@@ -42,7 +42,6 @@
             Name = "frmTravelExperts";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Travel Experts";
-            Load += Form1_Load;
             ResumeLayout(false);
         }
 
