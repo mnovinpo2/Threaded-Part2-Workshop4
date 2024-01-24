@@ -39,6 +39,7 @@
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1393, 741);
+            Cursor = Cursors.Hand;
             Name = "frmTravelExperts";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Travel Experts";
@@ -46,5 +47,9 @@
         }
 
         #endregion
+
+        private ToolStrip tsNav;
+        private ToolStripLabel tsProducts;
+        private ToolStripLabel toolStripLabel1;
     }
 }
