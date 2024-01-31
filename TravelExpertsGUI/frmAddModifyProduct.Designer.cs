@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddModifyProduct));
-            label1 = new Label();
+            lblProducts = new Label();
             label2 = new Label();
             txtProductID = new TextBox();
             txtProductName = new TextBox();
@@ -37,15 +37,15 @@
             btnClear = new Button();
             SuspendLayout();
             // 
-            // label1
+            // lblProducts
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(219, 130);
-            label1.Name = "label1";
-            label1.Size = new Size(86, 21);
-            label1.TabIndex = 0;
-            label1.Text = "Product ID:";
+            lblProducts.AutoSize = true;
+            lblProducts.Font = new Font("Segoe UI", 12F);
+            lblProducts.Location = new Point(219, 130);
+            lblProducts.Name = "lblProducts";
+            lblProducts.Size = new Size(86, 21);
+            lblProducts.TabIndex = 0;
+            lblProducts.Text = "Product ID:";
             // 
             // label2
             // 
@@ -59,17 +59,19 @@
             // 
             // txtProductID
             // 
+            txtProductID.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtProductID.Location = new Point(390, 128);
             txtProductID.Name = "txtProductID";
             txtProductID.ReadOnly = true;
-            txtProductID.Size = new Size(122, 23);
+            txtProductID.Size = new Size(122, 27);
             txtProductID.TabIndex = 2;
             // 
             // txtProductName
             // 
+            txtProductName.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtProductName.Location = new Point(390, 185);
             txtProductName.Name = "txtProductName";
-            txtProductName.Size = new Size(248, 23);
+            txtProductName.Size = new Size(248, 27);
             txtProductName.TabIndex = 3;
             // 
             // btnSubmit
@@ -88,7 +90,7 @@
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(122, 42);
             btnClear.TabIndex = 5;
-            btnClear.Text = "Clear";
+            btnClear.Text = "Cancel";
             btnClear.UseVisualStyleBackColor = true;
             btnClear.Click += btnClear_Click;
             // 
@@ -104,7 +106,7 @@
             Controls.Add(txtProductName);
             Controls.Add(txtProductID);
             Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblProducts);
             Name = "frmAddModifyProduct";
             Text = "frmAddModifyProduct";
             Load += frmAddModifyProduct_Load;
@@ -114,7 +116,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label lblProducts;
         private Label label2;
         private TextBox txtProductID;
         private TextBox txtProductName;
