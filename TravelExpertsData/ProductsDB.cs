@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 namespace TravelExpertsData
 {
     /// <summary>
-    /// Static Class For Database methods
+    /// Static Class For Database crud operations
     /// Has a Get all Products Method 
     /// Edit Products Method
     /// Add Products Method
+    /// Delete Products Method
+    /// Author: Mustafa Hersi
+    /// Date: Jan 2024
     /// </summary>
     public static class ProductsDB
     {
@@ -117,13 +120,17 @@ namespace TravelExpertsData
                 Console.WriteLine($"Uncaught error {ex.Message}");
             }
         }
-        public static void DeleteProduct(Product modifiedProduct)
+        /// <summary>
+        /// Method to Delete Product
+        /// </summary>
+        /// <param name="removedProduct">Takes in a product of type Product to modify</param>
+        public static void DeleteProduct(Product removedProduct)
         {
             try
             {
                 using(TravelExpertsContext db = new())
                 {
-                    db.Products.Remove(modifiedProduct);
+                    db.Products.Remove(removedProduct);
                     db.SaveChanges();
                 }
             }

@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProducts));
             dgvProducts = new DataGridView();
             btnAdd = new Button();
+            btnClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             SuspendLayout();
             // 
@@ -56,6 +57,17 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
+            // btnClose
+            // 
+            btnClose.Font = new Font("Segoe UI", 10F);
+            btnClose.Location = new Point(849, 412);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(150, 33);
+            btnClose.TabIndex = 2;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
             // frmProducts
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -63,6 +75,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1219, 556);
+            Controls.Add(btnClose);
             Controls.Add(btnAdd);
             Controls.Add(dgvProducts);
             Margin = new Padding(3, 2, 3, 2);
@@ -77,5 +90,6 @@
 
         private DataGridView dgvProducts;
         private Button btnAdd;
+        private Button btnClose;
     }
 }

@@ -25,7 +25,7 @@ namespace TravelExpertsGUI
         }
 
         /// <summary>
-        /// Displays Products in ListView
+        /// Displays Products in DataGridView
         /// </summary>
         public void DisplayProducts()
         {
@@ -60,9 +60,22 @@ namespace TravelExpertsGUI
             dgvProducts.Columns[1].HeaderText = "Product Name";
             dgvProducts.Columns[1].Width = 200;
 
-            //dgvProducts.Columns[2].Visible = false;
-            dgvProducts.Columns[2].Width = 200;
+            // hide product suppliers column
+            dgvProducts.Columns[2].Visible = false;
+
+            // hide grey space in data grid view 
             dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // changing height of headers
+            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvProducts.ColumnHeadersHeight = 35;
+            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // changing background color of data gridview
+            dgvProducts.BackgroundColor = Color.FloralWhite;
+
+            // getting rid of row headers 
+            dgvProducts.RowHeadersVisible = false;
 
         }
 
@@ -158,6 +171,11 @@ namespace TravelExpertsGUI
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddProduct();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

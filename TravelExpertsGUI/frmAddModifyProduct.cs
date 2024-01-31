@@ -25,6 +25,7 @@ namespace TravelExpertsGUI
             if (prod == null)
             {
                 Text = "Add Product";
+                btnSubmit.Text = "Add Product";
                 lblProducts.Visible = false;
                 txtProductID.Visible = false;
                 prod = new(); // instantiate product on add operation
@@ -32,6 +33,7 @@ namespace TravelExpertsGUI
             else
             {
                 Text = "Edit Product";
+                btnSubmit.Text = "Edit Product";
                 txtProductID.Visible = true;
                 txtProductID.Enabled = false;
                 txtProductID.BackColor = Color.Silver;
