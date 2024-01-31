@@ -33,7 +33,7 @@
             // 
             // btnProductsFrm
             // 
-            btnProductsFrm.Font = new Font("Segoe UI", 11F);
+            btnProductsFrm.Font = new Font("Segoe UI", 10F);
             btnProductsFrm.Location = new Point(342, 395);
             btnProductsFrm.Name = "btnProductsFrm";
             btnProductsFrm.Size = new Size(172, 40);

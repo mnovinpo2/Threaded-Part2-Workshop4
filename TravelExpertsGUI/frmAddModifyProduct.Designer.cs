@@ -34,7 +34,7 @@
             txtProductID = new TextBox();
             txtProductName = new TextBox();
             btnSubmit = new Button();
-            btnClear = new Button();
+            btnClose = new Button();
             SuspendLayout();
             // 
             // lblProducts
@@ -76,23 +76,25 @@
             // 
             // btnSubmit
             // 
+            btnSubmit.Font = new Font("Segoe UI", 10F);
             btnSubmit.Location = new Point(390, 258);
             btnSubmit.Name = "btnSubmit";
-            btnSubmit.Size = new Size(122, 42);
+            btnSubmit.Size = new Size(122, 30);
             btnSubmit.TabIndex = 4;
             btnSubmit.Text = "Submit";
             btnSubmit.UseVisualStyleBackColor = true;
             btnSubmit.Click += btnSubmit_Click;
             // 
-            // btnClear
+            // btnClose
             // 
-            btnClear.Location = new Point(546, 258);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(122, 42);
-            btnClear.TabIndex = 5;
-            btnClear.Text = "Cancel";
-            btnClear.UseVisualStyleBackColor = true;
-            btnClear.Click += btnClear_Click;
+            btnClose.Font = new Font("Segoe UI", 10F);
+            btnClose.Location = new Point(546, 258);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(122, 30);
+            btnClose.TabIndex = 5;
+            btnClose.Text = "Cancel";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // frmAddModifyProduct
             // 
@@ -101,7 +103,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnClear);
+            Controls.Add(btnClose);
             Controls.Add(btnSubmit);
             Controls.Add(txtProductName);
             Controls.Add(txtProductID);
@@ -121,6 +123,6 @@
         private TextBox txtProductID;
         private TextBox txtProductName;
         private Button btnSubmit;
-        private Button btnClear;
+        private Button btnClose;
     }
 }

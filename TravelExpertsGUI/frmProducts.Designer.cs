@@ -47,7 +47,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Font = new Font("Segoe UI", 12F);
+            btnAdd.Font = new Font("Segoe UI", 10F);
             btnAdd.Location = new Point(530, 412);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(150, 33);
