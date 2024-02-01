@@ -28,18 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnProductsFrm = new Button();
+            btnPackagefrm = new Button();
             SuspendLayout();
+            // 
+            // btnProductsFrm
+            // 
+            btnProductsFrm.Font = new Font("Segoe UI", 10F);
+            btnProductsFrm.Location = new Point(428, 416);
+            btnProductsFrm.Name = "btnProductsFrm";
+            btnProductsFrm.Size = new Size(172, 40);
+            btnProductsFrm.TabIndex = 0;
+            btnProductsFrm.Text = "Product Form";
+            btnProductsFrm.UseVisualStyleBackColor = true;
+            btnProductsFrm.Click += btnProductsFrm_Click;
+            // 
+            // btnPackagefrm
+            // 
+            btnPackagefrm.Font = new Font("Segoe UI", 10F);
+            btnPackagefrm.Location = new Point(670, 416);
+            btnPackagefrm.Name = "btnPackagefrm";
+            btnPackagefrm.Size = new Size(172, 40);
+            btnPackagefrm.TabIndex = 1;
+            btnPackagefrm.Text = "Packages";
+            btnPackagefrm.UseVisualStyleBackColor = true;
+            btnPackagefrm.Click += btnPackagefrm_Click;
             // 
             // frmTravelExperts
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.Control;
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1393, 741);
+            ClientSize = new Size(1219, 556);
+            Controls.Add(btnPackagefrm);
+            Controls.Add(btnProductsFrm);
             Cursor = Cursors.Hand;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "frmTravelExperts";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Travel Experts";
@@ -51,5 +78,7 @@
         private ToolStrip tsNav;
         private ToolStripLabel tsProducts;
         private ToolStripLabel toolStripLabel1;
+        private Button btnProductsFrm;
+        private Button btnPackagefrm;
     }
 }
