@@ -16,10 +16,16 @@ namespace TravelExpertsGUI
             fp.ShowDialog();
         }
 
-        private void btnPackagefrm_Click(object sender, EventArgs e)
+        private void btnPackageFrm_Click(object sender, EventArgs e)
         {
             frmPackageMain fpm = new();
             fpm.ShowDialog();
+        }
+
+        private void btnSuppliersFrm_Click(object sender, EventArgs e)
+        {
+            TemporaryMainForm fs = new();
+            fs.ShowDialog();
         }
     }
 }

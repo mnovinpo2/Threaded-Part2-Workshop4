@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TravelExpertsData;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
+
+namespace TravelExpertsGUI
+{
+    
+    public partial class AddSuppliers : Form
+    {
+        
+
+        private TravelExpertsContext context = new();
+        private SupplierDB db = new();
+        public Supplier supplier { get; set; } = null!;
+        public AddSuppliers()
+        {
+            InitializeComponent();
+        }
+
+        private void AddSuppliers_Load(object sender, EventArgs e)
+        {
+            //// can just be changes in desing mode later
+            //Text = "Add Product"; 
+            //txtSupID.ReadOnly = false;  // Can change on design
+            //supplier = new();
+
+            if (supplier == null) // if no product is present = adding product
+            {
+                Text = "Add Product";
+                txtSupID.ReadOnly = false;  // Allow user to enter new product code
+                supplier = new();
+            }
+            else if (supplier != null)// there will be a product present which means it is a modify
+            {
+                Text = "Modify Product";
+                txtSupID.ReadOnly = true;   // user can't change product code ( product code should be the same )
+                DisplaySuppliers();
+            }
+        }
+
+        private void DisplaySuppliers() 
+        {
+            
+            txtSupID.Text = supplier.SupplierId.ToString();
+            txtSupName.Text = supplier.SupName;
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            if (supplier == null) // if its adding
+            {
+                // for adding NOT editing
+                if (Validator.IsPresent(txtSupName) &&
+                    Validator.IsPresent(txtSupID) &&
+                    Validator.IsNonNegativeInt(txtSupID) &&
+                    Validator.IsValidID(txtSupID))
+                {
+                    // Main form should have a add supplier button, code should be:
+                    // ModalForm addModifyForm = new(); // new form
+
+                    // DialogResult result = addModifyForm.ShowDialog();
+                    //if (result == DialogResult.OK)
+                    //{
+                    //    CODE THAT ADDS SUPPLIER OR EDIT
+                    //}
+                    LoadData();
+                    DialogResult = DialogResult.OK;
+                }
+            }
+            else // if its edit
+            {
+                if (Validator.IsPresent(txtSupName) &&
+                    Validator.IsPresent(txtSupID) &&
+                    Validator.IsNonNegativeInt(txtSupID))
+                {
+                    LoadData();
+                    DialogResult = DialogResult.OK;
+                }
+            }
+        }
+
+        // Function that creates the supplier object
+        private void LoadData()
+        {
+            supplier.SupName = txtSupName.Text;
+            supplier.SupplierId = Convert.ToInt32(txtSupID.Text);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             btnProductsFrm = new Button();
-            btnPackagefrm = new Button();
+            btnPackageFrm = new Button();
+            btnSuppliersFrm = new Button();
             SuspendLayout();
             // 
             // btnProductsFrm
             // 
             btnProductsFrm.Font = new Font("Segoe UI", 10F);
-            btnProductsFrm.Location = new Point(428, 416);
+            btnProductsFrm.Location = new Point(518, 416);
             btnProductsFrm.Name = "btnProductsFrm";
             btnProductsFrm.Size = new Size(172, 40);
             btnProductsFrm.TabIndex = 0;
@@ -43,16 +44,27 @@
             btnProductsFrm.UseVisualStyleBackColor = true;
             btnProductsFrm.Click += btnProductsFrm_Click;
             // 
-            // btnPackagefrm
+            // btnPackageFrm
             // 
-            btnPackagefrm.Font = new Font("Segoe UI", 10F);
-            btnPackagefrm.Location = new Point(670, 416);
-            btnPackagefrm.Name = "btnPackagefrm";
-            btnPackagefrm.Size = new Size(172, 40);
-            btnPackagefrm.TabIndex = 1;
-            btnPackagefrm.Text = "Packages";
-            btnPackagefrm.UseVisualStyleBackColor = true;
-            btnPackagefrm.Click += btnPackagefrm_Click;
+            btnPackageFrm.Font = new Font("Segoe UI", 10F);
+            btnPackageFrm.Location = new Point(722, 416);
+            btnPackageFrm.Name = "btnPackageFrm";
+            btnPackageFrm.Size = new Size(172, 40);
+            btnPackageFrm.TabIndex = 1;
+            btnPackageFrm.Text = "Packages Form";
+            btnPackageFrm.UseVisualStyleBackColor = true;
+            btnPackageFrm.Click += btnPackageFrm_Click;
+            // 
+            // btnSuppliersFrm
+            // 
+            btnSuppliersFrm.Font = new Font("Segoe UI", 10F);
+            btnSuppliersFrm.Location = new Point(312, 416);
+            btnSuppliersFrm.Name = "btnSuppliersFrm";
+            btnSuppliersFrm.Size = new Size(172, 40);
+            btnSuppliersFrm.TabIndex = 2;
+            btnSuppliersFrm.Text = "Suppliers Form";
+            btnSuppliersFrm.UseVisualStyleBackColor = true;
+            btnSuppliersFrm.Click += btnSuppliersFrm_Click;
             // 
             // frmTravelExperts
             // 
@@ -63,7 +75,8 @@
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1219, 556);
-            Controls.Add(btnPackagefrm);
+            Controls.Add(btnSuppliersFrm);
+            Controls.Add(btnPackageFrm);
             Controls.Add(btnProductsFrm);
             Cursor = Cursors.Hand;
             Margin = new Padding(3, 2, 3, 2);
@@ -79,6 +92,7 @@
         private ToolStripLabel tsProducts;
         private ToolStripLabel toolStripLabel1;
         private Button btnProductsFrm;
-        private Button btnPackagefrm;
+        private Button btnPackageFrm;
+        private Button btnSuppliersFrm;
     }
 }
