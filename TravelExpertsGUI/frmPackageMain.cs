@@ -8,7 +8,7 @@ public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, 
 
 
 
-namespace TravelExpertsPackageMaintenance
+namespace TravelExpertsGUI
 {
 
 

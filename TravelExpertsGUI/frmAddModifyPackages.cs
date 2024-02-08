@@ -1,6 +1,6 @@
 ﻿using TravelExpertsData;
 
-namespace TravelExpertsPackageMaintenance
+namespace TravelExpertsGUI
 {
     public partial class frmAddModifyPackages : Form
     {

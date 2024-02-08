@@ -1,6 +1,6 @@
 ﻿
 
-namespace TravelExpertsPackageMaintenance
+namespace TravelExpertsGUI
 {
     partial class frmPackageMain
     {
