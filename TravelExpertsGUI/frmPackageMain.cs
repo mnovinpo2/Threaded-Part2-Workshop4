@@ -31,7 +31,7 @@ namespace TravelExpertsGUI
 
         public List<PackagesDTO> GetAllpackages() =>
                 context.Packages
-            .OrderBy(p => p.PackageId).Select(p => new PackagesDTO(p.PackageId, p.PkgName, (DateTime)p.PkgStartDate!, (DateTime)p.PkgEndDate!, p.PkgDesc, p.PkgBasePrice, (decimal)p.PkgAgencyCommission!)).ToList();
+            .OrderBy(p => p.PackageId).Select(p => new PackagesDTO(p.PackageId, p.PkgName, (DateTime)p.PkgStartDate!, (DateTime)p.PkgEndDate!, p.PkgDesc!, p.PkgBasePrice, (decimal)p.PkgAgencyCommission!)).ToList();
 
         private void btnGet_Click(object sender, EventArgs e)
         {
