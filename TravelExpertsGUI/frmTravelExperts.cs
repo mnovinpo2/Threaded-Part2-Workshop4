@@ -17,8 +17,8 @@ namespace TravelExpertsGUI
 
 		private void btnPackageFrm_Click(object sender, EventArgs e)
 		{
-			frmPackageMain fpm = new();
-			fpm.ShowDialog();
+			frmPackageMain fp = new();
+			fp.ShowDialog();
 		}
 
 		private void btnSuppliersFrm_Click(object sender, EventArgs e)

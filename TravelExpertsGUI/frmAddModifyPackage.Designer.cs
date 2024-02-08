@@ -1,6 +1,6 @@
 ﻿namespace TravelExpertsGUI
 {
-    partial class frmAddModifyPackages
+    partial class frmAddModifyPackage
     {
         /// <summary>
         /// Required designer variable.
@@ -39,11 +39,13 @@
             dtpEDate = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
+            cboSupplier = new ComboBox();
+            cboProduct = new ComboBox();
             SuspendLayout();
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(36, 279);
+            btnOK.Location = new Point(37, 279);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(94, 29);
             btnOK.TabIndex = 0;
@@ -53,7 +55,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(594, 279);
+            btnCancel.Location = new Point(176, 279);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 29);
             btnCancel.TabIndex = 1;
@@ -63,57 +65,57 @@
             // 
             // txtPkgId
             // 
-            txtPkgId.Location = new Point(311, 33);
+            txtPkgId.Location = new Point(347, 71);
             txtPkgId.Name = "txtPkgId";
-            txtPkgId.Size = new Size(125, 27);
+            txtPkgId.Size = new Size(342, 27);
             txtPkgId.TabIndex = 2;
             // 
             // txtPkgName
             // 
-            txtPkgName.Location = new Point(311, 77);
+            txtPkgName.Location = new Point(347, 136);
             txtPkgName.Name = "txtPkgName";
-            txtPkgName.Size = new Size(125, 27);
+            txtPkgName.Size = new Size(342, 27);
             txtPkgName.TabIndex = 3;
             // 
             // txtPkgDesc
             // 
-            txtPkgDesc.Location = new Point(311, 123);
+            txtPkgDesc.Location = new Point(347, 203);
             txtPkgDesc.Name = "txtPkgDesc";
-            txtPkgDesc.Size = new Size(125, 27);
+            txtPkgDesc.Size = new Size(342, 27);
             txtPkgDesc.TabIndex = 4;
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(311, 166);
+            txtPrice.Location = new Point(347, 248);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(125, 27);
+            txtPrice.Size = new Size(342, 27);
             txtPrice.TabIndex = 5;
             // 
             // txtCom
             // 
-            txtCom.Location = new Point(311, 210);
+            txtCom.Location = new Point(347, 292);
             txtCom.Name = "txtCom";
-            txtCom.Size = new Size(125, 27);
+            txtCom.Size = new Size(342, 27);
             txtCom.TabIndex = 6;
             // 
             // dtpSDate
             // 
-            dtpSDate.Location = new Point(241, 291);
+            dtpSDate.Location = new Point(347, 371);
             dtpSDate.Name = "dtpSDate";
-            dtpSDate.Size = new Size(250, 27);
+            dtpSDate.Size = new Size(342, 27);
             dtpSDate.TabIndex = 7;
             // 
             // dtpEDate
             // 
-            dtpEDate.Location = new Point(241, 369);
+            dtpEDate.Location = new Point(347, 449);
             dtpEDate.Name = "dtpEDate";
-            dtpEDate.Size = new Size(250, 27);
+            dtpEDate.Size = new Size(342, 27);
             dtpEDate.TabIndex = 8;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(241, 268);
+            label1.Location = new Point(347, 348);
             label1.Name = "label1";
             label1.Size = new Size(137, 20);
             label1.TabIndex = 9;
@@ -122,17 +124,45 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(241, 346);
+            label2.Location = new Point(347, 427);
             label2.Name = "label2";
             label2.Size = new Size(131, 20);
             label2.TabIndex = 10;
             label2.Text = "Package End Date:";
             // 
+            // cboSupplier
+            // 
+            cboSupplier.DisplayMember = "SupName";
+            cboSupplier.FormattingEnabled = true;
+            cboSupplier.Location = new Point(37, 71);
+            cboSupplier.Margin = new Padding(3, 4, 3, 4);
+            cboSupplier.Name = "cboSupplier";
+            cboSupplier.Size = new Size(279, 28);
+            cboSupplier.TabIndex = 11;
+            cboSupplier.Text = "Pick a Supplier";
+            cboSupplier.ValueMember = "SupplierId";
+            cboSupplier.SelectedValueChanged += cboSupplier_SelectedValueChanged;
+            // 
+            // cboProduct
+            // 
+            cboProduct.DisplayMember = "ProdName";
+            cboProduct.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboProduct.FormattingEnabled = true;
+            cboProduct.Location = new Point(37, 136);
+            cboProduct.Margin = new Padding(3, 4, 3, 4);
+            cboProduct.Name = "cboProduct";
+            cboProduct.Size = new Size(279, 28);
+            cboProduct.TabIndex = 12;
+            cboProduct.ValueMember = "ProductId";
+            cboProduct.SelectedValueChanged += cboProduct_SelectedValueChanged;
+            // 
             // frmAddModify
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(734, 527);
+            Controls.Add(cboProduct);
+            Controls.Add(cboSupplier);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(dtpEDate);
@@ -164,5 +194,7 @@
         private DateTimePicker dtpEDate;
         private Label label1;
         private Label label2;
+        private ComboBox cboSupplier;
+        private ComboBox cboProduct;
     }
 }

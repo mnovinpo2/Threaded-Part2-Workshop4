@@ -50,18 +50,20 @@ namespace TravelExpertsGUI
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
+            dgv1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvPackages).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv1).BeginInit();
             SuspendLayout();
             // 
             // dgvPackages
             // 
             dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPackages.GridColor = SystemColors.MenuHighlight;
             dgvPackages.Location = new Point(42, 30);
             dgvPackages.Name = "dgvPackages";
             dgvPackages.RowHeadersWidth = 51;
-            dgvPackages.Size = new Size(807, 377);
+            dgvPackages.Size = new Size(457, 377);
             dgvPackages.TabIndex = 0;
-            dgvPackages.CellContentClick += dgvPackages_CellContentClick;
             // 
             // txtEDate
             // 
@@ -130,6 +132,7 @@ namespace TravelExpertsGUI
             btnAdd.TabIndex = 9;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnDelete
             // 
@@ -221,11 +224,22 @@ namespace TravelExpertsGUI
             label7.TabIndex = 19;
             label7.Text = "Agency Commision";
             // 
+            // dgv1
+            // 
+            dgv1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv1.Location = new Point(545, 30);
+            dgv1.Margin = new Padding(3, 2, 3, 2);
+            dgv1.Name = "dgv1";
+            dgv1.RowHeadersWidth = 51;
+            dgv1.Size = new Size(995, 377);
+            dgv1.TabIndex = 20;
+            // 
             // PackageMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(890, 658);
+            ClientSize = new Size(1591, 653);
+            Controls.Add(dgv1);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -250,6 +264,7 @@ namespace TravelExpertsGUI
             Text = "Form1";
             Load += PackageMain_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPackages).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -280,5 +295,6 @@ namespace TravelExpertsGUI
         private Label label5;
         private Label label6;
         private Label label7;
+        private DataGridView dgv1;
     }
 }
