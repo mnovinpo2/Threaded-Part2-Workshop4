@@ -38,12 +38,13 @@
 			usrCtrlProductsFrm = new usrCtrlProducts();
 			usrCtrlPackagesFrm = new usrCtrlPackages();
 			btnFrm = new Button();
+			btnExit = new Button();
 			pnlMain.SuspendLayout();
 			SuspendLayout();
 			// 
 			// btnProductsFrm
 			// 
-			btnProductsFrm.Font = new Font("Segoe UI", 10F);
+			btnProductsFrm.Font = new Font("Segoe UI", 11.25F);
 			btnProductsFrm.Location = new Point(636, 28);
 			btnProductsFrm.Name = "btnProductsFrm";
 			btnProductsFrm.Size = new Size(172, 40);
@@ -54,7 +55,7 @@
 			// 
 			// btnPackageFrm
 			// 
-			btnPackageFrm.Font = new Font("Segoe UI", 10F);
+			btnPackageFrm.Font = new Font("Segoe UI", 11.25F);
 			btnPackageFrm.Location = new Point(280, 28);
 			btnPackageFrm.Name = "btnPackageFrm";
 			btnPackageFrm.Size = new Size(172, 40);
@@ -65,7 +66,7 @@
 			// 
 			// btnSuppliersFrm
 			// 
-			btnSuppliersFrm.Font = new Font("Segoe UI", 10F);
+			btnSuppliersFrm.Font = new Font("Segoe UI", 11.25F);
 			btnSuppliersFrm.Location = new Point(458, 28);
 			btnSuppliersFrm.Name = "btnSuppliersFrm";
 			btnSuppliersFrm.Size = new Size(172, 40);
@@ -76,7 +77,7 @@
 			// 
 			// btnProdSup
 			// 
-			btnProdSup.Font = new Font("Segoe UI", 10F);
+			btnProdSup.Font = new Font("Segoe UI", 11.25F);
 			btnProdSup.Location = new Point(814, 28);
 			btnProdSup.Name = "btnProdSup";
 			btnProdSup.Size = new Size(172, 40);
@@ -130,13 +131,25 @@
 			// 
 			// btnFrm
 			// 
-			btnFrm.Location = new Point(523, 433);
+			btnFrm.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnFrm.Location = new Point(536, 405);
 			btnFrm.Name = "btnFrm";
 			btnFrm.Size = new Size(178, 37);
 			btnFrm.TabIndex = 5;
 			btnFrm.Text = "Edit";
 			btnFrm.UseVisualStyleBackColor = true;
 			btnFrm.Click += btnFrm_Click;
+			// 
+			// btnExit
+			// 
+			btnExit.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnExit.Location = new Point(957, 405);
+			btnExit.Name = "btnExit";
+			btnExit.Size = new Size(178, 37);
+			btnExit.TabIndex = 6;
+			btnExit.Text = "Exit";
+			btnExit.UseVisualStyleBackColor = true;
+			btnExit.Click += btnExit_Click;
 			// 
 			// frmTravelExperts
 			// 
@@ -147,6 +160,7 @@
 			BackgroundImage = Properties.Resources.Clouds;
 			BackgroundImageLayout = ImageLayout.Stretch;
 			ClientSize = new Size(1219, 556);
+			Controls.Add(btnExit);
 			Controls.Add(btnFrm);
 			Controls.Add(pnlMain);
 			Controls.Add(btnProdSup);
@@ -178,5 +192,6 @@
 		private Button btnFrm;
 		private usrCtrlProductSuppliers usrCtrlProductSuppliersFrm;
 		private usrCtrlSuppliers usrCtrlSuppliersFrm;
+		private Button btnExit;
 	}
 }

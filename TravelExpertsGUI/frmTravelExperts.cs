@@ -4,10 +4,10 @@ namespace TravelExpertsGUI
 {
 	public partial class frmTravelExperts : Form
 	{
-		public bool EditPrdFrm { get; set; } = false;
-		public bool EditPkgFrm { get; set; } = false;
-		public bool EditSupFrm { get; set; } = false;
-		public bool EditPrdSupFrm { get; set; } = false;
+		private bool EditPrdFrm { get; set; } = false;
+		private bool EditPkgFrm { get; set; } = false;
+		private bool EditSupFrm { get; set; } = false;
+		private bool EditPrdSupFrm { get; set; } = false;
 		public frmTravelExperts()
 		{
 			InitializeComponent();
@@ -17,7 +17,7 @@ namespace TravelExpertsGUI
 		{
 			EditPkgFrm = true;
 			btnFrm.Text = "Edit Packages";
-			CurrentControl(usrCtrlPackagesFrm);
+			CurrentControl(usrCtrlPackagesFrm, btnPackageFrm);
 		}
 
 		private void btnPackageFrm_Click(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace TravelExpertsGUI
 			EditPrdSupFrm = false;
 			EditPrdFrm = false;
 			btnFrm.Text = "Edit Packages";
-			CurrentControl(usrCtrlPackagesFrm);
+			CurrentControl(usrCtrlPackagesFrm, btnPackageFrm);
 		}
 
 		private void btnProductsFrm_Click(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace TravelExpertsGUI
 			EditPrdSupFrm = false;
 			EditPrdFrm = true;
 			btnFrm.Text = "Edit Products";
-			CurrentControl(usrCtrlProductsFrm);
+			CurrentControl(usrCtrlProductsFrm, btnProductsFrm);
 		}
 		private void btnSuppliersFrm_Click(object sender, EventArgs e)
 		{
@@ -46,7 +46,7 @@ namespace TravelExpertsGUI
 			EditPrdSupFrm = false;
 			EditPrdFrm = false;
 			btnFrm.Text = "Edit Suppliers";
-			CurrentControl(usrCtrlSuppliersFrm);
+			CurrentControl(usrCtrlSuppliersFrm, btnSuppliersFrm);
 		}
 
 		private void btnProdSup_Click(object sender, EventArgs e)
@@ -56,17 +56,28 @@ namespace TravelExpertsGUI
 			EditPrdSupFrm = true;
 			EditPrdFrm = false;
 			btnFrm.Text = "Edit Product Suppliers";
-			CurrentControl(usrCtrlProductSuppliersFrm);
+			CurrentControl(usrCtrlProductSuppliersFrm, btnProdSup);
 		}
-		public void CurrentControl(UserControl userControl)
+		private void CurrentControl(UserControl userControl, Button btn)
 		{
+			// setting all user controls to hidden
 			usrCtrlPackagesFrm.Visible = false;
 			usrCtrlProductsFrm.Visible = false;
 			usrCtrlSuppliersFrm.Visible = false;
 			usrCtrlProductSuppliersFrm.Visible = false;
 
+			// setting all buttons to white
+			btnProductsFrm.BackColor = Color.White;
+			btnPackageFrm.BackColor = Color.White;
+			btnSuppliersFrm.BackColor = Color.White;
+			btnProdSup.BackColor = Color.White;
+
+			// setting active user controls and buttons
 			userControl.Visible = true;
+			btn.BackColor = Color.CornflowerBlue;
 		}
+
+
 
 		private void btnFrm_Click(object sender, EventArgs e)
 		{
@@ -108,6 +119,9 @@ namespace TravelExpertsGUI
 			}
 		}
 
-		
+		private void btnExit_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
 	}
 }
