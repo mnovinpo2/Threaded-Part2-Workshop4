@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TravelExpertsData;
+﻿using TravelExpertsData;
 
 namespace TravelExpertsGUI
 {
@@ -49,15 +40,18 @@ namespace TravelExpertsGUI
         private void SetProducts()
         {
             prod.ProdName = txtProductName.Text;
-        }
+		}
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+		private void btnSubmit_Click(object sender, EventArgs e)
         {
-            SetProducts();
-            DialogResult = DialogResult.OK;
-        }
+            if (Validator.IsPresent(txtProductName))
+            {
+                SetProducts();
+				DialogResult = DialogResult.OK;
+			}
+		}
 
-        private void btnClose_Click(object sender, EventArgs e)
+		private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }

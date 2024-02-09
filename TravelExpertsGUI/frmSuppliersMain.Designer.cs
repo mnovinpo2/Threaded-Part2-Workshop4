@@ -1,6 +1,6 @@
 ﻿namespace TravelExpertsGUI
 {
-    partial class TemporaryMainForm
+    partial class frmSuppliersMain
     {
         /// <summary>
         /// Required designer variable.

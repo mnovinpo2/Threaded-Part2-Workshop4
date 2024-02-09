@@ -44,7 +44,8 @@ namespace TravelExpertsData
             }
 
             return products;
-        }public static Product GetProductByID(int id)
+        }
+        public static Product GetProductByID(int id)
         {
             Product product = null!; 
 

@@ -12,13 +12,13 @@ using TravelExpertsData;
 
 namespace TravelExpertsGUI
 {
-    public partial class TemporaryMainForm : Form
+    public partial class frmSuppliersMain : Form
     {
         private Supplier selectedSupplier = null!;
         private SupplierDB db = new SupplierDB();
         private TravelExpertsContext context = new();
         private Supplier? supplier = null;
-        public TemporaryMainForm()
+        public frmSuppliersMain()
         {
             InitializeComponent();
         }
