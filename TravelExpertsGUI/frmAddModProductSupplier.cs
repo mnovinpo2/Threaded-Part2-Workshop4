@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -50,13 +51,44 @@ namespace TravelExpertsGUI
             }
         }
 
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtProdSupplierId);
+            error += Validator.IsNonNegativeInt(txtProdSupplierId);
+            if (Validator.IsNonNegativeInt(txtProdSupplierId) == "")
+            {
+                error += Validator.IsValidProdSupID(txtProdSupplierId);
+            }
+            error += Validator.IsPresent(txtProductId);
+            error += Validator.IsNonNegativeInt(txtProductId);
+            if (Validator.IsNonNegativeInt(txtProductId) == "")
+            {
+                error += Validator.IsExistingSupplierID(txtProductId); ;
+            }
+           
+            error += Validator.IsPresent(txtSupplierId);
+            error += Validator.IsNonNegativeInt(txtSupplierId);
+            if (Validator.IsNonNegativeInt(txtSupplierId) == "")
+            {
+                error += Validator.IsExistingSupplierID(txtSupplierId);
+            }
+           
+            
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
-            // validate data
-            //if (Validator.IsPresent(txtProdSupplierId) &&
-            //    Validator.IsPresent(txtProductId) &&
-            //    Validator.IsPresent(txtSupplierId) 
-            //    ) //&&
+            
+            if (IsValidData())
 
             {
                 if (isAdd)

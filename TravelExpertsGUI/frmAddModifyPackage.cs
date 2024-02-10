@@ -79,20 +79,50 @@ namespace TravelExpertsGUI
                 txtCom.Text = package.PkgAgencyCommission.ToString();
             }
         }
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
 
+            error += Validator.IsPresent(txtPkgId);
+            error += Validator.IsNonNegativeInt(txtPkgId);
+            if (Validator.IsNonNegativeInt(txtPkgId) == "")
+            {
+                error += Validator.IsValidPackageID(txtPkgId);
+            }
+
+            error += Validator.IsPresent(txtPkgName);
+            error += Validator.IsPresent(txtPkgDesc);
+            error += Validator.IsPresent(txtPrice);
+            error += Validator.IsNonNegativeInt(txtPrice);
+            error += Validator.IsPresent(txtCom);
+            error += Validator.IsNonNegativeInt(txtCom);
+            error += Validator.IsValidDate(dtpSDate, dtpEDate);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (isAdd)
+
+            if (isAdd &&
+                IsValidData()) // check if start date is before end date and not the same as end date
             {
                 package = new Package(); // creates empty object
                 GetPackageData();
+                DialogResult = DialogResult.OK; // closes the form
             }
-            else // Modify
+            else if (IsValidData()) // Modify
             {
                 // product is not null
                 GetPackageData();
+                DialogResult = DialogResult.OK; // closes the form
             }
-            DialogResult = DialogResult.OK; // closes the form
+            
         }
 
         private void GetPackageData()

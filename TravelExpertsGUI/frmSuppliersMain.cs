@@ -42,19 +42,36 @@ namespace TravelExpertsGUI
                     Text = "Edit"
                 };
                 dgvSupplier.Columns.Add(editColumn);
+
+                DataGridViewButtonColumn deleteColumn = new() // creates delete buttons on the dvg in a seperate column
+                {
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "",
+                    Text = "Delete"
+                };
+                dgvSupplier.Columns.Add(deleteColumn);
+
+                dgvSupplier.Columns[2].Width = 63;
+
+                dgvSupplier.AlternatingRowsDefaultCellStyle.BackColor = Color.Goldenrod;
+                dgvSupplier.EnableHeadersVisualStyles = false;
+                dgvSupplier.ColumnHeadersDefaultCellStyle.BackColor = Color.Goldenrod;
+
+                dgvSupplier.ColumnHeadersDefaultCellStyle.Padding = new Padding(5, 5, 5, 5);
             }
+            
         }
 
 
 
         private void dgvSupplier_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvSupplier.BackgroundColor = Color.Blue;
+        { 
             const int EditIndex = 4;
+            const int DeleteIndex = 5;
 
             if (e.RowIndex > -1)  // make sure header row wasn't clicked
             {
-                if (e.ColumnIndex == EditIndex)
+                if (e.ColumnIndex == EditIndex || e.ColumnIndex == DeleteIndex)
                 {
                     DataGridViewCell cell = dgvSupplier.Rows[e.RowIndex].Cells[0];
                     string supplierID = cell.Value?.ToString()?.Trim() ?? "";
@@ -67,10 +84,33 @@ namespace TravelExpertsGUI
                     {
                         ModifyProduct();
                     }
+                    else if (e.ColumnIndex == DeleteIndex)
+                    {
+                        DeleteProduct();
+                    }
                 }
             }
         }
 
+        private void DeleteProduct()
+        {
+            DialogResult warning =
+                 MessageBox.Show($"Are you sure you want to delete {selectedSupplier.SupplierId.ToString().Trim()}?",
+                     "Confirm Delete", MessageBoxButtons.YesNo,
+                     MessageBoxIcon.Question); // Warning for the user
+            if (warning == DialogResult.Yes) // if user clicks yes
+            {
+                try
+                {
+                    db.DeleteSupplier(selectedSupplier); // removes product from db
+                    DisplaySuppliers(); // displays current product after deletion
+                }
+                catch (DataAccessException ex)
+                {
+                    HandleDataAccessError(ex);
+                }
+            }
+        }
         private void ModifyProduct()
         {
             DialogResult result = DialogResult.Cancel;

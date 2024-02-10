@@ -32,14 +32,28 @@ namespace TravelExpertsGUI
             .OrderBy(p => p.PackageId).Select(p => new PackagesDTO(p.PackageId, p.PkgName, p.PkgStartDate, p.PkgEndDate, p.PkgDesc!, p.PkgBasePrice, p.PkgAgencyCommission)).ToList();
 
 
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
 
+            error += Validator.IsPresent(txtGetPkg);
+            error += Validator.IsNonNegativeInt(txtGetPkg);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
 
         private void btnGet_Click(object sender, EventArgs e)
         {
-            //if (//Validator.IsPresent(txtGet)) // if valid ProductCode
+            //if (Validator.IsPresent(txtGet)) if valid ProductCode
             //)
+            if (IsValidData())
             {
-                
                 try
                 {
                     int pkgID = Convert.ToInt32(txtGetPkg.Text);

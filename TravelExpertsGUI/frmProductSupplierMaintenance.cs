@@ -30,17 +30,36 @@ namespace TravelExpertsGUI
         private void frmPackageMaintenance_Load(object sender, EventArgs e)
         {
             DisplaySupplier();
+            btnDelete.Enabled = false;
+            btnModify.Enabled = false;
         }
         public List<PSupplierDTO> GetAllSuppliers() =>
             context.ProductsSuppliers
         .OrderBy(p => p.ProductSupplierId)
         .Select(p => new PSupplierDTO(p.ProductSupplierId, (int)p.ProductId!, (int)p.SupplierId!))
         .ToList();
+
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtGet);
+            error += Validator.IsNonNegativeInt(txtGet);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
         private void btnGetSupplier_Click(object sender, EventArgs e)
         {
 
             //if (//Validator.IsPresent(txtGet)) // if valid ProductCode
             //)
+            if (IsValidData())
             {
                 int supID = Convert.ToInt32(txtGet.Text);
                 try

@@ -42,6 +42,29 @@ namespace TravelExpertsData
             }
         }
 
+        public void DeleteSupplier(Supplier supplier)
+        {
+            try
+            {
+                db.Suppliers.Remove(supplier);
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                ex.Entries.Single().Reload();
+                var state = db.Entry(supplier).State;
+                throw CreateDataAccessException(state);
+            }
+            catch (DbUpdateException ex)
+            {
+                throw CreateDataAccessException(ex);
+            }
+            catch (SqlException ex)
+            {
+                throw CreateDataAccessException(ex);
+            }
+        }
+
         public static List<Supplier> GetSupplier()
         {
             List<Supplier> supplier = null;

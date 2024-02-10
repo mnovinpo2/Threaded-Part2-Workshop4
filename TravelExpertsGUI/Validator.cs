@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TravelExpertsData;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TravelExpertsGUI
 {
@@ -13,37 +15,132 @@ namespace TravelExpertsGUI
     /// </summary>
     public static class Validator
     {
-        /// <summary>
-        /// tests if a textbox contains non-empty string
-        /// </summary>
-        /// <param name="textBox">text box to check</param>
-        /// <returns>true is valid and false if not</returns>
+        public static string LineEnd { get; set; } = "\n";
 
-        public static bool IsValidID(TextBox textBox)
+        public static string IsValidID(System.Windows.Forms.TextBox textBox) // FOR SUPPLIERS
         {
             using (var context = new TravelExpertsContext())
             {
-                bool isValid = true;
+                string msg = "";
                 if (context.Suppliers.Any(s => s.SupplierId == int.Parse(textBox.Text)))
                 {
-                    isValid = false;
-                    MessageBox.Show($"{textBox.Tag} is already taken");
-                    textBox.Focus();
+                    msg = $"{textBox.Tag} is already taken.{LineEnd}";
                 }
-                return isValid;
+                return msg;
+
+
             }
             
         }
-        public static bool IsPresent(TextBox textBox)
+
+        public static string IsExistingProductID(System.Windows.Forms.TextBox textBox)
         {
-            bool isValid = true; //"innocent until proven guilty"
+            using (var context = new TravelExpertsContext())
+            {
+                string msg = $"{textBox.Tag} doesn't exist.{LineEnd}";
+                if (context.Products.Any(s => s.ProductId == int.Parse(textBox.Text)))
+                {
+                    msg = "";
+                }
+                return msg;
+            }
+
+        }
+
+        public static string IsExistingSupplierID(System.Windows.Forms.TextBox textBox)
+        {
+            using (var context = new TravelExpertsContext())
+            {
+                string msg = $"{textBox.Tag} doesn't exist.{LineEnd}";
+                if (context.Suppliers.Any(s => s.SupplierId == int.Parse(textBox.Text)))
+                {
+                    msg = "";
+                }
+                return msg;
+            }
+
+        }
+
+        public static string IsValidProductID(System.Windows.Forms.TextBox textBox) // FOR PRODUCTS
+        {
+            using (var context = new TravelExpertsContext())
+            {
+                string msg = "";
+                if (context.Products.Any(s => s.ProductId == int.Parse(textBox.Text))) // it already exists
+                {
+                    msg = $"{textBox.Tag} is already taken.{LineEnd}";
+                }
+                return msg;
+            }
+
+        }
+
+        public static string IsValidProdSupID(System.Windows.Forms.TextBox textBox) // FOR PRODUCT SUPPLIER ID
+        {
+            using (var context = new TravelExpertsContext())
+            {
+                string msg = "";
+                if (context.ProductsSuppliers.Any(s => s.ProductSupplierId == int.Parse(textBox.Text)))
+                {
+                    msg = $"{textBox.Tag} is already taken.{LineEnd}";
+                }
+                return msg;
+            }
+
+        }
+
+        public static string IsValidPackageID(System.Windows.Forms.TextBox textBox) // FOR PACKAGE ID
+        {
+            using (var context = new TravelExpertsContext())
+            {
+                string msg = "";
+
+                if (context.Packages.Any(s => s.PackageId == int.Parse(textBox.Text)))
+                {
+                    msg = $"{textBox.Tag} is already taken.{LineEnd}";
+                }
+                return msg;
+            }
+
+        }
+
+        public static string IsValidSupplierID(System.Windows.Forms.TextBox textBox) // FOR SUPPLIERS
+        {
+            using (var context = new TravelExpertsContext())
+            {
+                string msg = "";
+                if (context.Suppliers.Any(s => s.SupplierId == int.Parse(textBox.Text)))
+                {
+                    msg = $"{textBox.Tag} is already taken.{LineEnd}";
+                }
+                return msg;
+
+
+            }
+
+        }
+
+        public static string IsValidDate(DateTimePicker dateTimePicker, DateTimePicker dateTimerPicker2)
+        {
+            string msg = "";
+            if (dateTimePicker.Value > dateTimerPicker2.Value ) // start date before end date
+            {
+                msg = "Start date can't be before end date";
+            }
+            else if (dateTimePicker.Value == dateTimerPicker2.Value) // start date the same as end date
+            {
+                msg = "Start date can't be the same as end date";
+            }
+            return msg;
+        }
+        public static string IsPresent(System.Windows.Forms.TextBox textBox)
+        {
+            string msg = "";
             if(textBox.Text == "")
             {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} is required");
-                textBox.Focus(); 
+                msg = $"{textBox.Tag} is a required field.{LineEnd}";
             }
-            return isValid;
+            return msg;
         }
        
         /// <summary>
@@ -51,135 +148,21 @@ namespace TravelExpertsGUI
         /// </summary>
         /// <param name="textBox">text box to check</param>
         /// <returns>true is valid and false if not</returns>
-        public static bool IsNonNegativeInt(TextBox textBox)
+        public static string IsNonNegativeInt(System.Windows.Forms.TextBox textBox)
         {
-            bool isValid = true;
+            string msg = "";
             int value; // parsed value if successful
             if(!Int32.TryParse(textBox.Text, out value)) // not an int
             {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be a whole number");
-                textBox.SelectAll();
-                textBox.Focus();
+                msg = $"{textBox.Tag} must be a valid integer value.{LineEnd}";
             }
             else if (value < 0) // an int, but negative
             {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be positive or zero");
-                textBox.SelectAll();
-                textBox.Focus();
+                msg = $"{textBox.Tag} must be a positive integer.{LineEnd}";
             }
-            return isValid;
+            return msg;
         }
 
-        /// <summary>
-        /// tests if the text box contains non-negative double value
-        /// </summary>
-        /// <param name="textBox">text box to check</param>
-        /// <returns>true if valid and false if not</returns>       
-        public static bool IsNonNegativeDouble(TextBox textBox)
-        {
-            bool isValid = true;
-            double value; // parsed value if successful
-            if (!Double.TryParse(textBox.Text, out value)) // not a double
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be a number");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            else if (value < 0) // a double, but negative
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be positive or zero");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            return isValid;
-        }
-        /// <summary>
-        /// tests if the text box contains non-negative decimal value
-        /// </summary>
-        /// <param name="textBox">text box to check</param>
-        /// <returns>true if valid and false if not</returns>       
-        public static bool IsNonNegativeDecimal(TextBox textBox)
-        {
-            bool isValid = true;
-            decimal value; // parsed value if successful
-            if (!Decimal.TryParse(textBox.Text, out value)) // not a decimal
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be a number");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            else if (value < 0) // a decimal, but negative
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be positive or zero");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            return isValid;
-        }
-
-        /// <summary>
-        /// tests if the text box contains a decimal value within range
-        /// </summary>
-        /// <param name="textBox"> text box to check</param>
-        /// <param name="minValue">minimum value for the range</param>
-        /// <param name="maxValue">maximum value for the range</param>
-        /// <returns></returns>
-        public static bool IsDecimalInRange(TextBox textBox,
-            decimal minValue, decimal maxValue)
-        {
-            bool isValid = true;
-            decimal value; // parsed value if successful
-            if (!Decimal.TryParse(textBox.Text, out value)) // not a decimal
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be a number");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            else if (value < minValue || value > maxValue) // a decimal, but out of range
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be between {minValue} and {maxValue}");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            return isValid;
-        }
-
-        /// <summary>
-        /// tests if the text box contains a double value within range
-        /// </summary>
-        /// <param name="textBox"> text box to check</param>
-        /// <param name="minValue">minimum value for the range</param>
-        /// <param name="maxValue">maximum value for the range</param>
-        /// <returns></returns>
-        public static bool IsDoubleInRange(TextBox textBox,
-            double minValue, double maxValue)
-        {
-            bool isValid = true;
-            double value; // parsed value if successful
-            if (!Double.TryParse(textBox.Text, out value)) // not a double
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be a number");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            else if (value < minValue || value > maxValue) // a double, but out of range
-            {
-                isValid = false;
-                MessageBox.Show($"{textBox.Tag} must be between {minValue} and {maxValue}");
-                textBox.SelectAll();
-                textBox.Focus();
-            }
-            return isValid;
-        }
 
     } // class
 } // namespace

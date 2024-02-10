@@ -35,7 +35,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(324, 352);
+            btnAdd.Location = new Point(333, 349);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(126, 23);
             btnAdd.TabIndex = 1;
@@ -46,20 +46,20 @@
             // dgvSupplier
             // 
             dgvSupplier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSupplier.Location = new Point(126, 58);
+            dgvSupplier.Location = new Point(95, 58);
             dgvSupplier.Name = "dgvSupplier";
-            dgvSupplier.Size = new Size(562, 262);
+            dgvSupplier.Size = new Size(613, 262);
             dgvSupplier.TabIndex = 2;
             dgvSupplier.CellContentClick += dgvSupplier_CellContentClick_1;
             // 
-            // TemporaryMainForm
+            // frmSuppliersMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(dgvSupplier);
             Controls.Add(btnAdd);
-            Name = "TemporaryMainForm";
+            Name = "frmSuppliersMain";
             Text = "TemporaryMainForm";
             Load += TemporaryMainForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSupplier).EndInit();

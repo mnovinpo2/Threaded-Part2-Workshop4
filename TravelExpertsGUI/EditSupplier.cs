@@ -32,9 +32,25 @@ namespace TravelExpertsGUI
             txtSupID.Text = supplier.SupplierId.ToString();
             txtSupName.Text = supplier.SupName;
         }
+
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtSupName);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
+
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (Validator.IsPresent(txtSupName))
+            if (IsValidData())
             {
                 LoadData();
                 DialogResult = DialogResult.OK;

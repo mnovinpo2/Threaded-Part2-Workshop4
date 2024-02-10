@@ -53,33 +53,59 @@ namespace TravelExpertsGUI
             txtSupName.Text = supplier.SupName;
         }
 
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtSupName);
+            error += Validator.IsPresent(txtSupID);
+            error += Validator.IsNonNegativeInt(txtSupID);
+            if (Validator.IsNonNegativeInt(txtSupID) == "")
+            {
+                error += Validator.IsValidSupplierID(txtSupID);
+            }
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
+
+        private bool IsValidModifyData()
+        {
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtSupName);
+            error += Validator.IsPresent(txtSupID);
+            error += Validator.IsNonNegativeInt(txtSupID);
+            
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
+
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (supplier == null) // if its adding
             {
                 // for adding NOT editing
-                if (Validator.IsPresent(txtSupName) &&
-                    Validator.IsPresent(txtSupID) &&
-                    Validator.IsNonNegativeInt(txtSupID) &&
-                    Validator.IsValidID(txtSupID))
+                if (IsValidData())
                 {
-                    // Main form should have a add supplier button, code should be:
-                    // ModalForm addModifyForm = new(); // new form
-
-                    // DialogResult result = addModifyForm.ShowDialog();
-                    //if (result == DialogResult.OK)
-                    //{
-                    //    CODE THAT ADDS SUPPLIER OR EDIT
-                    //}
                     LoadData();
                     DialogResult = DialogResult.OK;
                 }
             }
             else // if its edit
             {
-                if (Validator.IsPresent(txtSupName) &&
-                    Validator.IsPresent(txtSupID) &&
-                    Validator.IsNonNegativeInt(txtSupID))
+                if (IsValidModifyData())
                 {
                     LoadData();
                     DialogResult = DialogResult.OK;

@@ -42,9 +42,23 @@ namespace TravelExpertsGUI
             prod.ProdName = txtProductName.Text;
 		}
 
-		private void btnSubmit_Click(object sender, EventArgs e)
+        private bool IsValidData()
         {
-            if (Validator.IsPresent(txtProductName))
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtProductName);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (IsValidData())
             {
                 SetProducts();
 				DialogResult = DialogResult.OK;

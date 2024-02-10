@@ -85,6 +85,7 @@ namespace TravelExpertsGUI
             txtGetPkg.Name = "txtGetPkg";
             txtGetPkg.Size = new Size(100, 23);
             txtGetPkg.TabIndex = 3;
+            txtGetPkg.Tag = "Package ID";
             // 
             // txtPkgDesc
             // 
@@ -234,11 +235,11 @@ namespace TravelExpertsGUI
             dgv1.Size = new Size(995, 377);
             dgv1.TabIndex = 20;
             // 
-            // PackageMain
+            // frmPackageMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1591, 653);
+            ClientSize = new Size(1284, 653);
             Controls.Add(dgv1);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -260,7 +261,7 @@ namespace TravelExpertsGUI
             Controls.Add(txtPkgId);
             Controls.Add(txtEDate);
             Controls.Add(dgvPackages);
-            Name = "PackageMain";
+            Name = "frmPackageMain";
             Text = "Form1";
             Load += PackageMain_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPackages).EndInit();

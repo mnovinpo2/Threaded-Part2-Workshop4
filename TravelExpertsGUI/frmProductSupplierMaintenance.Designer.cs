@@ -42,10 +42,9 @@
             // 
             // btnModify
             // 
-            btnModify.Location = new Point(304, 441);
-            btnModify.Margin = new Padding(3, 4, 3, 4);
+            btnModify.Location = new Point(266, 331);
             btnModify.Name = "btnModify";
-            btnModify.Size = new Size(86, 31);
+            btnModify.Size = new Size(75, 23);
             btnModify.TabIndex = 0;
             btnModify.Text = "Modify";
             btnModify.UseVisualStyleBackColor = true;
@@ -53,10 +52,9 @@
             // 
             // btnGetSupplier
             // 
-            btnGetSupplier.Location = new Point(591, 441);
-            btnGetSupplier.Margin = new Padding(3, 4, 3, 4);
+            btnGetSupplier.Location = new Point(517, 331);
             btnGetSupplier.Name = "btnGetSupplier";
-            btnGetSupplier.Size = new Size(121, 31);
+            btnGetSupplier.Size = new Size(106, 23);
             btnGetSupplier.TabIndex = 1;
             btnGetSupplier.Text = "Get Supplier";
             btnGetSupplier.UseVisualStyleBackColor = true;
@@ -64,10 +62,9 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(304, 377);
-            btnAdd.Margin = new Padding(3, 4, 3, 4);
+            btnAdd.Location = new Point(266, 283);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(86, 31);
+            btnAdd.Size = new Size(75, 23);
             btnAdd.TabIndex = 2;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
@@ -75,10 +72,9 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(304, 505);
-            btnDelete.Margin = new Padding(3, 4, 3, 4);
+            btnDelete.Location = new Point(266, 379);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(86, 31);
+            btnDelete.Size = new Size(75, 23);
             btnDelete.TabIndex = 3;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -87,50 +83,46 @@
             // dgvSuppliers
             // 
             dgvSuppliers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSuppliers.Location = new Point(46, 16);
-            dgvSuppliers.Margin = new Padding(3, 4, 3, 4);
+            dgvSuppliers.Location = new Point(40, 12);
             dgvSuppliers.Name = "dgvSuppliers";
             dgvSuppliers.RowHeadersWidth = 51;
-            dgvSuppliers.Size = new Size(826, 335);
+            dgvSuppliers.Size = new Size(723, 251);
             dgvSuppliers.TabIndex = 4;
             // 
             // txtProdSupId
             // 
-            txtProdSupId.Location = new Point(46, 441);
-            txtProdSupId.Margin = new Padding(3, 4, 3, 4);
+            txtProdSupId.Location = new Point(40, 331);
             txtProdSupId.Name = "txtProdSupId";
-            txtProdSupId.Size = new Size(114, 27);
+            txtProdSupId.Size = new Size(100, 23);
             txtProdSupId.TabIndex = 5;
             // 
             // txtProductId
             // 
-            txtProductId.Location = new Point(46, 509);
-            txtProductId.Margin = new Padding(3, 4, 3, 4);
+            txtProductId.Location = new Point(40, 382);
             txtProductId.Name = "txtProductId";
-            txtProductId.Size = new Size(114, 27);
+            txtProductId.Size = new Size(100, 23);
             txtProductId.TabIndex = 6;
             // 
             // txtSupplierId
             // 
-            txtSupplierId.Location = new Point(46, 560);
-            txtSupplierId.Margin = new Padding(3, 4, 3, 4);
+            txtSupplierId.Location = new Point(40, 420);
             txtSupplierId.Name = "txtSupplierId";
-            txtSupplierId.Size = new Size(114, 27);
+            txtSupplierId.Size = new Size(100, 23);
             txtSupplierId.TabIndex = 7;
             // 
             // txtGet
             // 
-            txtGet.Location = new Point(758, 441);
-            txtGet.Margin = new Padding(3, 4, 3, 4);
+            txtGet.Location = new Point(663, 331);
             txtGet.Name = "txtGet";
-            txtGet.Size = new Size(114, 27);
+            txtGet.Size = new Size(100, 23);
             txtGet.TabIndex = 8;
+            txtGet.Tag = "SupplierID";
             // 
             // frmProductSupplierMaintenance
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(txtGet);
             Controls.Add(txtSupplierId);
             Controls.Add(txtProductId);
@@ -140,7 +132,6 @@
             Controls.Add(btnAdd);
             Controls.Add(btnGetSupplier);
             Controls.Add(btnModify);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "frmProductSupplierMaintenance";
             Text = "Form";
             Load += frmPackageMaintenance_Load;
