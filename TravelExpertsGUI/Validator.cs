@@ -115,7 +115,6 @@ namespace TravelExpertsGUI
                 }
                 return msg;
 
-
             }
 
         }
