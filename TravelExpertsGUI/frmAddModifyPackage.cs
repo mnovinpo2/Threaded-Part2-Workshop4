@@ -90,7 +90,6 @@ namespace TravelExpertsGUI
             {
                 error += Validator.IsValidPackageID(txtPkgId);
             }
-
             error += Validator.IsPresent(txtPkgName);
             error += Validator.IsPresent(txtPkgDesc);
             error += Validator.IsPresent(txtPrice);

@@ -109,6 +109,7 @@ namespace TravelExpertsGUI
             using (var context = new TravelExpertsContext())
             {
                 string msg = "";
+
                 if (context.Suppliers.Any(s => s.SupplierId == int.Parse(textBox.Text)))
                 {
                     msg = $"{textBox.Tag} is already taken.{LineEnd}";
@@ -160,6 +161,8 @@ namespace TravelExpertsGUI
                 msg = $"{textBox.Tag} must be a positive integer.{LineEnd}";
             }
             return msg;
+
+
         }
 
 

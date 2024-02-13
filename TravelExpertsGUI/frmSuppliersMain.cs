@@ -53,9 +53,9 @@ namespace TravelExpertsGUI
 
                 dgvSupplier.Columns[2].Width = 63;
 
-                dgvSupplier.AlternatingRowsDefaultCellStyle.BackColor = Color.Goldenrod;
+                dgvSupplier.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
                 dgvSupplier.EnableHeadersVisualStyles = false;
-                dgvSupplier.ColumnHeadersDefaultCellStyle.BackColor = Color.Goldenrod;
+                dgvSupplier.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
 
                 dgvSupplier.ColumnHeadersDefaultCellStyle.Padding = new Padding(5, 5, 5, 5);
             }

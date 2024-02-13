@@ -36,7 +36,8 @@ namespace TravelExpertsGUI
             {
                 Text = "Add Product";
                 txtSupID.ReadOnly = false;  // Allow user to enter new product code
-                supplier = new();
+                
+                
             }
             else if (supplier != null)// there will be a product present which means it is a modify
             {
@@ -58,13 +59,14 @@ namespace TravelExpertsGUI
             bool success = true;
             string error = null;
 
-            error += Validator.IsPresent(txtSupName);
+            
             error += Validator.IsPresent(txtSupID);
             error += Validator.IsNonNegativeInt(txtSupID);
             if (Validator.IsNonNegativeInt(txtSupID) == "")
             {
                 error += Validator.IsValidSupplierID(txtSupID);
             }
+            error += Validator.IsPresent(txtSupName);
 
             if (!string.IsNullOrEmpty(error))
             {

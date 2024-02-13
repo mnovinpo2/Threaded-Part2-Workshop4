@@ -247,7 +247,7 @@ namespace TravelExpertsGUI
                     {
                         using (TravelExpertsContext db = new TravelExpertsContext())
                         {
-                            db.Packages.Remove(selectedPackage);
+                            db.Packages.Remove(selectedPackage); 
                             db.SaveChanges();
                             selectedPackage = null;
                             ClearControls();
