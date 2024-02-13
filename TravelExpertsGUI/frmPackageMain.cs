@@ -13,6 +13,9 @@ namespace TravelExpertsGUI
     {
         private TravelExpertsContext context = new();
         private Package? selectedPackage = null;
+        public DbSet<Package> Packages { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         public frmPackageMain()
         {
@@ -206,6 +209,8 @@ namespace TravelExpertsGUI
                         context.SaveChanges();
                         DisplayPackage();
                     }
+
+                    EditPackage();
                 }
                 catch (DbUpdateException ex)
                 {
@@ -240,6 +245,7 @@ namespace TravelExpertsGUI
                     $"Do you really want to delete {selectedPackage.PkgName}",
                     "Confirm delete", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
+
                 if (answer == DialogResult.Yes) // user confirmed
                 {
                     // perform delete
@@ -247,8 +253,18 @@ namespace TravelExpertsGUI
                     {
                         using (TravelExpertsContext db = new TravelExpertsContext())
                         {
+<<<<<<< Updated upstream
                             db.Packages.Remove(selectedPackage); 
+=======
+                            // Manually delete related records from join table
+                            string deleteJoinTableQuery = $"DELETE FROM Packages_Products_Suppliers WHERE PackageId = {selectedPackage.PackageId}";
+                            db.Database.ExecuteSqlRaw(deleteJoinTableQuery);
+
+                            // Delete from main table
+                            db.Packages.Remove(selectedPackage);
+>>>>>>> Stashed changes
                             db.SaveChanges();
+
                             selectedPackage = null;
                             ClearControls();
                             DisplayPackage();
@@ -275,12 +291,7 @@ namespace TravelExpertsGUI
                         MessageBox.Show("Unanticipated error: " + ex.Message,
                             ex.GetType().ToString());
                     }
-
-
-
-
                 }
-
             }
         }
         // Clears Controls and prepares for new CRUD Entry
