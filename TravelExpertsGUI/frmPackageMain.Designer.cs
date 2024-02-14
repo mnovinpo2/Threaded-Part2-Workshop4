@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace TravelExpertsGUI
 {
     partial class frmPackageMain
@@ -269,9 +270,6 @@ namespace TravelExpertsGUI
             ResumeLayout(false);
             PerformLayout();
         }
-
-
-
 
 
         #endregion
