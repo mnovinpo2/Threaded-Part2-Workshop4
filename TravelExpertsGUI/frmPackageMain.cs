@@ -245,6 +245,7 @@ namespace TravelExpertsGUI
                     // perform delete
                     try
                     {
+
                         using (TravelExpertsContext db = new TravelExpertsContext())
                         {
                             db.Packages.Remove(selectedPackage); 
