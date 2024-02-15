@@ -118,7 +118,8 @@ namespace TravelExpertsGUI
         // Function that creates the supplier object
         private void LoadData()
         {
-            supplier.SupName = txtSupName.Text;
+			supplier = new Supplier();
+			supplier.SupName = txtSupName.Text;
             supplier.SupplierId = Convert.ToInt32(txtSupID.Text);
         }
 
