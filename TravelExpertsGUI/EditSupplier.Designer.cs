@@ -92,6 +92,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.Clouds;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(342, 254);
             Controls.Add(txtSupName);
             Controls.Add(txtSupID);

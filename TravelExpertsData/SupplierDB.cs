@@ -28,7 +28,6 @@ namespace TravelExpertsData
         {
             try
             {
-                
                 db.Suppliers.Add(supplier);
                 db.SaveChanges();
             }

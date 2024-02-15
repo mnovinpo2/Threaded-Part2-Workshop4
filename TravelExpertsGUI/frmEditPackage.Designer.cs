@@ -41,13 +41,15 @@
             dgv1.TabIndex = 0;
             dgv1.CellContentClick += dgv1_CellContentClick;
             // 
-            // frmEditPkg
+            // frmEditPackage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.Clouds;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(870, 548);
             Controls.Add(dgv1);
-            Name = "frmEditPkg";
+            Name = "frmEditPackage";
             Text = "frmEditPkg";
             Load += frmEditPkg_Load;
             ((System.ComponentModel.ISupportInitialize)dgv1).EndInit();

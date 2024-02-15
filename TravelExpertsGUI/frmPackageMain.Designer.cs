@@ -258,6 +258,8 @@ namespace TravelExpertsPackageMaintenance
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = TravelExpertsGUI.Properties.Resources.Clouds;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1138, 648);
             Controls.Add(btnAddProducts);
             Controls.Add(label7);

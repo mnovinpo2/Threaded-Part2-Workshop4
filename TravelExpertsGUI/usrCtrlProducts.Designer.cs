@@ -35,7 +35,8 @@
 			// dgvProducts
 			// 
 			dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvProducts.Location = new Point(3, 2);
+			dgvProducts.Dock = DockStyle.Fill;
+			dgvProducts.Location = new Point(0, 0);
 			dgvProducts.Margin = new Padding(3, 2, 3, 2);
 			dgvProducts.Name = "dgvProducts";
 			dgvProducts.RowHeadersWidth = 51;
