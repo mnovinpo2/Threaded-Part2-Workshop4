@@ -95,6 +95,7 @@ namespace TravelExpertsGUI
         {
             dgvSuppliers.Columns.Clear();
             dgvSuppliers.DataSource = GetAllSuppliers();
+            dgvSuppliers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSuppliers.DefaultCellStyle.Font = new Font("Sanscript", 10);
             dgvSuppliers.ColumnHeadersDefaultCellStyle.Font = new Font("Sanscript", 10, FontStyle.Bold);
             dgvSuppliers.AutoResizeColumns();
