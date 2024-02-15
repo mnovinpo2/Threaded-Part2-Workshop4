@@ -41,7 +41,7 @@ namespace TravelExpertsGUI
             }
             else if (supplier != null)// there will be a product present which means it is a modify
             {
-                Text = "Modify Product";
+                Text = "Modify Product!";
                 txtSupID.ReadOnly = true;   // user can't change product code ( product code should be the same )
                 DisplaySuppliers();
             }
@@ -118,9 +118,19 @@ namespace TravelExpertsGUI
         // Function that creates the supplier object
         private void LoadData()
         {
-			supplier = new Supplier();
-			supplier.SupName = txtSupName.Text;
-            supplier.SupplierId = Convert.ToInt32(txtSupID.Text);
+
+            if (supplier == null) // if its adding
+            {
+                // for adding NOT editing
+                supplier = new Supplier();
+                supplier.SupName = txtSupName.Text;
+                supplier.SupplierId = Convert.ToInt32(txtSupID.Text);
+            }
+            else // if its edit
+            {
+                supplier.SupName = txtSupName.Text;
+                supplier.SupplierId = Convert.ToInt32(txtSupID.Text);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
