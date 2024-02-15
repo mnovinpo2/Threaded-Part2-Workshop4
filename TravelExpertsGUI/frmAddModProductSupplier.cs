@@ -66,7 +66,7 @@ namespace TravelExpertsGUI
             error += Validator.IsNonNegativeInt(txtProductId);
             if (Validator.IsNonNegativeInt(txtProductId) == "")
             {
-                error += Validator.IsExistingSupplierID(txtProductId); ;
+                error += Validator.IsExistingProductID(txtProductId); ;
             }
            
             error += Validator.IsPresent(txtSupplierId);
