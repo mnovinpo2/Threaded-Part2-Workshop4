@@ -14,8 +14,8 @@ using System.Xml.Linq;
 using TravelExpertsData;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-//public record PSupplierDTO(int ProductSupplierId, int ProductId, int SupplierId);
-public record PSupplierDTO(int ProductId, int SupplierId);
+public record PSupplierDTO(int ProductSupplierId, int ProductId, int SupplierId);
+//public record PSupplierDTO(int ProductId, int SupplierId);
 
 
 namespace TravelExpertsGUI
@@ -38,7 +38,7 @@ namespace TravelExpertsGUI
         public List<PSupplierDTO> GetAllSuppliers() =>
             context.ProductsSuppliers
         .OrderBy(p => p.ProductSupplierId)
-        .Select(p => new PSupplierDTO((int)p.ProductId!, (int)p.SupplierId!))
+        .Select(p => new PSupplierDTO((int)p.ProductSupplierId, (int)p.ProductId!, (int)p.SupplierId!))
         .ToList();
 
         private bool IsValidData()

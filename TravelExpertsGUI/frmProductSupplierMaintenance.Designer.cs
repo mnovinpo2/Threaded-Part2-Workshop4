@@ -37,6 +37,9 @@
             txtProductId = new TextBox();
             txtSupplierId = new TextBox();
             txtGet = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvSuppliers).BeginInit();
             SuspendLayout();
             // 
@@ -91,21 +94,21 @@
             // 
             // txtProdSupId
             // 
-            txtProdSupId.Location = new Point(40, 331);
+            txtProdSupId.Location = new Point(127, 284);
             txtProdSupId.Name = "txtProdSupId";
             txtProdSupId.Size = new Size(100, 23);
             txtProdSupId.TabIndex = 5;
             // 
             // txtProductId
             // 
-            txtProductId.Location = new Point(40, 382);
+            txtProductId.Location = new Point(127, 335);
             txtProductId.Name = "txtProductId";
             txtProductId.Size = new Size(100, 23);
             txtProductId.TabIndex = 6;
             // 
             // txtSupplierId
             // 
-            txtSupplierId.Location = new Point(40, 420);
+            txtSupplierId.Location = new Point(127, 373);
             txtSupplierId.Name = "txtSupplierId";
             txtSupplierId.Size = new Size(100, 23);
             txtSupplierId.TabIndex = 7;
@@ -118,6 +121,33 @@
             txtGet.TabIndex = 8;
             txtGet.Tag = "SupplierID";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 287);
+            label1.Name = "label1";
+            label1.Size = new Size(109, 15);
+            label1.TabIndex = 9;
+            label1.Text = "Product Supplier ID";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(40, 339);
+            label2.Name = "label2";
+            label2.Size = new Size(63, 15);
+            label2.TabIndex = 10;
+            label2.Text = "Product ID";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(31, 380);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 15);
+            label3.TabIndex = 11;
+            label3.Text = "Supplier ID";
+            // 
             // frmProductSupplierMaintenance
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -125,6 +155,9 @@
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(txtGet);
             Controls.Add(txtSupplierId);
             Controls.Add(txtProductId);
@@ -135,7 +168,7 @@
             Controls.Add(btnGetSupplier);
             Controls.Add(btnModify);
             Name = "frmProductSupplierMaintenance";
-            Text = "Form";
+            Text = "Product Suppliers";
             Load += frmPackageMaintenance_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSuppliers).EndInit();
             ResumeLayout(false);
@@ -153,5 +186,8 @@
         private TextBox txtProductId;
         private TextBox txtSupplierId;
         private TextBox txtGet;
+        private Label label1;
+        private Label label2;
+        private Label label3;
     }
 }

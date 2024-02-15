@@ -41,7 +41,7 @@
             // txtProdSupplierId
             // 
             txtProdSupplierId.Font = new Font("Segoe UI", 10.8F);
-            txtProdSupplierId.Location = new Point(330, 68);
+            txtProdSupplierId.Location = new Point(785, 397);
             txtProdSupplierId.Margin = new Padding(3, 2, 3, 2);
             txtProdSupplierId.Name = "txtProdSupplierId";
             txtProdSupplierId.Size = new Size(157, 27);
@@ -51,7 +51,7 @@
             // txtProductId
             // 
             txtProductId.Font = new Font("Segoe UI", 10.8F);
-            txtProductId.Location = new Point(330, 110);
+            txtProductId.Location = new Point(326, 100);
             txtProductId.Margin = new Padding(3, 2, 3, 2);
             txtProductId.Name = "txtProductId";
             txtProductId.Size = new Size(157, 27);
@@ -61,7 +61,7 @@
             // txtSupplierId
             // 
             txtSupplierId.Font = new Font("Segoe UI", 10.8F);
-            txtSupplierId.Location = new Point(326, 151);
+            txtSupplierId.Location = new Point(326, 144);
             txtSupplierId.Margin = new Padding(3, 2, 3, 2);
             txtSupplierId.Name = "txtSupplierId";
             txtSupplierId.Size = new Size(161, 27);
@@ -72,7 +72,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.8F);
-            label1.Location = new Point(182, 70);
+            label1.Location = new Point(568, 397);
             label1.Name = "label1";
             label1.Size = new Size(132, 20);
             label1.TabIndex = 3;
@@ -128,7 +128,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(576, 340);
             Controls.Add(btnCancel);
             Controls.Add(btnOK);
             Controls.Add(label3);
