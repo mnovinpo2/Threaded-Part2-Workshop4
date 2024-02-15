@@ -24,6 +24,7 @@ namespace TravelExpertsGUI
 			dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
 			dgvProducts.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
 
+
 			//dgvProducts.Columns[0].HeaderText = "Product ID";
 
 			//dgvProducts.Columns[1].HeaderText = "Product Name";

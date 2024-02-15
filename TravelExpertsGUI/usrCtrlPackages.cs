@@ -11,64 +11,54 @@ using TravelExpertsData;
 
 namespace TravelExpertsGUI
 {
-	public partial class usrCtrlPackages : UserControl
-	{
-		public usrCtrlPackages()
-		{
-			InitializeComponent();
-		}
+    public partial class usrCtrlPackages : UserControl
+    {
+        private void usrCtrlPackages_Load(object sender, EventArgs e)
+        {
+            // Your code to initialize or load data
+            DisplayPackages();
+        }
+        public usrCtrlPackages()
+        {
 
-		private void usrCtrlPackages_Load(object sender, EventArgs e)
-		{
-			DisplayPackages();
-		}
-		public void DisplayPackages()
-		{
-			dgvPackages.Columns.Clear();
-			dgvPackages.DataSource = PackageDB.GetPackages();
-			   
-			// Packages header and row styles
-			dgvPackages.EnableHeadersVisualStyles = false;
-			dgvPackages.ColumnHeadersDefaultCellStyle.Font = new Font("Century", 9, FontStyle.Bold);
-			dgvPackages.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
-			dgvPackages.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+            InitializeComponent();
+            Load += usrCtrlPackages_Load;
 
-			//dgvPackages.Columns[0].HeaderText = "ID";
-
-			//dgvPackages.Columns[1].HeaderText = "Name";
-
-			//dgvPackages.Columns[2].HeaderText = "Start Date";
-
-			//dgvPackages.Columns[3].HeaderText = "End Date";
-
-			//dgvPackages.Columns[4].HeaderText = "Desc";
-
-			//dgvPackages.Columns[5].HeaderText = "Price";
-			//dgvPackages.Columns[5].DefaultCellStyle.Format = "c";
+        }
 
 
-			//dgvPackages.Columns[6].HeaderText = "Commission";
-			//dgvPackages.Columns[6].DefaultCellStyle.Format = "c";
+        public void DisplayPackages()
+        {
+            dgvPackages.Columns.Clear();
+            dgvPackages.DataSource = PackageDB.GetPackages();
+
+            // Packages header and row styles
+            dgvPackages.EnableHeadersVisualStyles = false;
+            dgvPackages.ColumnHeadersDefaultCellStyle.Font = new Font("Century", 9, FontStyle.Bold);
+            dgvPackages.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
+            dgvPackages.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+
+            dgvPackages.Columns[5].HeaderText = "Price";
+            dgvPackages.Columns[5].DefaultCellStyle.Format = "c";
 
 
-			//dgvPackages.Columns[7].Visible = false;
-			//dgvPackages.Columns[8].Visible = false;
+            dgvPackages.Columns[6].HeaderText = "Commission";
+            dgvPackages.Columns[6].DefaultCellStyle.Format = "c";
 
 
-			// Packagesy space in data grid view 
-			dgvPackages.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			 
-			// Packages height of headers
-			dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-			dgvPackages.ColumnHeadersHeight = 35;
-			dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvPackages.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-			// Packages background color of data gridview
-			dgvPackages.BackgroundColor = Color.FloralWhite;
-			
-			// Packagesrid of row headers 
-			dgvPackages.RowHeadersVisible = false;
-			   
-		}
-	}
+            // Packages height of headers
+            dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvPackages.ColumnHeadersHeight = 35;
+            dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // Packages background color of data gridview
+            dgvPackages.BackgroundColor = Color.FloralWhite;
+
+            // Packagesrid of row headers 
+            dgvPackages.RowHeadersVisible = false;
+
+        }
+    }
 }

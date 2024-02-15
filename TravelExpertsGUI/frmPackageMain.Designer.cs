@@ -1,7 +1,6 @@
 ﻿
 
-
-namespace TravelExpertsGUI
+namespace TravelExpertsPackageMaintenance
 {
     partial class frmPackageMain
     {
@@ -51,76 +50,83 @@ namespace TravelExpertsGUI
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            dgv1 = new DataGridView();
+            btnAddProducts = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPackages).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgv1).BeginInit();
             SuspendLayout();
             // 
             // dgvPackages
             // 
+            dgvPackages.BackgroundColor = SystemColors.ButtonHighlight;
             dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPackages.GridColor = SystemColors.MenuHighlight;
-            dgvPackages.Location = new Point(42, 30);
+            dgvPackages.Location = new Point(30, 32);
             dgvPackages.Name = "dgvPackages";
             dgvPackages.RowHeadersWidth = 51;
-            dgvPackages.Size = new Size(457, 377);
+            dgvPackages.Size = new Size(1094, 248);
             dgvPackages.TabIndex = 0;
             // 
             // txtEDate
             // 
-            txtEDate.Location = new Point(137, 536);
+            txtEDate.Font = new Font("Segoe UI", 12F);
+            txtEDate.Location = new Point(206, 456);
             txtEDate.Name = "txtEDate";
-            txtEDate.Size = new Size(100, 23);
+            txtEDate.Size = new Size(100, 29);
             txtEDate.TabIndex = 1;
             // 
             // txtPkgId
             // 
-            txtPkgId.Location = new Point(423, 433);
+            txtPkgId.Font = new Font("Segoe UI", 12F);
+            txtPkgId.Location = new Point(559, 403);
             txtPkgId.Name = "txtPkgId";
-            txtPkgId.Size = new Size(100, 23);
+            txtPkgId.Size = new Size(100, 29);
             txtPkgId.TabIndex = 2;
             // 
             // txtGetPkg
             // 
-            txtGetPkg.Location = new Point(749, 523);
+            txtGetPkg.Font = new Font("Segoe UI", 12F);
+            txtGetPkg.Location = new Point(1024, 302);
             txtGetPkg.Name = "txtGetPkg";
-            txtGetPkg.Size = new Size(100, 23);
+            txtGetPkg.Size = new Size(100, 29);
             txtGetPkg.TabIndex = 3;
-            txtGetPkg.Tag = "Package ID";
             // 
             // txtPkgDesc
             // 
-            txtPkgDesc.Location = new Point(423, 494);
+            txtPkgDesc.Font = new Font("Segoe UI", 12F);
+            txtPkgDesc.Location = new Point(559, 591);
             txtPkgDesc.Name = "txtPkgDesc";
-            txtPkgDesc.Size = new Size(100, 23);
+            txtPkgDesc.Size = new Size(347, 29);
             txtPkgDesc.TabIndex = 4;
             // 
             // txtPkgName
             // 
-            txtPkgName.Location = new Point(423, 552);
+            txtPkgName.Font = new Font("Segoe UI", 12F);
+            txtPkgName.Location = new Point(559, 502);
             txtPkgName.Name = "txtPkgName";
-            txtPkgName.Size = new Size(100, 23);
+            txtPkgName.Size = new Size(347, 29);
             txtPkgName.TabIndex = 5;
             // 
             // txtSDate
             // 
-            txtSDate.Location = new Point(137, 472);
+            txtSDate.Font = new Font("Segoe UI", 12F);
+            txtSDate.Location = new Point(206, 390);
             txtSDate.Name = "txtSDate";
-            txtSDate.Size = new Size(100, 23);
+            txtSDate.Size = new Size(100, 29);
             txtSDate.TabIndex = 6;
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(137, 584);
+            txtPrice.Font = new Font("Segoe UI", 12F);
+            txtPrice.Location = new Point(206, 520);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(100, 23);
+            txtPrice.Size = new Size(100, 29);
             txtPrice.TabIndex = 7;
             // 
             // btnGet
             // 
-            btnGet.Location = new Point(731, 476);
+            btnGet.Font = new Font("Segoe UI", 12F);
+            btnGet.Location = new Point(959, 363);
             btnGet.Name = "btnGet";
-            btnGet.Size = new Size(107, 23);
+            btnGet.Size = new Size(165, 34);
             btnGet.TabIndex = 8;
             btnGet.Text = "Get Package";
             btnGet.UseVisualStyleBackColor = true;
@@ -128,9 +134,10 @@ namespace TravelExpertsGUI
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(602, 552);
+            btnAdd.Font = new Font("Segoe UI", 12F);
+            btnAdd.Location = new Point(42, 302);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 23);
+            btnAdd.Size = new Size(133, 34);
             btnAdd.TabIndex = 9;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
@@ -138,9 +145,10 @@ namespace TravelExpertsGUI
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(602, 432);
+            btnDelete.Font = new Font("Segoe UI", 12F);
+            btnDelete.Location = new Point(713, 302);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
+            btnDelete.Size = new Size(133, 34);
             btnDelete.TabIndex = 10;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -148,9 +156,10 @@ namespace TravelExpertsGUI
             // 
             // btnModify
             // 
-            btnModify.Location = new Point(602, 494);
+            btnModify.Font = new Font("Segoe UI", 12F);
+            btnModify.Location = new Point(335, 302);
             btnModify.Name = "btnModify";
-            btnModify.Size = new Size(75, 23);
+            btnModify.Size = new Size(133, 34);
             btnModify.TabIndex = 11;
             btnModify.Text = "Modify";
             btnModify.UseVisualStyleBackColor = true;
@@ -158,90 +167,99 @@ namespace TravelExpertsGUI
             // 
             // txtCom
             // 
-            txtCom.Location = new Point(137, 623);
+            txtCom.Font = new Font("Segoe UI", 12F);
+            txtCom.Location = new Point(206, 581);
             txtCom.Name = "txtCom";
-            txtCom.Size = new Size(100, 23);
+            txtCom.Size = new Size(100, 29);
             txtCom.TabIndex = 12;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(329, 441);
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(433, 411);
             label1.Name = "label1";
-            label1.Size = new Size(61, 15);
+            label1.Size = new Size(79, 21);
             label1.TabIndex = 13;
             label1.Text = "PackageId";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(304, 502);
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(408, 502);
             label2.Name = "label2";
-            label2.Size = new Size(86, 15);
+            label2.Size = new Size(112, 21);
             label2.TabIndex = 14;
             label2.Text = "Package Name";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(288, 560);
+            label3.Font = new Font("Segoe UI", 12F);
+            label3.Location = new Point(380, 599);
             label3.Name = "label3";
-            label3.Size = new Size(114, 15);
+            label3.Size = new Size(149, 21);
             label3.TabIndex = 15;
             label3.Text = "Package Description";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 480);
+            label4.Font = new Font("Segoe UI", 12F);
+            label4.Location = new Point(12, 393);
             label4.Name = "label4";
-            label4.Size = new Size(105, 15);
+            label4.Size = new Size(138, 21);
             label4.TabIndex = 16;
             label4.Text = "Package Start Date";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(30, 592);
+            label5.Font = new Font("Segoe UI", 12F);
+            label5.Location = new Point(18, 530);
             label5.Name = "label5";
-            label5.Size = new Size(80, 15);
+            label5.Size = new Size(104, 21);
             label5.TabIndex = 17;
             label5.Text = "Package Price";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(12, 536);
+            label6.Font = new Font("Segoe UI", 12F);
+            label6.Location = new Point(17, 462);
             label6.Name = "label6";
-            label6.Size = new Size(101, 15);
+            label6.Size = new Size(132, 21);
             label6.TabIndex = 18;
             label6.Text = "Package End Date";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(12, 631);
+            label7.Font = new Font("Segoe UI", 12F);
+            label7.Location = new Point(12, 586);
             label7.Name = "label7";
-            label7.Size = new Size(112, 15);
+            label7.Size = new Size(145, 21);
             label7.TabIndex = 19;
             label7.Text = "Agency Commision";
             // 
-            // dgv1
+            // btnAddProducts
             // 
-            dgv1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv1.Location = new Point(545, 30);
-            dgv1.Margin = new Padding(3, 2, 3, 2);
-            dgv1.Name = "dgv1";
-            dgv1.RowHeadersWidth = 51;
-            dgv1.Size = new Size(995, 377);
-            dgv1.TabIndex = 20;
+            btnAddProducts.Font = new Font("Segoe UI", 12F);
+            btnAddProducts.Location = new Point(959, 502);
+            btnAddProducts.Name = "btnAddProducts";
+            btnAddProducts.Size = new Size(165, 49);
+            btnAddProducts.TabIndex = 21;
+            btnAddProducts.Text = "Add a product";
+            btnAddProducts.UseVisualStyleBackColor = true;
+            btnAddProducts.Click += btnAddProducts_Click;
             // 
             // frmPackageMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 653);
-            Controls.Add(dgv1);
+            ClientSize = new Size(1138, 648);
+            Controls.Add(btnAddProducts);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -263,13 +281,15 @@ namespace TravelExpertsGUI
             Controls.Add(txtEDate);
             Controls.Add(dgvPackages);
             Name = "frmPackageMain";
-            Text = "Form1";
+            Text = "TravelExperts Packages";
             Load += PackageMain_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPackages).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgv1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
+
+
+
 
 
         #endregion
@@ -294,6 +314,6 @@ namespace TravelExpertsGUI
         private Label label5;
         private Label label6;
         private Label label7;
-        private DataGridView dgv1;
+        private Button btnAddProducts;
     }
 }

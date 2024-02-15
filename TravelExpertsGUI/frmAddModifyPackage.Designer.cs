@@ -37,18 +37,22 @@
             txtCom = new TextBox();
             dtpSDate = new DateTimePicker();
             dtpEDate = new DateTimePicker();
-            label1 = new Label();
-            label2 = new Label();
-            cboSupplier = new ComboBox();
-            cboProduct = new ComboBox();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
             SuspendLayout();
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(32, 209);
+            btnOK.Font = new Font("Segoe UI", 12F);
+            btnOK.Location = new Point(126, 455);
             btnOK.Margin = new Padding(3, 2, 3, 2);
             btnOK.Name = "btnOK";
-            btnOK.Size = new Size(82, 22);
+            btnOK.Size = new Size(128, 34);
             btnOK.TabIndex = 0;
             btnOK.Text = "btnOK";
             btnOK.UseVisualStyleBackColor = true;
@@ -56,10 +60,11 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(154, 209);
+            btnCancel.Font = new Font("Segoe UI", 12F);
+            btnCancel.Location = new Point(335, 455);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(82, 22);
+            btnCancel.Size = new Size(128, 34);
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -67,116 +72,154 @@
             // 
             // txtPkgId
             // 
-            txtPkgId.Location = new Point(304, 53);
+            txtPkgId.Font = new Font("Segoe UI", 11.25F);
+            txtPkgId.Location = new Point(219, 47);
             txtPkgId.Margin = new Padding(3, 2, 3, 2);
             txtPkgId.Name = "txtPkgId";
-            txtPkgId.Size = new Size(300, 23);
+            txtPkgId.Size = new Size(300, 27);
             txtPkgId.TabIndex = 2;
             txtPkgId.Tag = "ID";
             // 
             // txtPkgName
             // 
-            txtPkgName.Location = new Point(304, 102);
+            txtPkgName.Font = new Font("Segoe UI", 11.25F);
+            txtPkgName.Location = new Point(219, 96);
             txtPkgName.Margin = new Padding(3, 2, 3, 2);
             txtPkgName.Name = "txtPkgName";
-            txtPkgName.Size = new Size(300, 23);
+            txtPkgName.Size = new Size(300, 27);
             txtPkgName.TabIndex = 3;
             txtPkgName.Tag = "Package Name";
             // 
             // txtPkgDesc
             // 
-            txtPkgDesc.Location = new Point(304, 152);
+            txtPkgDesc.Font = new Font("Segoe UI", 11.25F);
+            txtPkgDesc.Location = new Point(219, 153);
             txtPkgDesc.Margin = new Padding(3, 2, 3, 2);
             txtPkgDesc.Name = "txtPkgDesc";
-            txtPkgDesc.Size = new Size(300, 23);
+            txtPkgDesc.Size = new Size(300, 27);
             txtPkgDesc.TabIndex = 4;
             txtPkgDesc.Tag = "Package Description";
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(304, 186);
+            txtPrice.Font = new Font("Segoe UI", 11.25F);
+            txtPrice.Location = new Point(219, 203);
             txtPrice.Margin = new Padding(3, 2, 3, 2);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(300, 23);
+            txtPrice.Size = new Size(300, 27);
             txtPrice.TabIndex = 5;
             txtPrice.Tag = "Price";
             // 
             // txtCom
             // 
-            txtCom.Location = new Point(304, 219);
+            txtCom.Font = new Font("Segoe UI", 11.25F);
+            txtCom.Location = new Point(219, 255);
             txtCom.Margin = new Padding(3, 2, 3, 2);
             txtCom.Name = "txtCom";
-            txtCom.Size = new Size(300, 23);
+            txtCom.Size = new Size(300, 27);
             txtCom.TabIndex = 6;
             txtCom.Tag = "Agency";
             // 
             // dtpSDate
             // 
-            dtpSDate.Location = new Point(304, 278);
+            dtpSDate.Font = new Font("Segoe UI", 9.75F);
+            dtpSDate.Location = new Point(219, 322);
             dtpSDate.Margin = new Padding(3, 2, 3, 2);
             dtpSDate.Name = "dtpSDate";
-            dtpSDate.Size = new Size(300, 23);
+            dtpSDate.Size = new Size(300, 25);
             dtpSDate.TabIndex = 7;
             // 
             // dtpEDate
             // 
-            dtpEDate.Location = new Point(304, 337);
+            dtpEDate.Font = new Font("Segoe UI", 9.75F);
+            dtpEDate.Location = new Point(219, 396);
             dtpEDate.Margin = new Padding(3, 2, 3, 2);
             dtpEDate.Name = "dtpEDate";
-            dtpEDate.Size = new Size(300, 23);
+            dtpEDate.Size = new Size(300, 25);
             dtpEDate.TabIndex = 8;
             // 
-            // label1
+            // label3
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(304, 261);
-            label1.Name = "label1";
-            label1.Size = new Size(108, 15);
-            label1.TabIndex = 9;
-            label1.Text = "Package Start Date:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F);
+            label3.Location = new Point(64, 103);
+            label3.Name = "label3";
+            label3.Size = new Size(110, 20);
+            label3.TabIndex = 14;
+            label3.Text = "Package Name:";
             // 
-            // label2
+            // label4
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(304, 320);
-            label2.Name = "label2";
-            label2.Size = new Size(104, 15);
-            label2.TabIndex = 10;
-            label2.Text = "Package End Date:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F);
+            label4.Location = new Point(77, 46);
+            label4.Name = "label4";
+            label4.Size = new Size(85, 20);
+            label4.TabIndex = 13;
+            label4.Text = "Package ID:";
             // 
-            // cboSupplier
+            // label5
             // 
-            cboSupplier.DisplayMember = "SupName";
-            cboSupplier.FormattingEnabled = true;
-            cboSupplier.Location = new Point(32, 53);
-            cboSupplier.Name = "cboSupplier";
-            cboSupplier.Size = new Size(245, 23);
-            cboSupplier.TabIndex = 11;
-            cboSupplier.Text = "Pick a Supplier";
-            cboSupplier.ValueMember = "SupplierId";
-            cboSupplier.SelectedValueChanged += cboSupplier_SelectedValueChanged;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11.25F);
+            label5.Location = new Point(64, 206);
+            label5.Name = "label5";
+            label5.Size = new Size(102, 20);
+            label5.TabIndex = 16;
+            label5.Text = "Package Price:";
             // 
-            // cboProduct
+            // label6
             // 
-            cboProduct.DisplayMember = "ProdName";
-            cboProduct.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboProduct.FormattingEnabled = true;
-            cboProduct.Location = new Point(32, 102);
-            cboProduct.Name = "cboProduct";
-            cboProduct.Size = new Size(245, 23);
-            cboProduct.TabIndex = 12;
-            cboProduct.ValueMember = "ProductId";
-            cboProduct.SelectedValueChanged += cboProduct_SelectedValueChanged;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11.25F);
+            label6.Location = new Point(45, 160);
+            label6.Name = "label6";
+            label6.Size = new Size(146, 20);
+            label6.TabIndex = 15;
+            label6.Text = "Package Description:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 11.25F);
+            label7.Location = new Point(60, 401);
+            label7.Name = "label7";
+            label7.Size = new Size(131, 20);
+            label7.TabIndex = 18;
+            label7.Text = "Package End Date:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11.25F);
+            label8.Location = new Point(45, 327);
+            label8.Name = "label8";
+            label8.Size = new Size(137, 20);
+            label8.TabIndex = 17;
+            label8.Text = "Package Start Date:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11.25F);
+            label9.Location = new Point(45, 262);
+            label9.Name = "label9";
+            label9.Size = new Size(146, 20);
+            label9.TabIndex = 19;
+            label9.Text = "Agency Commission:";
             // 
             // frmAddModifyPackage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(642, 395);
-            Controls.Add(cboProduct);
-            Controls.Add(cboSupplier);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            ClientSize = new Size(619, 521);
+            Controls.Add(label9);
+            Controls.Add(label7);
+            Controls.Add(label8);
+            Controls.Add(label5);
+            Controls.Add(label6);
+            Controls.Add(label3);
+            Controls.Add(label4);
             Controls.Add(dtpEDate);
             Controls.Add(dtpSDate);
             Controls.Add(txtCom);
@@ -188,7 +231,7 @@
             Controls.Add(btnOK);
             Margin = new Padding(3, 2, 3, 2);
             Name = "frmAddModifyPackage";
-            Text = "Form1";
+            Text = "TravelExperts Add and Modify Packages";
             Load += frmAddModify_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -205,9 +248,12 @@
         private TextBox txtCom;
         private DateTimePicker dtpSDate;
         private DateTimePicker dtpEDate;
-        private Label label1;
-        private Label label2;
-        private ComboBox cboSupplier;
-        private ComboBox cboProduct;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Label label9;
     }
 }

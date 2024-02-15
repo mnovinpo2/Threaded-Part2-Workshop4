@@ -1,21 +1,41 @@
-﻿using Microsoft.Data.SqlClient;
+﻿
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
 using TravelExpertsData;
+using TravelExpertsGUI;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-public record PackagesDTO(int PackageId, string PkgName, DateTime? PkgStartDate, DateTime pkgEndDate, string PkgDesc, decimal PkgBasePrice, decimal PkgCom);
+public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, DateTime pkgEndDate, string PkgDesc, decimal PkgBasePrice, decimal PkgCom);
 
 
-namespace TravelExpertsGUI
+
+namespace TravelExpertsPackageMaintenance
 {
+
+
 
     public partial class frmPackageMain : Form
     {
         private TravelExpertsContext context = new();
         private Package? selectedPackage = null;
+
         public DbSet<Package> Packages { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+
+        // Property to hold productSupplierId
+        public int ProductSupplierId { get; set; }
 
         public frmPackageMain()
         {
@@ -25,36 +45,38 @@ namespace TravelExpertsGUI
         private void PackageMain_Load(object sender, EventArgs e)
         {
             DisplayPackage();
-            EditPackage();
             btnModify.Enabled = false;
             btnDelete.Enabled = false;
+
+
+
+
         }
 
-        public List<PackagesDTO> GetAllpackages() =>
+        public List<PackagesDTO> GetAllPackages() =>
                 context.Packages
-            .OrderBy(p => p.PackageId).Select(p => new PackagesDTO(p.PackageId, p.PkgName, p.PkgStartDate, p.PkgEndDate, p.PkgDesc!, p.PkgBasePrice, p.PkgAgencyCommission)).ToList();
-
+            .OrderBy(p => p.PackageId).Select(p => new PackagesDTO(p.PackageId, p.PkgName, p.PkgStartDate, p.PkgEndDate, p.PkgDesc, p.PkgBasePrice, p.PkgAgencyCommission)).ToList();
 
         private bool IsValidData()
         {
             bool success = true;
             string error = null;
 
-            error += Validator.IsPresent(txtGetPkg);
-            error += Validator.IsNonNegativeInt(txtGetPkg);
+            //error += Validator.IsPresent(txtGetPkg);
+            //error += Validator.IsNonNegativeInt(txtGetPkg);
 
             if (!string.IsNullOrEmpty(error))
             {
                 success = false;
                 MessageBox.Show(error, "Entry Error");
             }
+
             return success;
         }
 
+
         private void btnGet_Click(object sender, EventArgs e)
         {
-            //if (Validator.IsPresent(txtGet)) if valid ProductCode
-            //)
             if (IsValidData())
             {
                 try
@@ -69,47 +91,44 @@ namespace TravelExpertsGUI
                         }
                         else
                         {
-                            MessageBox.Show
-                                ($"There is no Product with ID = {pkgID}");
+                            MessageBox.Show($"There is no Package with ID = {pkgID}");
                         }
                     }
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error while retrieving product data: " + ex.Message,
-                        "Database Error");
+                    MessageBox.Show("Error while retrieving package data: " + ex.Message, "Database Error");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unanticipated error: " + ex.Message,
-                        ex.GetType().ToString());
+                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
                 }
             }
-
         }
 
-        public void EditPackage()
-        {
-            var connection = new SqlConnection(@"Server=LOCALHOST\SQLEXPRESS;Database=TravelExperts;Trusted_connection=True; TrustServerCertificate=True");
+        //public void EditPackage()
+        //{
+        //    var connection = new SqlConnection(@"Server=LOCALHOST\SQLEXPRESS;Database=TravelExperts;Trusted_connection=True; TrustServerCertificate=True");
 
-            connection.Open();
-            string SQL = "select pk.PackageId, PkgName, p.ProductId, ProdName, s.SupplierId, SupName\r\nfrom Products p join Products_Suppliers ps on p.ProductId = ps.ProductId\r\n                join Suppliers s on s.SupplierId = ps.SupplierId\r\n\t\t\t\tjoin Packages_Products_Suppliers pps on pps.ProductSupplierId = ps.ProductSupplierId\r\n\t\t\t\tjoin Packages pk on pk.PackageId = pps.PackageId";
-            var cmd = new SqlCommand(SQL, connection);
-            var dataReader = cmd.ExecuteReader();
-            DataTable table = new DataTable();
-            table.Load(dataReader);
-            dgv1.DataSource = table;
-        }
+        //    connection.Open();
+        //    string SQL = "select pk.PackageId, PkgName, p.ProductId, ProdName, s.SupplierId, SupName\r\nfrom Products p join Products_Suppliers ps on p.ProductId = ps.ProductId\r\n                join Suppliers s on s.SupplierId = ps.SupplierId\r\n\t\t\t\tjoin Packages_Products_Suppliers pps on pps.ProductSupplierId = ps.ProductSupplierId\r\n\t\t\t\tjoin Packages pk on pk.PackageId = pps.PackageId";
+        //    var cmd = new SqlCommand(SQL, connection);
+        //    var dataReader = cmd.ExecuteReader();
+        //    DataTable table = new DataTable();
+        //    table.Load(dataReader);
+        //    dgv1.DataSource = table;
+        //}
 
         private void DisplayPackage()
         {
             dgvPackages.Columns.Clear();
-            dgvPackages.DataSource = GetAllpackages();
+            dgvPackages.DataSource = GetAllPackages();
             dgvPackages.Columns[5].DefaultCellStyle.Format = "c";
             dgvPackages.Columns[6].DefaultCellStyle.Format = "c";
             dgvPackages.DefaultCellStyle.Font = new Font("Sanscript", 10);
             dgvPackages.ColumnHeadersDefaultCellStyle.Font = new Font("Sanscript", 10, FontStyle.Bold);
             dgvPackages.AutoResizeColumns();
+
             if (selectedPackage != null)
             {
                 txtPkgId.Text = selectedPackage.PackageId.ToString();
@@ -120,8 +139,7 @@ namespace TravelExpertsGUI
                 txtPrice.Text = selectedPackage.PkgBasePrice.ToString("c");
                 txtCom.Text = selectedPackage.PkgAgencyCommission.ToString("c");
 
-
-                // enable Modify and Delete
+                // Enable Modify and Delete
                 btnModify.Enabled = true;
                 btnDelete.Enabled = true;
 
@@ -133,105 +151,53 @@ namespace TravelExpertsGUI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            frmAddModifyPackage secondForm = new();
+            frmAddModifyPackage secondForm = new frmAddModifyPackage();
             secondForm.isAdd = true;
-            secondForm.package = null;
-
+            secondForm.package = selectedPackage;
 
             DialogResult result = secondForm.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-
+                // Continue with other operations using ProductSupplierId
                 try
                 {
-                    if (selectedPackage == null)
-                    {
-                        selectedPackage = secondForm.package;
-                        context.Packages.Add(selectedPackage);
-                        context.SaveChanges();
-                        DisplayPackage();
-                    }
-
-                    var packageId = context.Packages.FirstOrDefault(x => x.PkgName == secondForm.package.PkgName).PackageId;
-                    var productSupplierId = secondForm.productSupplierId;
-                    
-                    // Add product supplier to package
-                    context.Database.ExecuteSql($"INSERT INTO Packages_Products_Suppliers VALUES({packageId}, {productSupplierId})");
-
-                    EditPackage();
-
-                }
-                catch (DbUpdateException ex)
-                {
-                    string msg = "";
-                    var sqlException =
-                        (SqlException)ex.InnerException!;
-                    foreach (SqlError error in sqlException.Errors)
-                    {
-                        msg += $"ERROR CODE {error.Number}: {error.Message}\n";
-                    }
-                    MessageBox.Show(msg, "Database Error");
+                    // ... (update package in the database) 
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error while adding product: " + ex.Message,
-                        "Database Error");
+                    MessageBox.Show("Error while modifying package: " + ex.Message, "Database Error");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unanticipated error: " + ex.Message,
-                        ex.GetType().ToString());
+                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
                 }
-
             }
         }
 
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            frmAddModifyPackage secondForm =
-                new frmAddModifyPackage();
+            frmAddModifyPackage secondForm = new frmAddModifyPackage();
             secondForm.isAdd = false;
             secondForm.package = selectedPackage;
 
-
-
             DialogResult result = secondForm.ShowDialog();
-            if (result == DialogResult.OK) // second form collected new data
+
+            if (result == DialogResult.OK)
             {
-                // perform the update
+                // Continue with other operations using ProductSupplierId
                 try
                 {
-                    if (secondForm.package != null)
-                    {
-                        context.Packages.Update(secondForm.package);
-                        context.SaveChanges();
-                        DisplayPackage();
-                    }
-
-                    EditPackage();
-                }
-                catch (DbUpdateException ex)
-                {
-                    string msg = "";
-                    var sqlException =
-                        (SqlException)ex.InnerException!;
-                    foreach (SqlError error in sqlException.Errors)
-                    {
-                        msg += $"ERROR CODE {error.Number}: {error.Message}\n";
-                    }
-                    MessageBox.Show(msg, "Database Error");
+                    // ... (update package in the database) 
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error while modifying product: " + ex.Message,
-                        "Database Error");
+                    MessageBox.Show("Error while modifying package: " + ex.Message, "Database Error");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unanticipated error: " + ex.Message,
-                        ex.GetType().ToString());
+                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
                 }
             }
         }
@@ -240,30 +206,22 @@ namespace TravelExpertsGUI
         {
             if (selectedPackage != null)
             {
-                // get the user's confirmation
                 DialogResult answer = MessageBox.Show(
                     $"Do you really want to delete {selectedPackage.PkgName}",
                     "Confirm delete", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
-                if (answer == DialogResult.Yes) // user confirmed
+                if (answer == DialogResult.Yes)
                 {
-                    // perform delete
                     try
                     {
 
                         using (TravelExpertsContext db = new TravelExpertsContext())
                         {
-<<<<<<< Updated upstream
-                            db.Packages.Remove(selectedPackage); 
-=======
-                            // Manually delete related records from join table
                             string deleteJoinTableQuery = $"DELETE FROM Packages_Products_Suppliers WHERE PackageId = {selectedPackage.PackageId}";
                             db.Database.ExecuteSqlRaw(deleteJoinTableQuery);
 
-                            // Delete from main table
                             db.Packages.Remove(selectedPackage);
->>>>>>> Stashed changes
                             db.SaveChanges();
 
                             selectedPackage = null;
@@ -273,24 +231,14 @@ namespace TravelExpertsGUI
                     }
                     catch (DbUpdateException ex)
                     {
-                        string msg = "";
-                        var sqlException =
-                            (SqlException)ex.InnerException!;
-                        foreach (SqlError error in sqlException.Errors)
-                        {
-                            msg += $"ERROR CODE {error.Number}:{error.Message}\n";
-                        }
-                        MessageBox.Show(msg, "Database Error");
                     }
                     catch (SqlException ex)
                     {
-                        MessageBox.Show("Error while deleting customer: " + ex.Message,
-                            "Database Error");
+                        MessageBox.Show("Error while deleting package: " + ex.Message, "Database Error");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unanticipated error: " + ex.Message,
-                            ex.GetType().ToString());
+                        MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
                     }
                 }
             }
@@ -306,14 +254,72 @@ namespace TravelExpertsGUI
             txtGetPkg.Text = "";
             txtPrice.Text = "";
             txtCom.Text = "";
-            // disable Modify and Delete
+
+            // Disable Modify and Delete
             btnModify.Enabled = false;
             btnDelete.Enabled = false;
-            txtGetPkg.Focus(); // facilitate selecting another Product
+
+            txtGetPkg.Focus(); // Facilitate selecting another Package
         }
+
+        private void btnAddProducts_Click(object sender, EventArgs e)
+        {
+            frmAddProductToPackage secondForm = new frmAddProductToPackage();
+            DialogResult result = secondForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                ProductSupplierId = secondForm.productSupplierId;
+
+                // Continue with other operations using ProductSupplierId
+                try
+                {
+                    // ... (add package and product supplier to database)
+
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error while adding package: " + ex.Message, "Database Error");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
+                }
+
+            }
+        }
+
+    //    frmAddProductToPackage addProductForm = new frmAddProductToPackage();
+
+    //        DialogResult result = addProductForm.ShowDialog();
+
+    //        if (result == DialogResult.OK)
+    //        {
+    //            ProductSupplierId = secondForm.productSupplierId;
+
+    //            // Continue with other operations using ProductSupplierId
+    //            try
+    //            {
+    //                // ... (add package and product supplier to database)
+
+    //            }
+    //            catch (DbUpdateException ex)
+    //            {
+    //            }
+    //            catch (SqlException ex)
+    //            {
+    //                MessageBox.Show("Error while adding package: " + ex.Message, "Database Error");
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
+    //            }
+
+    //        }
+    //    }
+    //}
     }
 }
-
 
 
 

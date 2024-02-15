@@ -1,4 +1,5 @@
 using TravelExpertsData;
+using TravelExpertsPackageMaintenance;
 
 namespace TravelExpertsGUI
 {
@@ -83,7 +84,7 @@ namespace TravelExpertsGUI
 		{
 			if (EditPkgFrm)
 			{
-				frmPackageMain frmPkg = new();
+                frmPackageMain frmPkg = new();
 				DialogResult result = frmPkg.ShowDialog();
 				if (result == DialogResult.OK)
 				{

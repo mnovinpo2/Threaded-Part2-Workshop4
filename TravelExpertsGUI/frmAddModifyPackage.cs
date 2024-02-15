@@ -1,12 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Identity.Client;
+using System;
 using System.Data;
 using System.Drawing.Text;
 using TravelExpertsData;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using Package = TravelExpertsData.Package;
-
 
 namespace TravelExpertsGUI
 {
@@ -14,44 +11,15 @@ namespace TravelExpertsGUI
     {
         public bool isAdd;
         public Package? package;
-        public int productSupplierId;
         public TravelExpertsContext context = new();
-        public void GetAllProducts()
-        {
-            //cboProduct.DataSource = (from p in context.Products
-            //                          select new { p.ProductId, p.ProdName}).ToList();
-            //cboProduct.DisplayMember = "ProdName";
-            //cboProduct.ValueMember = "ProductId";
-
-            cboProduct.DataSource = context.Products.Select(x => new { ProductId = x.ProductId, ProdName = x.ProdName }).ToList();
-            cboProduct.DisplayMember = "ProdName";
-            cboProduct.ValueMember = "ProductId";
-
-            int id = Convert.ToInt32(cboProduct.SelectedValue);
-
-        }
-
-        public void GetAllSuppliers()
-        {
-            cboSupplier.DataSource = (from s in context.Suppliers
-                                      join ps in context.ProductsSuppliers
-                                      on s.SupplierId equals ps.SupplierId
-                                      select new { s.SupName, s.SupplierId, ps.ProductId, }).ToList();
-            cboSupplier.DisplayMember = "SupName";
-            cboSupplier.ValueMember = "SupplierId";
-        }
-
-
 
         public frmAddModifyPackage()
         {
             InitializeComponent();
         }
+
         public void frmAddModify_Load(object sender, EventArgs e)
         {
-            GetAllProducts();
-            GetAllSuppliers();
-
             if (isAdd)
             {
                 Text = "Add Package";
@@ -60,7 +28,7 @@ namespace TravelExpertsGUI
             }
             else // Modify operation
             {
-                Text = "Modify Product";
+                Text = "Modify Package";
                 DisplayPackage();
                 txtPkgId.Enabled = false;
             }
@@ -79,6 +47,7 @@ namespace TravelExpertsGUI
                 txtCom.Text = package.PkgAgencyCommission.ToString();
             }
         }
+
         private bool IsValidData()
         {
             bool success = true;
@@ -105,23 +74,20 @@ namespace TravelExpertsGUI
             }
             return success;
         }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
-
-            if (isAdd &&
-                IsValidData()) // check if start date is before end date and not the same as end date
+            if (isAdd && IsValidData())
             {
-                package = new Package(); // creates empty object
+                package = new Package();
                 GetPackageData();
-                DialogResult = DialogResult.OK; // closes the form
+                DialogResult = DialogResult.OK;
             }
-            else if (IsValidData()) // Modify
+            else if (IsValidData())
             {
-                // product is not null
                 GetPackageData();
-                DialogResult = DialogResult.OK; // closes the form
+                DialogResult = DialogResult.OK;
             }
-            
         }
 
         private void GetPackageData()
@@ -135,43 +101,12 @@ namespace TravelExpertsGUI
                 package.PkgBasePrice = Convert.ToDecimal(txtPrice.Text);
                 package.PkgAgencyCommission = Convert.ToDecimal(txtCom.Text);
                 DisplayPackage();
-
             }
         }
-
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
-
-        public void cboProduct_SelectedValueChanged(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(cboProduct.SelectedValue);
-            cboSupplier.DataSource = (from s in context.Suppliers
-                                      join ps in context.ProductsSuppliers
-                                      on s.SupplierId equals ps.SupplierId
-                                      where ps.ProductId == id
-                                      select new { s.SupName, s.SupplierId, ps.ProductId }).ToList();
-            cboSupplier.DisplayMember = "SupName";
-            cboSupplier.ValueMember = "SupplierId";
-        }
-
-
-        public void cboSupplier_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cboProduct.SelectedValue != null && cboSupplier.SelectedValue != null)
-            {
-                int productId = Convert.ToInt32(cboProduct.SelectedValue);
-                int supplierId = Convert.ToInt32(cboSupplier.SelectedValue);
-
-                // Assuming prodSupplierId is a class-level variable to store the result
-                productSupplierId = (from ps in context.ProductsSuppliers
-                            where ps.ProductId == productId && ps.SupplierId == supplierId
-                            select ps.ProductSupplierId)
-                        .FirstOrDefault();
-            }
-        }
     }
 }
-
