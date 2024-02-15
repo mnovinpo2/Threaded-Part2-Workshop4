@@ -59,6 +59,7 @@ namespace TravelExpertsGUI
         }
         private void LoadData()
         {
+            supplier = new Supplier();
             supplier.SupName = txtSupName.Text;
             supplier.SupplierId = Convert.ToInt32(txtSupID.Text);
         }
