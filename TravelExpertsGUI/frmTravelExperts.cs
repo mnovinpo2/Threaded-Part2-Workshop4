@@ -56,7 +56,7 @@ namespace TravelExpertsGUI
 			EditSupFrm = false;
 			EditPrdSupFrm = true;
 			EditPrdFrm = false;
-			btnFrm.Text = "Edit Product Suppliers";
+			btnFrm.Text = "Edit Prod Suppliers";
 			CurrentControl(usrCtrlProductSuppliersFrm, btnProdSup);
 		}
 		private void CurrentControl(UserControl userControl, Button btn)
