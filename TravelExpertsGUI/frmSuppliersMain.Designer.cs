@@ -30,6 +30,7 @@
         {
             btnAdd = new Button();
             dgvSupplier = new DataGridView();
+            btnOk = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSupplier).BeginInit();
             SuspendLayout();
             // 
@@ -52,6 +53,16 @@
             dgvSupplier.TabIndex = 2;
             dgvSupplier.CellContentClick += dgvSupplier_CellContentClick_1;
             // 
+            // btnOk
+            // 
+            btnOk.Location = new Point(561, 349);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(126, 23);
+            btnOk.TabIndex = 3;
+            btnOk.Text = "Ok";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
+            // 
             // frmSuppliersMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -59,6 +70,7 @@
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnOk);
             Controls.Add(dgvSupplier);
             Controls.Add(btnAdd);
             Name = "frmSuppliersMain";
@@ -71,5 +83,6 @@
         #endregion
         private Button btnAdd;
         private DataGridView dgvSupplier;
+        private Button btnOk;
     }
 }

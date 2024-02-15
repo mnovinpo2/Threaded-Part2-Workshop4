@@ -59,13 +59,13 @@ namespace TravelExpertsGUI
 
                 dgvSupplier.ColumnHeadersDefaultCellStyle.Padding = new Padding(5, 5, 5, 5);
             }
-            
+
         }
 
 
 
         private void dgvSupplier_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        { 
+        {
             const int EditIndex = 4;
             const int DeleteIndex = 5;
 
@@ -160,13 +160,19 @@ namespace TravelExpertsGUI
                     selectedSupplier = AddForm.supplier; // changes current data to new and changed product
                     db.AddSupplier(selectedSupplier); // adds the new product to db
                     DisplaySuppliers(); // displays current products after the addition of the new one
-                    
+
                 }
                 catch (DataAccessException ex)
                 {
                     HandleDataAccessError(ex);
                 }
             }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }
