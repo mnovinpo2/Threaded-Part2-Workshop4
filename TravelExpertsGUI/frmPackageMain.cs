@@ -151,30 +151,51 @@ namespace TravelExpertsPackageMaintenance
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            frmAddModifyPackage secondForm = new frmAddModifyPackage();
+            frmAddModifyPackage secondForm = new();
             secondForm.isAdd = true;
-            secondForm.package = selectedPackage;
+            secondForm.package = null;
+
 
             DialogResult result = secondForm.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                // Continue with other operations using ProductSupplierId
+
                 try
                 {
-                    // ... (update package in the database) 
+                    if (selectedPackage == null)
+                    {
+                        selectedPackage = secondForm.package;
+                        context.Packages.Add(selectedPackage);
+                        context.SaveChanges();
+                        DisplayPackage();
+                    }
+
+                }
+                catch (DbUpdateException ex)
+                {
+                    string msg = "";
+                    var sqlException =
+                        (SqlException)ex.InnerException!;
+                    foreach (SqlError error in sqlException.Errors)
+                    {
+                        msg += $"ERROR CODE {error.Number}: {error.Message}\n";
+                    }
+                    MessageBox.Show(msg, "Database Error");
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error while modifying package: " + ex.Message, "Database Error");
+                    MessageBox.Show("Error while adding product: " + ex.Message,
+                        "Database Error");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
+                    MessageBox.Show("Unanticipated error: " + ex.Message,
+                        ex.GetType().ToString());
                 }
+
             }
         }
-
 
         private void btnModify_Click(object sender, EventArgs e)
         {

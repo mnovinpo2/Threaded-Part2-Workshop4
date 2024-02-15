@@ -56,27 +56,36 @@ namespace TravelExpertsGUI
             bool success = true;
             string error = null;
 
-            error += Validator.IsPresent(txtProdSupplierId);
-            error += Validator.IsNonNegativeInt(txtProdSupplierId);
+            // Commented-out lines removed
+            // error += Validator.IsPresent(txtProdSupplierId);
+            // error += Validator.IsNonNegativeInt(txtProdSupplierId);
+
             if (Validator.IsNonNegativeInt(txtProdSupplierId) == "")
             {
                 error += Validator.IsValidProdSupID(txtProdSupplierId);
             }
+
             error += Validator.IsPresent(txtProductId);
             error += Validator.IsNonNegativeInt(txtProductId);
+
             if (Validator.IsNonNegativeInt(txtProductId) == "")
             {
-                error += Validator.IsExistingProductID(txtProductId); ;
+                error += Validator.IsExistingProductID(txtProductId);
             }
-           
+
             error += Validator.IsPresent(txtSupplierId);
             error += Validator.IsNonNegativeInt(txtSupplierId);
+
             if (Validator.IsNonNegativeInt(txtSupplierId) == "")
             {
                 error += Validator.IsExistingSupplierID(txtSupplierId);
             }
-           
-            
+
+            // Rest of your code...
+
+            return success;
+
+
 
             if (!string.IsNullOrEmpty(error))
             {
@@ -108,7 +117,7 @@ namespace TravelExpertsGUI
         {
             if (productsSupplier != null)
             {
-                productsSupplier.ProductSupplierId = Convert.ToInt32(txtProdSupplierId.Text);
+                //productsSupplier.ProductSupplierId = Convert.ToInt32(txtProdSupplierId.Text);
                 productsSupplier.ProductId = Convert.ToInt32(txtProductId.Text);
                 productsSupplier.SupplierId = Convert.ToInt32(txtSupplierId.Text);
                 DisplayProductSupplier();
