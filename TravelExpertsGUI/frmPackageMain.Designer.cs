@@ -51,6 +51,8 @@ namespace TravelExpertsPackageMaintenance
             label6 = new Label();
             label7 = new Label();
             btnAddProducts = new Button();
+            button1 = new Button();
+            btnOk = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPackages).BeginInit();
             SuspendLayout();
             // 
@@ -254,6 +256,27 @@ namespace TravelExpertsPackageMaintenance
             btnAddProducts.UseVisualStyleBackColor = true;
             btnAddProducts.Click += btnAddProducts_Click;
             // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 12F);
+            button1.Location = new Point(487, 300);
+            button1.Name = "button1";
+            button1.Size = new Size(165, 49);
+            button1.TabIndex = 22;
+            button1.Text = "Add a product";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // btnOk
+            // 
+            btnOk.Font = new Font("Segoe UI", 12F);
+            btnOk.Location = new Point(981, 602);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(133, 34);
+            btnOk.TabIndex = 23;
+            btnOk.Text = "Ok";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
+            // 
             // frmPackageMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -261,6 +284,8 @@ namespace TravelExpertsPackageMaintenance
             BackgroundImage = TravelExpertsGUI.Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1138, 648);
+            Controls.Add(btnOk);
+            Controls.Add(button1);
             Controls.Add(btnAddProducts);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -317,5 +342,7 @@ namespace TravelExpertsPackageMaintenance
         private Label label6;
         private Label label7;
         private Button btnAddProducts;
+        private Button button1;
+        private Button btnOk;
     }
 }

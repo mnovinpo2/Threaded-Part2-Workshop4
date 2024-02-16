@@ -310,35 +310,41 @@ namespace TravelExpertsPackageMaintenance
             }
         }
 
-    //    frmAddProductToPackage addProductForm = new frmAddProductToPackage();
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            this.Close();
+        }
 
-    //        DialogResult result = addProductForm.ShowDialog();
+        //    frmAddProductToPackage addProductForm = new frmAddProductToPackage();
 
-    //        if (result == DialogResult.OK)
-    //        {
-    //            ProductSupplierId = secondForm.productSupplierId;
+        //        DialogResult result = addProductForm.ShowDialog();
 
-    //            // Continue with other operations using ProductSupplierId
-    //            try
-    //            {
-    //                // ... (add package and product supplier to database)
+        //        if (result == DialogResult.OK)
+        //        {
+        //            ProductSupplierId = secondForm.productSupplierId;
 
-    //            }
-    //            catch (DbUpdateException ex)
-    //            {
-    //            }
-    //            catch (SqlException ex)
-    //            {
-    //                MessageBox.Show("Error while adding package: " + ex.Message, "Database Error");
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
-    //            }
+        //            // Continue with other operations using ProductSupplierId
+        //            try
+        //            {
+        //                // ... (add package and product supplier to database)
 
-    //        }
-    //    }
-    //}
+        //            }
+        //            catch (DbUpdateException ex)
+        //            {
+        //            }
+        //            catch (SqlException ex)
+        //            {
+        //                MessageBox.Show("Error while adding package: " + ex.Message, "Database Error");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
+        //            }
+
+        //        }
+        //    }
+        //}
     }
 }
 

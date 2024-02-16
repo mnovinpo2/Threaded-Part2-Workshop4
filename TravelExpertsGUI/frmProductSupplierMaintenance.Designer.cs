@@ -40,6 +40,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            btnOk = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSuppliers).BeginInit();
             SuspendLayout();
             // 
@@ -148,6 +149,16 @@
             label3.TabIndex = 11;
             label3.Text = "Supplier ID";
             // 
+            // btnOk
+            // 
+            btnOk.Location = new Point(364, 408);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(124, 30);
+            btnOk.TabIndex = 12;
+            btnOk.Text = "Ok";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
+            // 
             // frmProductSupplierMaintenance
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -155,6 +166,7 @@
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnOk);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -189,5 +201,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Button btnOk;
     }
 }

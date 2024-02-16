@@ -281,6 +281,11 @@ namespace TravelExpertsGUI
             txtGet.Focus(); // facilitate selecting another Product
         }
 
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            this.Close();
+        }
     }
 }
 
