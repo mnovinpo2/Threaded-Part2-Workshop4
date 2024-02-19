@@ -1,0 +1,50 @@
+Please refer to this page for Group4 responsibility breakdown
+
+WorkShop 4 Group 4 work breakdown
+
+Mohsen
+
+Created frmPackageMain, frmAddModifyPackage and frmAddProductToPackage
+
+Created frm ProductSupplierMaintenance and frmAddModProductSupplier
+
+
+
+Mustafa
+
+Created frmTravelExperts which is the first form that runs when application is started, used for Navigation between the different Forms.
+
+Created frmProducts and frmAddModifyProduct
+Created style for the forms and data grids that were used by team 4.
+
+
+Josh
+
+Created frmSuppliersMain and frmEditSupplier and frmAddSupplier
+Created Validators and added to all forms
+Also Created Google Slides theme for team 4's presentation, the content of the presentation itself was created by all three members
+
+
+WorkShop 5 Group 4 work breakdown
+
+
+Mohsen
+
+Created Login and Registeration page
+Created Contact page
+Created AboutUs page, there was an issue getting the CSS used here with the rest of website, This was solved by Mustafa.
+
+
+Mustafa
+
+Created Homepage that give quick access to the rest of the website
+Created Edit profile page
+Created the styles and themes used in website
+
+
+Josh
+
+Created Offers Page
+Created book package, package detail and package breakdown page.
+
+

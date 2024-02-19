@@ -30,93 +30,68 @@
         {
             cboProduct = new ComboBox();
             cboSupplier = new ComboBox();
-            label1 = new Label();
-            label2 = new Label();
             dgvPkgProduct = new DataGridView();
-            label3 = new Label();
             cboPkg = new ComboBox();
-            btnOK = new Button();
+            btnAddProd = new Button();
             btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPkgProduct).BeginInit();
             SuspendLayout();
             // 
             // cboProduct
             // 
+            cboProduct.Font = new Font("Segoe UI", 11.25F);
             cboProduct.FormattingEnabled = true;
-            cboProduct.Location = new Point(313, 424);
+            cboProduct.Location = new Point(154, 345);
             cboProduct.Name = "cboProduct";
-            cboProduct.Size = new Size(121, 23);
+            cboProduct.Size = new Size(121, 28);
             cboProduct.TabIndex = 0;
             cboProduct.SelectedValueChanged += cboProduct_SelectedValueChanged;
             // 
             // cboSupplier
             // 
+            cboSupplier.Font = new Font("Segoe UI", 11.25F);
             cboSupplier.FormattingEnabled = true;
-            cboSupplier.Location = new Point(313, 485);
+            cboSupplier.Location = new Point(154, 402);
             cboSupplier.Name = "cboSupplier";
-            cboSupplier.Size = new Size(121, 23);
+            cboSupplier.Size = new Size(121, 28);
             cboSupplier.TabIndex = 1;
             cboSupplier.SelectedValueChanged += cboSupplier_SelectedValueChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(195, 427);
-            label1.Name = "label1";
-            label1.Size = new Size(54, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Products";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(195, 488);
-            label2.Name = "label2";
-            label2.Size = new Size(55, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Suppliers";
             // 
             // dgvPkgProduct
             // 
             dgvPkgProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPkgProduct.Location = new Point(32, 34);
             dgvPkgProduct.Name = "dgvPkgProduct";
-            dgvPkgProduct.Size = new Size(903, 312);
+            dgvPkgProduct.Size = new Size(903, 212);
             dgvPkgProduct.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(195, 370);
-            label3.Name = "label3";
-            label3.Size = new Size(56, 15);
-            label3.TabIndex = 6;
-            label3.Text = "Packages";
             // 
             // cboPkg
             // 
+            cboPkg.Font = new Font("Segoe UI", 11.25F);
             cboPkg.FormattingEnabled = true;
-            cboPkg.Location = new Point(313, 367);
+            cboPkg.Location = new Point(154, 281);
             cboPkg.Name = "cboPkg";
-            cboPkg.Size = new Size(121, 23);
+            cboPkg.Size = new Size(121, 28);
             cboPkg.TabIndex = 5;
             cboPkg.SelectedValueChanged += cboPkg_SelectedValueChanged;
             // 
-            // btnOK
+            // btnAddProd
             // 
-            btnOK.Location = new Point(569, 426);
-            btnOK.Name = "btnOK";
-            btnOK.Size = new Size(75, 23);
-            btnOK.TabIndex = 7;
-            btnOK.Text = "OK";
-            btnOK.UseVisualStyleBackColor = true;
-            btnOK.Click += btnOK_Click;
+            btnAddProd.Font = new Font("Segoe UI", 11.25F);
+            btnAddProd.Location = new Point(151, 465);
+            btnAddProd.Name = "btnAddProd";
+            btnAddProd.Size = new Size(124, 35);
+            btnAddProd.TabIndex = 7;
+            btnAddProd.Text = "Add Product";
+            btnAddProd.UseVisualStyleBackColor = true;
+            btnAddProd.Click += btnAddProd_Click;
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(709, 426);
+            btnExit.Font = new Font("Segoe UI", 11.25F);
+            btnExit.Location = new Point(844, 456);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(75, 23);
+            btnExit.Size = new Size(91, 35);
             btnExit.TabIndex = 8;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
@@ -128,14 +103,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(985, 609);
+            ClientSize = new Size(973, 512);
             Controls.Add(btnExit);
-            Controls.Add(btnOK);
-            Controls.Add(label3);
+            Controls.Add(btnAddProd);
             Controls.Add(cboPkg);
             Controls.Add(dgvPkgProduct);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(cboSupplier);
             Controls.Add(cboProduct);
             Name = "frmAddProductToPackage";
@@ -143,19 +115,15 @@
             Load += frmAddProductToPackage_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPkgProduct).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private ComboBox cboProduct;
         private ComboBox cboSupplier;
-        private Label label1;
-        private Label label2;
         private DataGridView dgvPkgProduct;
-        private Label label3;
         private ComboBox cboPkg;
-        private Button btnOK;
+        private Button btnAddProd;
         private Button btnExit;
     }
 }

@@ -89,7 +89,7 @@ namespace TravelExpertsPackageMaintenance
             txtPkgDesc.Font = new Font("Segoe UI", 12F);
             txtPkgDesc.Location = new Point(480, 274);
             txtPkgDesc.Name = "txtPkgDesc";
-            txtPkgDesc.Size = new Size(432, 29);
+            txtPkgDesc.Size = new Size(408, 29);
             txtPkgDesc.TabIndex = 4;
             // 
             // txtPkgName
@@ -97,7 +97,7 @@ namespace TravelExpertsPackageMaintenance
             txtPkgName.Font = new Font("Segoe UI", 12F);
             txtPkgName.Location = new Point(494, 188);
             txtPkgName.Name = "txtPkgName";
-            txtPkgName.Size = new Size(347, 29);
+            txtPkgName.Size = new Size(394, 29);
             txtPkgName.TabIndex = 5;
             // 
             // txtSDate

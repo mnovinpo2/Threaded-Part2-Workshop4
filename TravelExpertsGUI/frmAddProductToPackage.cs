@@ -153,14 +153,15 @@ namespace TravelExpertsGUI
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            AddProduct();
-        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnAddProd_Click(object sender, EventArgs e)
+        {
+            AddProduct();
         }
     }
 }
