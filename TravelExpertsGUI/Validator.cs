@@ -164,6 +164,20 @@ namespace TravelExpertsGUI
 
 
         }
+        public static string IsNonNegativeDecimal(System.Windows.Forms.TextBox textBox)
+        {
+            string msg = "";
+            decimal value; // parsed value if successful
+            if (!Decimal.TryParse(textBox.Text, out value)) // not a decimal
+            {
+                msg = $"{textBox.Tag} must be a valid decimal value.{Environment.NewLine}";
+            }
+            else if (value < 0) // a decimal, but negative
+            {
+                msg = $"{textBox.Tag} must be a non-negative decimal.{Environment.NewLine}";
+            }
+            return msg;
+        }
 
 
     } // class

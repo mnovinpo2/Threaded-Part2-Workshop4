@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ using TravelExpertsData;
 using TravelExpertsGUI;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, DateTime pkgEndDate, string PkgDesc, decimal PkgBasePrice, decimal PkgCom);
+public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, DateTime pkgEndDate,
+    string PkgDesc, decimal PkgBasePrice, decimal PkgCom);
 
 
 
@@ -27,10 +29,10 @@ namespace TravelExpertsPackageMaintenance
 
     public partial class frmPackageMain : Form
     {
-        private TravelExpertsContext context = new();
-        private Package? selectedPackage = null;
+        private readonly TravelExpertsContext context = new();
+        private TravelExpertsData.Package selectedPackage; // Use alias here
 
-        public DbSet<Package> Packages { get; set; }
+        public DbSet<TravelExpertsData.Package> Packages { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
@@ -44,18 +46,34 @@ namespace TravelExpertsPackageMaintenance
 
         private void PackageMain_Load(object sender, EventArgs e)
         {
+            LoadPackages();
             DisplayPackage();
-            btnModify.Enabled = false;
-            btnDelete.Enabled = false;
+            DisableModifyDeleteButtons();
+        }
 
+        private void LoadPackages()
+        {
+            try
+            {
+                List<TravelExpertsData.Package> packages = context.Packages.ToList();
+                packages.Insert(0, new TravelExpertsData.Package { PackageId = 0, PkgName = "Choose a Package" });
+                cboGetPkg.DataSource = packages;
+                cboGetPkg.DisplayMember = "PkgName";
+                cboGetPkg.ValueMember = "PackageId"; 
+                cboGetPkg.SelectedIndex = 0;
+            }
 
-
-
+            catch (Exception)
+            {
+                MessageBox.Show("Error loading packages");
+            }
         }
 
         public List<PackagesDTO> GetAllPackages() =>
-                context.Packages
-            .OrderBy(p => p.PackageId).Select(p => new PackagesDTO(p.PackageId, p.PkgName, p.PkgStartDate, p.PkgEndDate, p.PkgDesc, p.PkgBasePrice, p.PkgAgencyCommission)).ToList();
+             context.Packages
+                 .OrderBy(p => p.PackageId)
+                 .Select(p => new PackagesDTO(p.PackageId, p.PkgName, p.PkgStartDate, p.PkgEndDate, p.PkgDesc, p.PkgBasePrice, p.PkgAgencyCommission))
+                 .ToList();
 
         private bool IsValidData()
         {
@@ -74,161 +92,126 @@ namespace TravelExpertsPackageMaintenance
             return success;
         }
 
-
-        private void btnGet_Click(object sender, EventArgs e)
-        {
-            if (IsValidData())
-            {
-                try
-                {
-                    int pkgID = Convert.ToInt32(txtGetPkg.Text);
-                    using (TravelExpertsContext db = new TravelExpertsContext())
-                    {
-                        selectedPackage = db.Packages.Find(pkgID);
-                        if (selectedPackage != null)
-                        {
-                            DisplayPackage();
-                        }
-                        else
-                        {
-                            MessageBox.Show($"There is no Package with ID = {pkgID}");
-                        }
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("Error while retrieving package data: " + ex.Message, "Database Error");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
-                }
-            }
-        }
-
-        //public void EditPackage()
-        //{
-        //    var connection = new SqlConnection(@"Server=LOCALHOST\SQLEXPRESS;Database=TravelExperts;Trusted_connection=True; TrustServerCertificate=True");
-
-        //    connection.Open();
-        //    string SQL = "select pk.PackageId, PkgName, p.ProductId, ProdName, s.SupplierId, SupName\r\nfrom Products p join Products_Suppliers ps on p.ProductId = ps.ProductId\r\n                join Suppliers s on s.SupplierId = ps.SupplierId\r\n\t\t\t\tjoin Packages_Products_Suppliers pps on pps.ProductSupplierId = ps.ProductSupplierId\r\n\t\t\t\tjoin Packages pk on pk.PackageId = pps.PackageId";
-        //    var cmd = new SqlCommand(SQL, connection);
-        //    var dataReader = cmd.ExecuteReader();
-        //    DataTable table = new DataTable();
-        //    table.Load(dataReader);
-        //    dgv1.DataSource = table;
-        //}
-
-        private void DisplayPackage()
+        private void DisplayPackage(TravelExpertsData.Package package = null)
         {
             dgvPackages.Columns.Clear();
             dgvPackages.DataSource = GetAllPackages();
             dgvPackages.Columns[5].DefaultCellStyle.Format = "c";
             dgvPackages.Columns[6].DefaultCellStyle.Format = "c";
             dgvPackages.DefaultCellStyle.Font = new Font("Sanscript", 10);
-            dgvPackages.ColumnHeadersDefaultCellStyle.Font = new Font("Sanscript", 10, FontStyle.Bold);
             dgvPackages.AutoResizeColumns();
+            dgvPackages.EnableHeadersVisualStyles = false;
+            dgvPackages.ColumnHeadersDefaultCellStyle.Font = new Font("Century", 9, FontStyle.Bold);
+            dgvPackages.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
+            dgvPackages.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+            dgvPackages.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvPackages.ColumnHeadersHeight = 35;
+            dgvPackages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvPackages.BackgroundColor = Color.FloralWhite;
+            dgvPackages.RowHeadersVisible = false;
+            UpdateControls(package);
+            EnableModifyDeleteButtons();
+   
 
-            if (selectedPackage != null)
+        }
+        private void UpdateControls(TravelExpertsData.Package package)
+        {
+            if (package != null)
             {
-                txtPkgId.Text = selectedPackage.PackageId.ToString();
-                txtPkgName.Text = selectedPackage.PkgName;
-                txtPkgDesc.Text = selectedPackage.PkgDesc;
-                txtSDate.Text = selectedPackage.PkgStartDate.ToShortDateString();
-                txtEDate.Text = selectedPackage.PkgEndDate.ToShortDateString();
-                txtPrice.Text = selectedPackage.PkgBasePrice.ToString("c");
-                txtCom.Text = selectedPackage.PkgAgencyCommission.ToString("c");
-
-                // Enable Modify and Delete
-                btnModify.Enabled = true;
-                btnDelete.Enabled = true;
-
-
+                txtPkgId.Text = package.PackageId.ToString();
+                txtPkgName.Text = package.PkgName;
+                txtPkgDesc.Text = package.PkgDesc;
+                txtSDate.Text = package.PkgStartDate.ToShortDateString();
+                txtEDate.Text = package.PkgEndDate.ToShortDateString();
+                txtPrice.Text = package.PkgBasePrice.ToString("c");
+                txtCom.Text = package.PkgAgencyCommission.ToString("c");
             }
-
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            frmAddModifyPackage secondForm = new();
+            frmAddModifyPackage secondForm = new frmAddModifyPackage();
             secondForm.isAdd = true;
             secondForm.package = null;
-
 
             DialogResult result = secondForm.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-
                 try
                 {
-                    if (selectedPackage == null)
-                    {
-                        selectedPackage = secondForm.package;
-                        context.Packages.Add(selectedPackage);
-                        context.SaveChanges();
-                        DisplayPackage();
-                    }
+                    // Ensure that selectedPackage is null for a new package
+                    selectedPackage = secondForm.package;
 
-                }
-                catch (DbUpdateException ex)
-                {
-                    string msg = "";
-                    var sqlException =
-                        (SqlException)ex.InnerException!;
-                    foreach (SqlError error in sqlException.Errors)
-                    {
-                        msg += $"ERROR CODE {error.Number}: {error.Message}\n";
-                    }
-                    MessageBox.Show(msg, "Database Error");
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("Error while adding product: " + ex.Message,
-                        "Database Error");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unanticipated error: " + ex.Message,
-                        ex.GetType().ToString());
-                }
+                    // Add the new package to the context
+                    context.Packages.Add(selectedPackage);
+                    context.SaveChanges();
 
+                    // Refresh the display with the updated information
+                    LoadPackages();
+                    DisplayPackage(selectedPackage);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error adding package");
+                }
             }
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
+
             frmAddModifyPackage secondForm = new frmAddModifyPackage();
-            secondForm.isAdd = false;
-            secondForm.package = selectedPackage;
-
-            DialogResult result = secondForm.ShowDialog();
-
-            if (result == DialogResult.OK)
             {
-                // Continue with other operations using ProductSupplierId
-                try
+                // Ensure a package is selected in the combo box
+                if (cboGetPkg.SelectedIndex > 0)  // Assuming index 0 is reserved for "Choose a Package"
                 {
-                    // ... (update package in the database) 
+                    // Retrieve the selected package from the combo box
+                    TravelExpertsData.Package selectedPackage = (TravelExpertsData.Package)cboGetPkg.SelectedItem;
+
+                    frmAddModifyPackage modifyForm = new frmAddModifyPackage();
+                    modifyForm.isAdd = false;
+                    modifyForm.package = selectedPackage;
+
+                    DialogResult result = modifyForm.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        try
+                        {
+                            // Update the package information in the database
+                            context.Entry(selectedPackage).State = EntityState.Modified;
+                            context.SaveChanges();
+
+                            // Refresh the display with the updated information
+                            LoadPackages();
+                            DisplayPackage(selectedPackage);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error modifying package: " + ex.Message, ex.GetType().ToString());
+                        }
+                    }
                 }
-                catch (SqlException ex)
+                else
                 {
-                    MessageBox.Show("Error while modifying package: " + ex.Message, "Database Error");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
+                    MessageBox.Show("Please select a package from the dropdown.", "Selection Error");
                 }
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+
+            private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (selectedPackage != null)
+            // Ensure a package is selected in the combo box
+            if (cboGetPkg.SelectedIndex > 0)  // Assuming index 0 is reserved for "Choose a Package"
             {
+                // Retrieve the selected package from the combo box
+                TravelExpertsData.Package selectedPackage = (TravelExpertsData.Package)cboGetPkg.SelectedItem;
+
                 DialogResult answer = MessageBox.Show(
-                    $"Do you really want to delete {selectedPackage.PkgName}",
+                    $"Do you really want to delete {selectedPackage.PkgName}?",
                     "Confirm delete", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
@@ -236,22 +219,21 @@ namespace TravelExpertsPackageMaintenance
                 {
                     try
                     {
-
                         using (TravelExpertsContext db = new TravelExpertsContext())
                         {
+                            // Delete related records from join table
                             string deleteJoinTableQuery = $"DELETE FROM Packages_Products_Suppliers WHERE PackageId = {selectedPackage.PackageId}";
                             db.Database.ExecuteSqlRaw(deleteJoinTableQuery);
 
+                            // Remove the selected package from the database
                             db.Packages.Remove(selectedPackage);
                             db.SaveChanges();
 
+                            // Clear controls and refresh the display
                             selectedPackage = null;
                             ClearControls();
-                            DisplayPackage();
+                            LoadPackages();
                         }
-                    }
-                    catch (DbUpdateException ex)
-                    {
                     }
                     catch (SqlException ex)
                     {
@@ -263,7 +245,12 @@ namespace TravelExpertsPackageMaintenance
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Please select a package from the dropdown.", "Selection Error");
+            }
         }
+
         // Clears Controls and prepares for new CRUD Entry
         private void ClearControls()
         {
@@ -272,17 +259,23 @@ namespace TravelExpertsPackageMaintenance
             txtPkgDesc.Text = "";
             txtSDate.Text = "";
             txtEDate.Text = "";
-            txtGetPkg.Text = "";
             txtPrice.Text = "";
             txtCom.Text = "";
 
-            // Disable Modify and Delete
-            btnModify.Enabled = false;
-            btnDelete.Enabled = false;
-
-            txtGetPkg.Focus(); // Facilitate selecting another Package
+            DisableModifyDeleteButtons();
         }
 
+        private void EnableModifyDeleteButtons()
+        {
+            btnModify.Enabled = true;
+            btnDelete.Enabled = true;
+        }
+
+        private void DisableModifyDeleteButtons()
+        {
+            btnModify.Enabled = false;
+            btnDelete.Enabled = false;
+        }
         private void btnAddProducts_Click(object sender, EventArgs e)
         {
             frmAddProductToPackage secondForm = new frmAddProductToPackage();
@@ -292,11 +285,9 @@ namespace TravelExpertsPackageMaintenance
             {
                 ProductSupplierId = secondForm.productSupplierId;
 
-                // Continue with other operations using ProductSupplierId
                 try
                 {
                     // ... (add package and product supplier to database)
-
                 }
                 catch (SqlException ex)
                 {
@@ -306,47 +297,55 @@ namespace TravelExpertsPackageMaintenance
                 {
                     MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
                 }
-
             }
         }
+
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            this.Close();
+            Close();
         }
-
-        //    frmAddProductToPackage addProductForm = new frmAddProductToPackage();
-
-        //        DialogResult result = addProductForm.ShowDialog();
-
-        //        if (result == DialogResult.OK)
-        //        {
-        //            ProductSupplierId = secondForm.productSupplierId;
-
-        //            // Continue with other operations using ProductSupplierId
-        //            try
-        //            {
-        //                // ... (add package and product supplier to database)
-
-        //            }
-        //            catch (DbUpdateException ex)
-        //            {
-        //            }
-        //            catch (SqlException ex)
-        //            {
-        //                MessageBox.Show("Error while adding package: " + ex.Message, "Database Error");
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
-        //            }
-
-        //        }
-        //    }
-        //}
+        private void cboGetPkg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cboGetPkg.SelectedItem is TravelExpertsData.Package selectedPackage)
+                {
+                    DisplayPackage(selectedPackage);
+                    if (cboGetPkg.SelectedIndex == 0 && cboGetPkg.Text == "Choose a Package")
+                    {
+                        gbPkgInfo.Visible = false; // Set the visibility of the group box to false
+                        DisableModifyDeleteButtons(); // Disable Modify and Delete buttons
+                    }
+                    else
+                    {
+                        gbPkgInfo.Visible = true; // Set the visibility of the group box to true
+                        EnableModifyDeleteButtons(); // Enable Modify and Delete buttons
+                    }
+                }
+                else
+                {
+                    ClearControls();
+                    MessageBox.Show("Please select a Package from the dropdown.");
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error while retrieving package data: " + ex.Message, "Database Error");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
+            }
+        }
     }
 }
+
+    
+
+
+
 
 
 

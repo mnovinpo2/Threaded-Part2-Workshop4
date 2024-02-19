@@ -33,12 +33,10 @@ namespace TravelExpertsPackageMaintenance
             dgvPackages = new DataGridView();
             txtEDate = new TextBox();
             txtPkgId = new TextBox();
-            txtGetPkg = new TextBox();
             txtPkgDesc = new TextBox();
             txtPkgName = new TextBox();
             txtSDate = new TextBox();
             txtPrice = new TextBox();
-            btnGet = new Button();
             btnAdd = new Button();
             btnDelete = new Button();
             btnModify = new Button();
@@ -51,9 +49,11 @@ namespace TravelExpertsPackageMaintenance
             label6 = new Label();
             label7 = new Label();
             btnAddProducts = new Button();
-            button1 = new Button();
             btnOk = new Button();
+            cboGetPkg = new ComboBox();
+            gbPkgInfo = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvPackages).BeginInit();
+            gbPkgInfo.SuspendLayout();
             SuspendLayout();
             // 
             // dgvPackages
@@ -70,7 +70,8 @@ namespace TravelExpertsPackageMaintenance
             // txtEDate
             // 
             txtEDate.Font = new Font("Segoe UI", 12F);
-            txtEDate.Location = new Point(206, 456);
+            txtEDate.ForeColor = SystemColors.MenuHighlight;
+            txtEDate.Location = new Point(212, 139);
             txtEDate.Name = "txtEDate";
             txtEDate.Size = new Size(100, 29);
             txtEDate.TabIndex = 1;
@@ -78,31 +79,23 @@ namespace TravelExpertsPackageMaintenance
             // txtPkgId
             // 
             txtPkgId.Font = new Font("Segoe UI", 12F);
-            txtPkgId.Location = new Point(559, 403);
+            txtPkgId.Location = new Point(494, 89);
             txtPkgId.Name = "txtPkgId";
             txtPkgId.Size = new Size(100, 29);
             txtPkgId.TabIndex = 2;
             // 
-            // txtGetPkg
-            // 
-            txtGetPkg.Font = new Font("Segoe UI", 12F);
-            txtGetPkg.Location = new Point(1024, 302);
-            txtGetPkg.Name = "txtGetPkg";
-            txtGetPkg.Size = new Size(100, 29);
-            txtGetPkg.TabIndex = 3;
-            // 
             // txtPkgDesc
             // 
             txtPkgDesc.Font = new Font("Segoe UI", 12F);
-            txtPkgDesc.Location = new Point(559, 591);
+            txtPkgDesc.Location = new Point(480, 274);
             txtPkgDesc.Name = "txtPkgDesc";
-            txtPkgDesc.Size = new Size(347, 29);
+            txtPkgDesc.Size = new Size(432, 29);
             txtPkgDesc.TabIndex = 4;
             // 
             // txtPkgName
             // 
             txtPkgName.Font = new Font("Segoe UI", 12F);
-            txtPkgName.Location = new Point(559, 502);
+            txtPkgName.Location = new Point(494, 188);
             txtPkgName.Name = "txtPkgName";
             txtPkgName.Size = new Size(347, 29);
             txtPkgName.TabIndex = 5;
@@ -110,7 +103,7 @@ namespace TravelExpertsPackageMaintenance
             // txtSDate
             // 
             txtSDate.Font = new Font("Segoe UI", 12F);
-            txtSDate.Location = new Point(206, 390);
+            txtSDate.Location = new Point(212, 73);
             txtSDate.Name = "txtSDate";
             txtSDate.Size = new Size(100, 29);
             txtSDate.TabIndex = 6;
@@ -118,21 +111,10 @@ namespace TravelExpertsPackageMaintenance
             // txtPrice
             // 
             txtPrice.Font = new Font("Segoe UI", 12F);
-            txtPrice.Location = new Point(206, 520);
+            txtPrice.Location = new Point(212, 203);
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 29);
             txtPrice.TabIndex = 7;
-            // 
-            // btnGet
-            // 
-            btnGet.Font = new Font("Segoe UI", 12F);
-            btnGet.Location = new Point(959, 363);
-            btnGet.Name = "btnGet";
-            btnGet.Size = new Size(165, 34);
-            btnGet.TabIndex = 8;
-            btnGet.Text = "Get Package";
-            btnGet.UseVisualStyleBackColor = true;
-            btnGet.Click += btnGet_Click;
             // 
             // btnAdd
             // 
@@ -170,7 +152,7 @@ namespace TravelExpertsPackageMaintenance
             // txtCom
             // 
             txtCom.Font = new Font("Segoe UI", 12F);
-            txtCom.Location = new Point(206, 581);
+            txtCom.Location = new Point(212, 264);
             txtCom.Name = "txtCom";
             txtCom.Size = new Size(100, 29);
             txtCom.TabIndex = 12;
@@ -179,7 +161,7 @@ namespace TravelExpertsPackageMaintenance
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(433, 411);
+            label1.Location = new Point(368, 97);
             label1.Name = "label1";
             label1.Size = new Size(79, 21);
             label1.TabIndex = 13;
@@ -189,7 +171,7 @@ namespace TravelExpertsPackageMaintenance
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(408, 502);
+            label2.Location = new Point(343, 188);
             label2.Name = "label2";
             label2.Size = new Size(112, 21);
             label2.TabIndex = 14;
@@ -199,17 +181,17 @@ namespace TravelExpertsPackageMaintenance
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(380, 599);
+            label3.Location = new Point(358, 277);
             label3.Name = "label3";
-            label3.Size = new Size(149, 21);
+            label3.Size = new Size(89, 21);
             label3.TabIndex = 15;
-            label3.Text = "Package Description";
+            label3.Text = "Description";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(12, 393);
+            label4.Location = new Point(18, 76);
             label4.Name = "label4";
             label4.Size = new Size(138, 21);
             label4.TabIndex = 16;
@@ -219,7 +201,7 @@ namespace TravelExpertsPackageMaintenance
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(18, 530);
+            label5.Location = new Point(24, 213);
             label5.Name = "label5";
             label5.Size = new Size(104, 21);
             label5.TabIndex = 17;
@@ -229,7 +211,7 @@ namespace TravelExpertsPackageMaintenance
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(17, 462);
+            label6.Location = new Point(23, 145);
             label6.Name = "label6";
             label6.Size = new Size(132, 21);
             label6.TabIndex = 18;
@@ -239,7 +221,7 @@ namespace TravelExpertsPackageMaintenance
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F);
-            label7.Location = new Point(12, 586);
+            label7.Location = new Point(18, 269);
             label7.Name = "label7";
             label7.Size = new Size(145, 21);
             label7.TabIndex = 19;
@@ -256,20 +238,10 @@ namespace TravelExpertsPackageMaintenance
             btnAddProducts.UseVisualStyleBackColor = true;
             btnAddProducts.Click += btnAddProducts_Click;
             // 
-            // button1
-            // 
-            button1.Font = new Font("Segoe UI", 12F);
-            button1.Location = new Point(487, 300);
-            button1.Name = "button1";
-            button1.Size = new Size(165, 49);
-            button1.TabIndex = 22;
-            button1.Text = "Add a product";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // btnOk
             // 
             btnOk.Font = new Font("Segoe UI", 12F);
-            btnOk.Location = new Point(981, 602);
+            btnOk.Location = new Point(991, 604);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(133, 34);
             btnOk.TabIndex = 23;
@@ -277,42 +249,67 @@ namespace TravelExpertsPackageMaintenance
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
+            // cboGetPkg
+            // 
+            cboGetPkg.BackColor = SystemColors.ButtonHighlight;
+            cboGetPkg.DisplayMember = "PkgName";
+            cboGetPkg.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cboGetPkg.ForeColor = SystemColors.WindowText;
+            cboGetPkg.FormattingEnabled = true;
+            cboGetPkg.Location = new Point(918, 307);
+            cboGetPkg.Name = "cboGetPkg";
+            cboGetPkg.Size = new Size(206, 29);
+            cboGetPkg.TabIndex = 26;
+            cboGetPkg.ValueMember = "PkgName";
+            cboGetPkg.SelectedIndexChanged += cboGetPkg_SelectedIndexChanged;
+            // 
+            // gbPkgInfo
+            // 
+            gbPkgInfo.BackColor = Color.Transparent;
+            gbPkgInfo.Controls.Add(txtPkgId);
+            gbPkgInfo.Controls.Add(txtEDate);
+            gbPkgInfo.Controls.Add(txtPkgDesc);
+            gbPkgInfo.Controls.Add(txtPkgName);
+            gbPkgInfo.Controls.Add(label7);
+            gbPkgInfo.Controls.Add(txtSDate);
+            gbPkgInfo.Controls.Add(label6);
+            gbPkgInfo.Controls.Add(txtPrice);
+            gbPkgInfo.Controls.Add(label5);
+            gbPkgInfo.Controls.Add(txtCom);
+            gbPkgInfo.Controls.Add(label4);
+            gbPkgInfo.Controls.Add(label1);
+            gbPkgInfo.Controls.Add(label3);
+            gbPkgInfo.Controls.Add(label2);
+            gbPkgInfo.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbPkgInfo.Location = new Point(30, 358);
+            gbPkgInfo.Name = "gbPkgInfo";
+            gbPkgInfo.Size = new Size(923, 352);
+            gbPkgInfo.TabIndex = 27;
+            gbPkgInfo.TabStop = false;
+            gbPkgInfo.Text = "Package Information";
+            // 
             // frmPackageMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = TravelExpertsGUI.Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1138, 648);
+            ClientSize = new Size(1153, 789);
+            Controls.Add(gbPkgInfo);
+            Controls.Add(cboGetPkg);
             Controls.Add(btnOk);
-            Controls.Add(button1);
             Controls.Add(btnAddProducts);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(txtCom);
             Controls.Add(btnModify);
             Controls.Add(btnDelete);
             Controls.Add(btnAdd);
-            Controls.Add(btnGet);
-            Controls.Add(txtPrice);
-            Controls.Add(txtSDate);
-            Controls.Add(txtPkgName);
-            Controls.Add(txtPkgDesc);
-            Controls.Add(txtGetPkg);
-            Controls.Add(txtPkgId);
-            Controls.Add(txtEDate);
             Controls.Add(dgvPackages);
             Name = "frmPackageMain";
             Text = "TravelExperts Packages";
             Load += PackageMain_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPackages).EndInit();
+            gbPkgInfo.ResumeLayout(false);
+            gbPkgInfo.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
 
@@ -324,12 +321,10 @@ namespace TravelExpertsPackageMaintenance
         private DataGridView dgvPackages;
         private TextBox txtEDate;
         private TextBox txtPkgId;
-        private TextBox txtGetPkg;
         private TextBox txtPkgDesc;
         private TextBox txtPkgName;
         private TextBox txtSDate;
         private TextBox txtPrice;
-        private Button btnGet;
         private Button btnAdd;
         private Button btnDelete;
         private Button btnModify;
@@ -342,7 +337,8 @@ namespace TravelExpertsPackageMaintenance
         private Label label6;
         private Label label7;
         private Button btnAddProducts;
-        private Button button1;
         private Button btnOk;
+        private ComboBox cboGetPkg;
+        private GroupBox gbPkgInfo;
     }
 }

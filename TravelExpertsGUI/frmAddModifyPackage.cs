@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Drawing.Text;
 using TravelExpertsData;
+using System.Globalization; // Add this line
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TravelExpertsGUI
@@ -12,6 +13,7 @@ namespace TravelExpertsGUI
         public bool isAdd;
         public Package? package;
         public TravelExpertsContext context = new();
+        public bool isModified; 
 
         public frmAddModifyPackage()
         {
@@ -23,70 +25,23 @@ namespace TravelExpertsGUI
             if (isAdd)
             {
                 Text = "Add Package";
-                DisplayPackage();
-                txtPkgId.Enabled = true;
             }
             else // Modify operation
             {
                 Text = "Modify Package";
                 DisplayPackage();
-                txtPkgId.Enabled = false;
             }
         }
-
         private void DisplayPackage()
         {
             if (package != null)
             {
-                txtPkgId.Text = package.PackageId.ToString();
                 txtPkgName.Text = package.PkgName;
                 txtPkgDesc.Text = package.PkgDesc;
-                dtpSDate.Text = package.PkgStartDate.ToShortDateString();
-                dtpEDate.Text = package.PkgEndDate.ToShortDateString();
-                txtPrice.Text = package.PkgBasePrice.ToString();
-                txtCom.Text = package.PkgAgencyCommission.ToString();
-            }
-        }
-
-        private bool IsValidData()
-        {
-            bool success = true;
-            string error = null;
-
-            error += Validator.IsPresent(txtPkgId);
-            error += Validator.IsNonNegativeInt(txtPkgId);
-            if (Validator.IsNonNegativeInt(txtPkgId) == "")
-            {
-                error += Validator.IsValidPackageID(txtPkgId);
-            }
-            error += Validator.IsPresent(txtPkgName);
-            error += Validator.IsPresent(txtPkgDesc);
-            error += Validator.IsPresent(txtPrice);
-            error += Validator.IsNonNegativeInt(txtPrice);
-            error += Validator.IsPresent(txtCom);
-            error += Validator.IsNonNegativeInt(txtCom);
-            error += Validator.IsValidDate(dtpSDate, dtpEDate);
-
-            if (!string.IsNullOrEmpty(error))
-            {
-                success = false;
-                MessageBox.Show(error, "Entry Error");
-            }
-            return success;
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            if (isAdd && IsValidData())
-            {
-                package = new Package();
-                GetPackageData();
-                DialogResult = DialogResult.OK;
-            }
-            else if (IsValidData())
-            {
-                GetPackageData();
-                DialogResult = DialogResult.OK;
+                dtpSDate.Value = package.PkgStartDate;
+                dtpEDate.Value = package.PkgEndDate;
+                txtPrice.Text = package.PkgBasePrice.ToString("F2");
+                txtCom.Text = package.PkgAgencyCommission.ToString("F2");
             }
         }
 
@@ -100,7 +55,62 @@ namespace TravelExpertsGUI
                 package.PkgEndDate = dtpEDate.Value;
                 package.PkgBasePrice = Convert.ToDecimal(txtPrice.Text);
                 package.PkgAgencyCommission = Convert.ToDecimal(txtCom.Text);
-                DisplayPackage();
+            }
+        }
+
+        private bool IsValidData()
+        {
+            bool success = true;
+            string error = null;
+
+            error += Validator.IsPresent(txtPkgName);
+            error += Validator.IsPresent(txtPkgDesc);
+            error += Validator.IsPresent(txtPrice);
+            error += Validator.IsNonNegativeDecimal(txtPrice);
+            error += Validator.IsPresent(txtCom);
+            error += Validator.IsNonNegativeDecimal(txtCom);
+            error += Validator.IsValidDate(dtpSDate, dtpEDate);
+
+            if (Convert.ToDecimal(txtCom.Text) > Convert.ToDecimal(txtPrice.Text))
+            {
+                error += "Agency Commission cannot be larger than Package Price.";
+            }
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                success = false;
+                MessageBox.Show(error, "Entry Error");
+            }
+            return success;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (IsValidData())
+            {
+                if (isAdd)
+                {
+                    // Logic for adding a new package
+                    package = new Package();
+                    GetPackageData();
+                    context.Packages.Add(package);
+                }
+                else // Modify operation
+                {
+                    GetPackageData();
+                }
+
+                try
+                {
+                    context.SaveChanges();
+                    isModified = !isAdd; // Set isModified to true when modifying a package
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error saving package: " + ex.Message, ex.GetType().ToString());
+                }
             }
         }
 

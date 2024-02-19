@@ -23,6 +23,7 @@ namespace TravelExpertsGUI
             buildTable();
             GetAllPackages();
 
+
         }
 
         public void buildTable()
@@ -36,6 +37,23 @@ namespace TravelExpertsGUI
             DataTable table = new DataTable();
             table.Load(dataReader);
             dgvPkgProduct.DataSource = table;
+
+            dgvPkgProduct.EnableHeadersVisualStyles = false;
+            dgvPkgProduct.ColumnHeadersDefaultCellStyle.Font = new Font("Century", 9, FontStyle.Bold);
+            dgvPkgProduct.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
+            dgvPkgProduct.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+            dgvPkgProduct.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Packages height of headers
+            dgvPkgProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvPkgProduct.ColumnHeadersHeight = 35;
+            dgvPkgProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // Packages background color of data gridview
+            dgvPkgProduct.BackgroundColor = Color.FloralWhite;
+
+            // Packagesrid of row headers 
+            dgvPkgProduct.RowHeadersVisible = false;
 
         }
 
