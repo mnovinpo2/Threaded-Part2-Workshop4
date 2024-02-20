@@ -193,7 +193,7 @@ namespace TravelExpertsPackageMaintenance
         }
 
         private void btnModify_Click(object sender, EventArgs e) //Opens a new form (frmAddModifyPackage) for modifying an existing package.
-                                                                //Checks for duplicate package names and updates the modified package in the database.
+                                                                 //Checks for duplicate package names and updates the modified package in the database.
         {
             // Ensure a package is selected in the combo box
             if (cboGetPkg.SelectedIndex > 0)
@@ -213,7 +213,7 @@ namespace TravelExpertsPackageMaintenance
                     try
                     {
                         // Check for a duplicate package name
-                        if (IsDuplicatePackageName(modifyForm.package.PkgName))
+                        if (IsDuplicatePackageName(modifyForm.package.PkgName) && modifyForm.package.PkgName != selectedPackage.PkgName)
                         {
                             MessageBox.Show("Error modifying package: Package with the same name already exists.", "Duplicate Package Name");
                         }
@@ -221,12 +221,21 @@ namespace TravelExpertsPackageMaintenance
                         {
                             modifyForm.package.PkgStartDate = modifyForm.package.PkgStartDate.Date;
                             modifyForm.package.PkgEndDate = modifyForm.package.PkgEndDate.Date;
-                            context.Entry(modifyForm.package).State = EntityState.Modified;
+
+                            // Update the selected package with the modified data
+                            selectedPackage.PkgName = modifyForm.package.PkgName;
+                            selectedPackage.PkgDesc = modifyForm.package.PkgDesc;
+                            selectedPackage.PkgStartDate = modifyForm.package.PkgStartDate;
+                            selectedPackage.PkgEndDate = modifyForm.package.PkgEndDate;
+                            selectedPackage.PkgBasePrice = modifyForm.package.PkgBasePrice;
+                            selectedPackage.PkgAgencyCommission = modifyForm.package.PkgAgencyCommission;
+
+                            context.Entry(selectedPackage).State = EntityState.Modified;
                             context.SaveChanges();
 
                             // Refresh the display with the updated information
                             LoadPackages();
-                            DisplayPackage(modifyForm.package);
+                            DisplayPackage(selectedPackage);
                         }
                     }
                     catch (Exception ex)
