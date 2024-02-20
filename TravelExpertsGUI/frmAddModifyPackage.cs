@@ -70,12 +70,14 @@ namespace TravelExpertsGUI
             error += Validator.IsNonNegativeDecimal(txtPrice);
             error += Validator.IsPresent(txtCom);
             error += Validator.IsNonNegativeDecimal(txtCom);
+            error += Validator.IsValidCom(txtPrice, txtCom);
             error += Validator.IsValidDate(dtpSDate, dtpEDate);
 
-            if (Convert.ToDecimal(txtCom.Text) > Convert.ToDecimal(txtPrice.Text))
-            {
-                error += "Agency Commission cannot be larger than Package Price.";
-            }
+
+            //if (Convert.ToDecimal(txtCom.Text) > Convert.ToDecimal(txtPrice.Text))
+            //{
+            //    error += "Agency Commission cannot be larger than Package Price.";
+            //}
 
             if (!string.IsNullOrEmpty(error))
             {

@@ -133,6 +133,19 @@ namespace TravelExpertsGUI
             }
             return msg;
         }
+         public static string IsValidCom(System.Windows.Forms.TextBox textBox, System.Windows.Forms.TextBox textBox2)
+        {
+            string msg = "";
+            double value1, value2;
+            if (double.TryParse(textBox.Text, out value1) && double.TryParse(textBox2.Text, out value2)) // base < agent comm
+            {
+                if (value1 < value2)
+                {
+                    msg = "Agent Commission can't be over package price";
+                }
+            }
+            return msg;
+        }
         public static string IsPresent(System.Windows.Forms.TextBox textBox)
         {
             string msg = "";
