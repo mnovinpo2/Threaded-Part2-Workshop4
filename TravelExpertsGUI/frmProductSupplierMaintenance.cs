@@ -99,8 +99,8 @@ namespace TravelExpertsGUI
 
         private void DisplaySupplier()     // Clears the columns of the dgvSuppliers DataGridView.
                                            // Populates the DataGridView with product supplier information using GetAllSuppliers.
-                                              //Adjusts the appearance of the DataGridView.
-                                            //Calls ClearControls and updates control values based on the selected product supplier.
+                                           //Adjusts the appearance of the DataGridView.
+                                           //Calls ClearControls and updates control values based on the selected product supplier.
         {
             dgvSuppliers.Columns.Clear();
             dgvSuppliers.DataSource = GetAllSuppliers();
@@ -121,7 +121,7 @@ namespace TravelExpertsGUI
             }
         }
         private void btnAdd_Click(object sender, EventArgs e) // Opens a new form (frmAddModProductSupplier) for adding a new product supplier.
-                                                                //Checks for existing product suppliers and adds the new product supplier to the database.
+                                                              //Checks for existing product suppliers and adds the new product supplier to the database.
         {
             frmAddModProductSupplier secondForm = new();
             secondForm.isAdd = true;
@@ -225,7 +225,7 @@ namespace TravelExpertsGUI
         }
 
         private void btnModify_Click(object sender, EventArgs e) //Opens a new form(frmAddModProductSupplier) for modifying an existing product supplier.
-                                                                //Checks for existing product suppliers and updates the modified product supplier in the database.
+                                                                 //Checks for existing product suppliers and updates the modified product supplier in the database.
         {
             {
                 frmAddModProductSupplier secondForm = new();
@@ -294,6 +294,11 @@ namespace TravelExpertsGUI
         {
             DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }
