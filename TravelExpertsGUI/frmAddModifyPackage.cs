@@ -105,7 +105,7 @@ namespace TravelExpertsGUI
 
                 try
                 {
-                    context.SaveChanges();
+                    //context.SaveChanges();
                     isModified = !isAdd; // Set isModified to true when modifying a package
                     DialogResult = DialogResult.OK;
                     Close();
