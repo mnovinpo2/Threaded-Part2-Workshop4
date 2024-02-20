@@ -4,6 +4,8 @@ using System;
 using System.Data;
 using TravelExpertsData;
 using TravelExpertsGUI;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 
 namespace TravelExpertsGUI
 {
@@ -26,7 +28,7 @@ namespace TravelExpertsGUI
 
         }
 
-        public void buildTable()
+        public void buildTable() // populates Datatable using SQL query and binds to dgvPkgProduct, Adjusts appearance for DataGridView
         {
             var connection = new SqlConnection(@"Server=LOCALHOST\SQLEXPRESS;Database=TravelExperts;Trusted_connection=True; TrustServerCertificate=True");
 
@@ -57,7 +59,7 @@ namespace TravelExpertsGUI
 
         }
 
-        private void cboProduct_SelectedValueChanged(object sender, EventArgs e)
+        private void cboProduct_SelectedValueChanged(object sender, EventArgs e) //Populates the suppliers dropdown cboSupplier based on the selected product.
         {
             int id = Convert.ToInt32(cboProduct.SelectedValue);
 
@@ -73,7 +75,7 @@ namespace TravelExpertsGUI
             cboSupplier.SelectedIndex = -1;
         }
 
-        private void cboSupplier_SelectedValueChanged(object sender, EventArgs e)
+        private void cboSupplier_SelectedValueChanged(object sender, EventArgs e) //Retrieves the selected product supplier ID based on the selected product and                                                                                supplier in the dropdowns.
         {
             if (cboProduct.SelectedValue != null && cboSupplier.SelectedValue != null)
             {
@@ -124,7 +126,7 @@ namespace TravelExpertsGUI
             cboPkg.SelectedIndex = 0; // Set the default "Select Package" option
         }
 
-        private void cboPkg_SelectedValueChanged(object sender, EventArgs e)
+        private void cboPkg_SelectedValueChanged(object sender, EventArgs e) //Retrieves the selected package ID when the user selects a package in the dropdown.
         {
             if (cboPkg.SelectedValue != null)
             {
@@ -159,7 +161,7 @@ namespace TravelExpertsGUI
             DialogResult = DialogResult.Cancel;
         }
 
-        private void btnAddProd_Click(object sender, EventArgs e)
+        private void btnAddProd_Click(object sender, EventArgs e) //Calls the AddProduct method to associate the selected product supplier with the selected package.
         {
             AddProduct();
         }

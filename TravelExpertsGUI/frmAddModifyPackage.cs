@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using TravelExpertsData;
 using System.Globalization; // Add this line
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace TravelExpertsGUI
 {
@@ -32,7 +33,7 @@ namespace TravelExpertsGUI
                 DisplayPackage();
             }
         }
-        private void DisplayPackage()
+        private void DisplayPackage() // Populate form fields with existing package data when modifying said package
         {
             if (package != null)
             {
@@ -45,7 +46,7 @@ namespace TravelExpertsGUI
             }
         }
 
-        private void GetPackageData()
+        private void GetPackageData() // updates package with data from form fields
         {
             if (package != null)
             {
@@ -58,7 +59,7 @@ namespace TravelExpertsGUI
             }
         }
 
-        private bool IsValidData()
+        private bool IsValidData() // Validates the data 
         {
             bool success = true;
             string error = null;
@@ -84,13 +85,13 @@ namespace TravelExpertsGUI
             return success;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e) // If adding a new package (isAdd is true) Creates a new Package object, populates it with data using                                                          GetPackageData, and adds it to the context.
         {
             if (IsValidData())
             {
                 if (isAdd)
                 {
-                    // Logic for adding a new package
+                    
                     package = new Package();
                     GetPackageData();
                     context.Packages.Add(package);
@@ -114,7 +115,7 @@ namespace TravelExpertsGUI
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e) 
         {
             DialogResult = DialogResult.Cancel;
         }

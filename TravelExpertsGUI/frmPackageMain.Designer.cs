@@ -73,6 +73,7 @@ namespace TravelExpertsPackageMaintenance
             txtEDate.ForeColor = SystemColors.MenuHighlight;
             txtEDate.Location = new Point(212, 139);
             txtEDate.Name = "txtEDate";
+            txtEDate.ReadOnly = true;
             txtEDate.Size = new Size(100, 29);
             txtEDate.TabIndex = 1;
             // 
@@ -81,6 +82,7 @@ namespace TravelExpertsPackageMaintenance
             txtPkgId.Font = new Font("Segoe UI", 12F);
             txtPkgId.Location = new Point(494, 89);
             txtPkgId.Name = "txtPkgId";
+            txtPkgId.ReadOnly = true;
             txtPkgId.Size = new Size(100, 29);
             txtPkgId.TabIndex = 2;
             // 
@@ -89,6 +91,7 @@ namespace TravelExpertsPackageMaintenance
             txtPkgDesc.Font = new Font("Segoe UI", 12F);
             txtPkgDesc.Location = new Point(480, 274);
             txtPkgDesc.Name = "txtPkgDesc";
+            txtPkgDesc.ReadOnly = true;
             txtPkgDesc.Size = new Size(408, 29);
             txtPkgDesc.TabIndex = 4;
             // 
@@ -97,6 +100,7 @@ namespace TravelExpertsPackageMaintenance
             txtPkgName.Font = new Font("Segoe UI", 12F);
             txtPkgName.Location = new Point(494, 188);
             txtPkgName.Name = "txtPkgName";
+            txtPkgName.ReadOnly = true;
             txtPkgName.Size = new Size(394, 29);
             txtPkgName.TabIndex = 5;
             // 
@@ -105,6 +109,7 @@ namespace TravelExpertsPackageMaintenance
             txtSDate.Font = new Font("Segoe UI", 12F);
             txtSDate.Location = new Point(212, 73);
             txtSDate.Name = "txtSDate";
+            txtSDate.ReadOnly = true;
             txtSDate.Size = new Size(100, 29);
             txtSDate.TabIndex = 6;
             // 
@@ -113,6 +118,7 @@ namespace TravelExpertsPackageMaintenance
             txtPrice.Font = new Font("Segoe UI", 12F);
             txtPrice.Location = new Point(212, 203);
             txtPrice.Name = "txtPrice";
+            txtPrice.ReadOnly = true;
             txtPrice.Size = new Size(100, 29);
             txtPrice.TabIndex = 7;
             // 
@@ -154,6 +160,7 @@ namespace TravelExpertsPackageMaintenance
             txtCom.Font = new Font("Segoe UI", 12F);
             txtCom.Location = new Point(212, 264);
             txtCom.Name = "txtCom";
+            txtCom.ReadOnly = true;
             txtCom.Size = new Size(100, 29);
             txtCom.TabIndex = 12;
             // 
@@ -304,6 +311,7 @@ namespace TravelExpertsPackageMaintenance
             Controls.Add(btnAdd);
             Controls.Add(dgvPackages);
             Name = "frmPackageMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "TravelExperts Packages";
             Load += PackageMain_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPackages).EndInit();

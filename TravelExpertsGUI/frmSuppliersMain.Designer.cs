@@ -74,6 +74,7 @@
             Controls.Add(dgvSupplier);
             Controls.Add(btnAdd);
             Name = "frmSuppliersMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "TemporaryMainForm";
             Load += TemporaryMainForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSupplier).EndInit();

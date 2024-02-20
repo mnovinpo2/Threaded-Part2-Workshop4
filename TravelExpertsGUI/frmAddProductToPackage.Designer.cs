@@ -111,6 +111,7 @@
             Controls.Add(cboSupplier);
             Controls.Add(cboProduct);
             Name = "frmAddProductToPackage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmAddProductToPackage";
             Load += frmAddProductToPackage_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPkgProduct).EndInit();

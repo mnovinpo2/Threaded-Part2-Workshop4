@@ -41,12 +41,16 @@
             label2 = new Label();
             label3 = new Label();
             btnOk = new Button();
+            gbGet = new GroupBox();
+            label4 = new Label();
+            btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSuppliers).BeginInit();
+            gbGet.SuspendLayout();
             SuspendLayout();
             // 
             // btnModify
             // 
-            btnModify.Location = new Point(266, 331);
+            btnModify.Location = new Point(306, 412);
             btnModify.Name = "btnModify";
             btnModify.Size = new Size(75, 23);
             btnModify.TabIndex = 0;
@@ -56,7 +60,7 @@
             // 
             // btnGetSupplier
             // 
-            btnGetSupplier.Location = new Point(517, 331);
+            btnGetSupplier.Location = new Point(186, 118);
             btnGetSupplier.Name = "btnGetSupplier";
             btnGetSupplier.Size = new Size(106, 23);
             btnGetSupplier.TabIndex = 1;
@@ -66,7 +70,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(266, 283);
+            btnAdd.Location = new Point(40, 280);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(75, 23);
             btnAdd.TabIndex = 2;
@@ -76,7 +80,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(266, 379);
+            btnDelete.Location = new Point(403, 412);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 23);
             btnDelete.TabIndex = 3;
@@ -90,33 +94,33 @@
             dgvSuppliers.Location = new Point(40, 12);
             dgvSuppliers.Name = "dgvSuppliers";
             dgvSuppliers.RowHeadersWidth = 51;
-            dgvSuppliers.Size = new Size(723, 251);
+            dgvSuppliers.Size = new Size(771, 251);
             dgvSuppliers.TabIndex = 4;
             // 
             // txtProdSupId
             // 
-            txtProdSupId.Location = new Point(127, 284);
+            txtProdSupId.Location = new Point(409, 286);
             txtProdSupId.Name = "txtProdSupId";
-            txtProdSupId.Size = new Size(100, 23);
+            txtProdSupId.Size = new Size(67, 23);
             txtProdSupId.TabIndex = 5;
             // 
             // txtProductId
             // 
-            txtProductId.Location = new Point(127, 335);
+            txtProductId.Location = new Point(409, 337);
             txtProductId.Name = "txtProductId";
-            txtProductId.Size = new Size(100, 23);
+            txtProductId.Size = new Size(67, 23);
             txtProductId.TabIndex = 6;
             // 
             // txtSupplierId
             // 
-            txtSupplierId.Location = new Point(127, 373);
+            txtSupplierId.Location = new Point(409, 375);
             txtSupplierId.Name = "txtSupplierId";
-            txtSupplierId.Size = new Size(100, 23);
+            txtSupplierId.Size = new Size(67, 23);
             txtSupplierId.TabIndex = 7;
             // 
             // txtGet
             // 
-            txtGet.Location = new Point(663, 331);
+            txtGet.Location = new Point(192, 40);
             txtGet.Name = "txtGet";
             txtGet.Size = new Size(100, 23);
             txtGet.TabIndex = 8;
@@ -125,39 +129,70 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 287);
+            label1.Location = new Point(294, 288);
             label1.Name = "label1";
-            label1.Size = new Size(109, 15);
+            label1.Size = new Size(112, 15);
             label1.TabIndex = 9;
-            label1.Text = "Product Supplier ID";
+            label1.Text = "Product Supplier ID:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(40, 339);
+            label2.Location = new Point(322, 340);
             label2.Name = "label2";
-            label2.Size = new Size(63, 15);
+            label2.Size = new Size(66, 15);
             label2.TabIndex = 10;
-            label2.Text = "Product ID";
+            label2.Text = "Product ID:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(31, 380);
+            label3.Location = new Point(313, 381);
             label3.Name = "label3";
-            label3.Size = new Size(64, 15);
+            label3.Size = new Size(67, 15);
             label3.TabIndex = 11;
-            label3.Text = "Supplier ID";
+            label3.Text = "Supplier ID:";
             // 
             // btnOk
             // 
-            btnOk.Location = new Point(364, 408);
+            btnOk.Location = new Point(40, 408);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(124, 30);
+            btnOk.Size = new Size(75, 30);
             btnOk.TabIndex = 12;
             btnOk.Text = "Ok";
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
+            // 
+            // gbGet
+            // 
+            gbGet.BackColor = Color.Transparent;
+            gbGet.Controls.Add(label4);
+            gbGet.Controls.Add(txtGet);
+            gbGet.Controls.Add(btnGetSupplier);
+            gbGet.Location = new Point(494, 280);
+            gbGet.Name = "gbGet";
+            gbGet.Size = new Size(317, 158);
+            gbGet.TabIndex = 13;
+            gbGet.TabStop = false;
+            gbGet.Text = "Select a Product Supplier";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(23, 43);
+            label4.Name = "label4";
+            label4.Size = new Size(151, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Enter a Product Supplier ID:";
+            // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(174, 412);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(82, 23);
+            btnExit.TabIndex = 14;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
             // 
             // frmProductSupplierMaintenance
             // 
@@ -165,24 +200,27 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(843, 450);
+            Controls.Add(btnExit);
+            Controls.Add(gbGet);
             Controls.Add(btnOk);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(txtGet);
             Controls.Add(txtSupplierId);
             Controls.Add(txtProductId);
             Controls.Add(txtProdSupId);
             Controls.Add(dgvSuppliers);
             Controls.Add(btnDelete);
             Controls.Add(btnAdd);
-            Controls.Add(btnGetSupplier);
             Controls.Add(btnModify);
             Name = "frmProductSupplierMaintenance";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Product Suppliers";
             Load += frmPackageMaintenance_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSuppliers).EndInit();
+            gbGet.ResumeLayout(false);
+            gbGet.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -202,5 +240,8 @@
         private Label label2;
         private Label label3;
         private Button btnOk;
+        private GroupBox gbGet;
+        private Label label4;
+        private Button btnExit;
     }
 }

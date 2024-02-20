@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             txtProdSupplierId = new TextBox();
-            txtProductId = new TextBox();
-            txtSupplierId = new TextBox();
             label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
             btnOK = new Button();
             btnCancel = new Button();
+            cboProducts = new ComboBox();
+            cboSuppliers = new ComboBox();
             SuspendLayout();
             // 
             // txtProdSupplierId
@@ -48,26 +46,6 @@
             txtProdSupplierId.TabIndex = 0;
             txtProdSupplierId.Tag = "ProductSupplierID";
             // 
-            // txtProductId
-            // 
-            txtProductId.Font = new Font("Segoe UI", 10.8F);
-            txtProductId.Location = new Point(326, 100);
-            txtProductId.Margin = new Padding(3, 2, 3, 2);
-            txtProductId.Name = "txtProductId";
-            txtProductId.Size = new Size(157, 27);
-            txtProductId.TabIndex = 1;
-            txtProductId.Tag = "ProductID";
-            // 
-            // txtSupplierId
-            // 
-            txtSupplierId.Font = new Font("Segoe UI", 10.8F);
-            txtSupplierId.Location = new Point(326, 144);
-            txtSupplierId.Margin = new Padding(3, 2, 3, 2);
-            txtSupplierId.Name = "txtSupplierId";
-            txtSupplierId.Size = new Size(161, 27);
-            txtSupplierId.TabIndex = 2;
-            txtSupplierId.Tag = "SupplierID";
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -77,26 +55,6 @@
             label1.Size = new Size(132, 20);
             label1.TabIndex = 3;
             label1.Text = "Product SupplierId";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.8F);
-            label2.Location = new Point(180, 107);
-            label2.Name = "label2";
-            label2.Size = new Size(73, 20);
-            label2.TabIndex = 4;
-            label2.Text = "ProductId";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10.8F);
-            label3.Location = new Point(177, 151);
-            label3.Name = "label3";
-            label3.Size = new Size(77, 20);
-            label3.TabIndex = 5;
-            label3.Text = "SupplierId";
             // 
             // btnOK
             // 
@@ -122,23 +80,42 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // cboProducts
+            // 
+            cboProducts.DisplayMember = "ProductID";
+            cboProducts.FormattingEnabled = true;
+            cboProducts.Location = new Point(209, 101);
+            cboProducts.Name = "cboProducts";
+            cboProducts.Size = new Size(121, 23);
+            cboProducts.TabIndex = 8;
+            cboProducts.ValueMember = "ProductID";
+            // 
+            // cboSuppliers
+            // 
+            cboSuppliers.DisplayMember = "SupplierID";
+            cboSuppliers.FormattingEnabled = true;
+            cboSuppliers.Location = new Point(209, 169);
+            cboSuppliers.Name = "cboSuppliers";
+            cboSuppliers.Size = new Size(121, 23);
+            cboSuppliers.TabIndex = 9;
+            cboSuppliers.ValueMember = "SupplierID";
+            // 
             // frmAddModProductSupplier
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Clouds;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(576, 340);
+            ClientSize = new Size(517, 335);
+            Controls.Add(cboSuppliers);
+            Controls.Add(cboProducts);
             Controls.Add(btnCancel);
             Controls.Add(btnOK);
-            Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(txtSupplierId);
-            Controls.Add(txtProductId);
             Controls.Add(txtProdSupplierId);
             Margin = new Padding(3, 2, 3, 2);
             Name = "frmAddModProductSupplier";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmAddModProductSupplier";
             Load += frmAddModProductSupplier_Load;
             ResumeLayout(false);
@@ -148,12 +125,10 @@
         #endregion
 
         private TextBox txtProdSupplierId;
-        private TextBox txtProductId;
-        private TextBox txtSupplierId;
         private Label label1;
-        private Label label2;
-        private Label label3;
         private Button btnOK;
         private Button btnCancel;
+        private ComboBox cboProducts;
+        private ComboBox cboSuppliers;
     }
 }

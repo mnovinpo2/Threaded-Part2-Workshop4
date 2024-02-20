@@ -209,6 +209,7 @@
             Controls.Add(btnOK);
             Margin = new Padding(3, 2, 3, 2);
             Name = "frmAddModifyPackage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "TravelExperts Add and Modify Packages";
             Load += frmAddModify_Load;
             ResumeLayout(false);

@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +17,11 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using TravelExpertsData;
 using TravelExpertsGUI;
+using static Azure.Core.HttpHeader;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, DateTime pkgEndDate,
+public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, DateTime pkgEndDate, // DTO for simplified package information
     string PkgDesc, decimal PkgBasePrice, decimal PkgCom);
 
 
@@ -46,12 +50,12 @@ namespace TravelExpertsPackageMaintenance
 
         private void PackageMain_Load(object sender, EventArgs e)
         {
-            LoadPackages();
-            DisplayPackage();
+            LoadPackages(); //calls method to populate a combo box with available packages.
+            DisplayPackage(); // calls method to display the selected package.
             DisableModifyDeleteButtons();
         }
 
-        private void LoadPackages()
+        private void LoadPackages() // populates dropdownlist cboGetPkg with Package names.
         {
             try
             {
@@ -59,17 +63,16 @@ namespace TravelExpertsPackageMaintenance
                 packages.Insert(0, new TravelExpertsData.Package { PackageId = 0, PkgName = "Choose a Package" });
                 cboGetPkg.DataSource = packages;
                 cboGetPkg.DisplayMember = "PkgName";
-                cboGetPkg.ValueMember = "PackageId"; 
+                cboGetPkg.ValueMember = "PackageId";
                 cboGetPkg.SelectedIndex = 0;
             }
-
             catch (Exception)
             {
                 MessageBox.Show("Error loading packages");
             }
         }
 
-        public List<PackagesDTO> GetAllPackages() =>
+        public List<PackagesDTO> GetAllPackages() => //Retrieves a list of all packages as PackagesDTO objects.
              context.Packages
                  .OrderBy(p => p.PackageId)
                  .Select(p => new PackagesDTO(p.PackageId, p.PkgName, p.PkgStartDate, p.PkgEndDate, p.PkgDesc, p.PkgBasePrice, p.PkgAgencyCommission))
@@ -129,7 +132,15 @@ namespace TravelExpertsPackageMaintenance
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        public bool IsDuplicatePackageName(string packageName, int packageId = 0)
+        {
+            // Check if there is any other package with the same name, excluding the current package
+            return context.Packages.Any(p => p.PkgName == packageName && p.PackageId != packageId);
+        }
+
+
+        private void btnAdd_Click(object sender, EventArgs e) //Opens a new form (frmAddModifyPackage) for adding a new package.
+                                                              //Checks for duplicate package names and adds the new package to the database.
         {
             frmAddModifyPackage secondForm = new frmAddModifyPackage();
             secondForm.isAdd = true;
@@ -141,16 +152,27 @@ namespace TravelExpertsPackageMaintenance
             {
                 try
                 {
-                    // Ensure that selectedPackage is null for a new package
                     selectedPackage = secondForm.package;
+                    selectedPackage.PkgStartDate = selectedPackage.PkgStartDate.Date;
+                    selectedPackage.PkgEndDate = selectedPackage.PkgEndDate.Date;
+                    if (IsDuplicatePackageName(selectedPackage.PkgName))
+                    {
+                        MessageBox.Show("Error adding package: Package with the same name already exists.", "Duplicate Package Name");
+                    }
+                    else
+                    {
+                        // Add the new package to the context
+                        context.Packages.Add(selectedPackage);
+                        context.SaveChanges();
 
-                    // Add the new package to the context
-                    context.Packages.Add(selectedPackage);
-                    context.SaveChanges();
-
-                    // Refresh the display with the updated information
-                    LoadPackages();
-                    DisplayPackage(selectedPackage);
+                        // Refresh the display with the updated information
+                        LoadPackages();
+                        DisplayPackage(selectedPackage);
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    MessageBox.Show("Error adding package: " + ex.Message, "Database Error");
                 }
                 catch (Exception)
                 {
@@ -159,50 +181,59 @@ namespace TravelExpertsPackageMaintenance
             }
         }
 
-        private void btnModify_Click(object sender, EventArgs e)
+        private void btnModify_Click(object sender, EventArgs e) //Opens a new form (frmAddModifyPackage) for modifying an existing package.
+                                                                //Checks for duplicate package names and updates the modified package in the database.
         {
-
-            frmAddModifyPackage secondForm = new frmAddModifyPackage();
+            // Ensure a package is selected in the combo box
+            if (cboGetPkg.SelectedIndex > 0)
             {
-                // Ensure a package is selected in the combo box
-                if (cboGetPkg.SelectedIndex > 0)  // Assuming index 0 is reserved for "Choose a Package"
+                // Retrieve the selected package from the combo box
+                TravelExpertsData.Package selectedPackage = (TravelExpertsData.Package)cboGetPkg.SelectedItem;
+
+                // Open the modify form
+                frmAddModifyPackage modifyForm = new frmAddModifyPackage();
+                modifyForm.isAdd = false;
+                modifyForm.package = selectedPackage;
+
+                DialogResult result = modifyForm.ShowDialog();
+
+                if (result == DialogResult.OK)
                 {
-                    // Retrieve the selected package from the combo box
-                    TravelExpertsData.Package selectedPackage = (TravelExpertsData.Package)cboGetPkg.SelectedItem;
-
-                    frmAddModifyPackage modifyForm = new frmAddModifyPackage();
-                    modifyForm.isAdd = false;
-                    modifyForm.package = selectedPackage;
-
-                    DialogResult result = modifyForm.ShowDialog();
-
-                    if (result == DialogResult.OK)
+                    try
                     {
-                        try
+                        // Check for a duplicate package name
+                        if (IsDuplicatePackageName(modifyForm.package.PkgName, modifyForm.package.PackageId))
                         {
-                            // Update the package information in the database
-                            context.Entry(selectedPackage).State = EntityState.Modified;
+                            MessageBox.Show("Error modifying package: Package with the same name already exists.", "Duplicate Package Name");
+                        }
+                        else
+                        {
+                            modifyForm.package.PkgStartDate = modifyForm.package.PkgStartDate.Date;
+                            modifyForm.package.PkgEndDate = modifyForm.package.PkgEndDate.Date;
+                            context.Entry(modifyForm.package).State = EntityState.Modified;
                             context.SaveChanges();
 
                             // Refresh the display with the updated information
                             LoadPackages();
-                            DisplayPackage(selectedPackage);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error modifying package: " + ex.Message, ex.GetType().ToString());
+                            DisplayPackage(modifyForm.package);
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error modifying package: " + ex.Message, ex.GetType().ToString());
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Please select a package from the dropdown.", "Selection Error");
-                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a package from the dropdown.", "Selection Error");
             }
         }
 
 
-            private void btnDelete_Click(object sender, EventArgs e)
+
+
+        private void btnDelete_Click(object sender, EventArgs e) //Deletes the selected package from the database after confirming with the user.
         {
             // Ensure a package is selected in the combo box
             if (cboGetPkg.SelectedIndex > 0)  // Assuming index 0 is reserved for "Choose a Package"
@@ -250,8 +281,7 @@ namespace TravelExpertsPackageMaintenance
                 MessageBox.Show("Please select a package from the dropdown.", "Selection Error");
             }
         }
-
-        // Clears Controls and prepares for new CRUD Entry
+        // Clears various controls on the form.
         private void ClearControls()
         {
             txtPkgId.Text = "";
@@ -261,22 +291,21 @@ namespace TravelExpertsPackageMaintenance
             txtEDate.Text = "";
             txtPrice.Text = "";
             txtCom.Text = "";
-
             DisableModifyDeleteButtons();
         }
 
-        private void EnableModifyDeleteButtons()
+        private void EnableModifyDeleteButtons() //Enable the Modify and Delete buttons based on the current state.
         {
             btnModify.Enabled = true;
             btnDelete.Enabled = true;
         }
 
-        private void DisableModifyDeleteButtons()
+        private void DisableModifyDeleteButtons() //disable the Modify and Delete buttons based on the current state.
         {
             btnModify.Enabled = false;
             btnDelete.Enabled = false;
         }
-        private void btnAddProducts_Click(object sender, EventArgs e)
+        private void btnAddProducts_Click(object sender, EventArgs e) //Opens a new form frmAddProductToPackage for adding products to a package.
         {
             frmAddProductToPackage secondForm = new frmAddProductToPackage();
             DialogResult result = secondForm.ShowDialog();
@@ -301,12 +330,13 @@ namespace TravelExpertsPackageMaintenance
         }
 
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e) // Closes the form with a DialogResult of OK.
         {
             DialogResult = DialogResult.OK;
             Close();
         }
-        private void cboGetPkg_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboGetPkg_SelectedIndexChanged(object sender, EventArgs e) //Handles the event when the selected index changes in the packages combo box.
+                                                                                //Calls DisplayPackage and adjusts the visibility of controls based on the selected package.
         {
             try
             {
