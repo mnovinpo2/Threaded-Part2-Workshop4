@@ -84,9 +84,9 @@
             // 
             cboProducts.DisplayMember = "ProductID";
             cboProducts.FormattingEnabled = true;
-            cboProducts.Location = new Point(209, 101);
+            cboProducts.Location = new Point(130, 101);
             cboProducts.Name = "cboProducts";
-            cboProducts.Size = new Size(121, 23);
+            cboProducts.Size = new Size(269, 23);
             cboProducts.TabIndex = 8;
             cboProducts.ValueMember = "ProductID";
             // 
@@ -94,9 +94,9 @@
             // 
             cboSuppliers.DisplayMember = "SupplierID";
             cboSuppliers.FormattingEnabled = true;
-            cboSuppliers.Location = new Point(209, 169);
+            cboSuppliers.Location = new Point(130, 169);
             cboSuppliers.Name = "cboSuppliers";
-            cboSuppliers.Size = new Size(121, 23);
+            cboSuppliers.Size = new Size(269, 23);
             cboSuppliers.TabIndex = 9;
             cboSuppliers.ValueMember = "SupplierID";
             // 

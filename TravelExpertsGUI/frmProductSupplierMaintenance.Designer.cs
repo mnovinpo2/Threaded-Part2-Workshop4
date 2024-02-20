@@ -129,7 +129,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(294, 288);
+            label1.Location = new Point(269, 289);
             label1.Name = "label1";
             label1.Size = new Size(112, 15);
             label1.TabIndex = 9;
@@ -138,7 +138,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(322, 340);
+            label2.Location = new Point(269, 340);
             label2.Name = "label2";
             label2.Size = new Size(66, 15);
             label2.TabIndex = 10;
@@ -147,7 +147,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(313, 381);
+            label3.Location = new Point(269, 383);
             label3.Name = "label3";
             label3.Size = new Size(67, 15);
             label3.TabIndex = 11;
@@ -193,6 +193,7 @@
             btnExit.TabIndex = 14;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // frmProductSupplierMaintenance
             // 

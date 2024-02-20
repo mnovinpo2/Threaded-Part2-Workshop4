@@ -131,54 +131,65 @@ namespace TravelExpertsPackageMaintenance
                 txtCom.Text = package.PkgAgencyCommission.ToString("c");
             }
         }
-
-        public bool IsDuplicatePackageName(string packageName, int packageId = 0)
+        public bool IsDuplicatePackageName(string packageName)
         {
-            // Check if there is any other package with the same name, excluding the current package
-            return context.Packages.Any(p => p.PkgName == packageName && p.PackageId != packageId);
+            // Check if there is any other package with the same name
+            return context.Packages.Any(p => p.PkgName == packageName);
         }
 
 
         private void btnAdd_Click(object sender, EventArgs e) //Opens a new form (frmAddModifyPackage) for adding a new package.
-                                                              //Checks for duplicate package names and adds the new package to the database.
         {
-            frmAddModifyPackage secondForm = new frmAddModifyPackage();
-            secondForm.isAdd = true;
-            secondForm.package = null;
-
-            DialogResult result = secondForm.ShowDialog();
-
-            if (result == DialogResult.OK)
+            using (var secondForm = new frmAddModifyPackage())
             {
-                try
+                secondForm.isAdd = true;
+
+                if (secondForm.ShowDialog() == DialogResult.OK)
                 {
-                    selectedPackage = secondForm.package;
-                    selectedPackage.PkgStartDate = selectedPackage.PkgStartDate.Date;
-                    selectedPackage.PkgEndDate = selectedPackage.PkgEndDate.Date;
-                    if (IsDuplicatePackageName(selectedPackage.PkgName))
+                    try
                     {
-                        MessageBox.Show("Error adding package: Package with the same name already exists.", "Duplicate Package Name");
-                    }
-                    else
-                    {
-                        // Add the new package to the context
+                        selectedPackage = secondForm.package;
+                        selectedPackage.PkgStartDate = selectedPackage.PkgStartDate.Date;
+                        selectedPackage.PkgEndDate = selectedPackage.PkgEndDate.Date;
+
+                        if (!IsValidPackage(selectedPackage))
+                        {
+                            // Display a more specific error message based on the validation failure
+                            return;
+                        }
+
                         context.Packages.Add(selectedPackage);
                         context.SaveChanges();
 
-                        // Refresh the display with the updated information
                         LoadPackages();
                         DisplayPackage(selectedPackage);
                     }
-                }
-                catch (DbUpdateException ex)
-                {
-                    MessageBox.Show("Error adding package: " + ex.Message, "Database Error");
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Error adding package");
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error adding package: {ex.Message}", "Database Error");
+                    }
                 }
             }
+        }
+
+        // Validation method for the package
+        private bool IsValidPackage(TravelExpertsData.Package package)
+        {
+            if (string.IsNullOrWhiteSpace(package.PkgName))
+            {
+                MessageBox.Show("Package Name cannot be empty.", "Validation Error");
+                return false;
+            }
+
+            if (IsDuplicatePackageName(package.PkgName))
+            {
+                MessageBox.Show("Error adding package: Package with the same name already exists.", "Duplicate Package Name");
+                return false;
+            }
+
+            // Add any additional validation checks here
+
+            return true;
         }
 
         private void btnModify_Click(object sender, EventArgs e) //Opens a new form (frmAddModifyPackage) for modifying an existing package.
@@ -202,7 +213,7 @@ namespace TravelExpertsPackageMaintenance
                     try
                     {
                         // Check for a duplicate package name
-                        if (IsDuplicatePackageName(modifyForm.package.PkgName, modifyForm.package.PackageId))
+                        if (IsDuplicatePackageName(modifyForm.package.PkgName))
                         {
                             MessageBox.Show("Error modifying package: Package with the same name already exists.", "Duplicate Package Name");
                         }
