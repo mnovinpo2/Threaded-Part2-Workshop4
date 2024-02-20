@@ -114,7 +114,7 @@ namespace TravelExpertsGUI
                 catch (DataAccessException ex)
                 {
                     //HandleDataAccessError(ex);
-                    MessageBox.Show("There are still existing product suppliers and package rows containing this supplier, remove this first.");
+                    MessageBox.Show("There are still existing product suppliers and package rows containing this supplier, remove them first.");
                 }
             }
         }
