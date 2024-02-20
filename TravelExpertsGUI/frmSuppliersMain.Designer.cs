@@ -42,7 +42,7 @@
             btnAdd.TabIndex = 1;
             btnAdd.Text = "Add Supplier";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
+            //btnAdd.Click += btnAdd_Click;
             // 
             // dgvSupplier
             // 

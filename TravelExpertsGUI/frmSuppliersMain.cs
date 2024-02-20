@@ -32,6 +32,8 @@ namespace TravelExpertsGUI
         {
             dgvSupplier.Columns.Clear(); //Clears first
             dgvSupplier.DataSource = SupplierDB.GetSupplier();
+            //dgvSupplier.Columns[1].Visible = false;
+            //dgvSupplier.Columns[2].Visible = false;
 
             if (dgvSupplier.Columns.Count <= 4)
             {
@@ -58,7 +60,11 @@ namespace TravelExpertsGUI
                 dgvSupplier.ColumnHeadersDefaultCellStyle.BackColor = Color.Lavender;
 
                 dgvSupplier.ColumnHeadersDefaultCellStyle.Padding = new Padding(5, 5, 5, 5);
+                dgvSupplier.Columns[2].Visible = false;
+                dgvSupplier.Columns[3].Visible = false;
             }
+
+
 
         }
 
@@ -107,7 +113,8 @@ namespace TravelExpertsGUI
                 }
                 catch (DataAccessException ex)
                 {
-                    HandleDataAccessError(ex);
+                    //HandleDataAccessError(ex);
+                    MessageBox.Show("There are still existing product suppliers and package rows containing this supplier, remove them first.");
                 }
             }
         }
@@ -130,7 +137,7 @@ namespace TravelExpertsGUI
                 }
                 catch (DataAccessException ex)
                 {
-                    HandleDataAccessError(ex);
+                    MessageBox.Show("There are still existing product suppliers and package rows containing this supplier, remove them first.");
                 }
             }
         }
