@@ -1,25 +1,10 @@
 ﻿
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Drawing;
-using System.IO.Packaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 using TravelExpertsData;
 using TravelExpertsGUI;
-using static Azure.Core.HttpHeader;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
+
 
 public record PackagesDTO(int PackageId, string PkgName, DateTime PkgStartDate, DateTime pkgEndDate, // DTO for simplified package information
     string PkgDesc, decimal PkgBasePrice, decimal PkgCom);

@@ -43,7 +43,7 @@
             cboProduct.FormattingEnabled = true;
             cboProduct.Location = new Point(154, 345);
             cboProduct.Name = "cboProduct";
-            cboProduct.Size = new Size(121, 28);
+            cboProduct.Size = new Size(236, 28);
             cboProduct.TabIndex = 0;
             cboProduct.SelectedValueChanged += cboProduct_SelectedValueChanged;
             // 
@@ -53,7 +53,7 @@
             cboSupplier.FormattingEnabled = true;
             cboSupplier.Location = new Point(154, 402);
             cboSupplier.Name = "cboSupplier";
-            cboSupplier.Size = new Size(121, 28);
+            cboSupplier.Size = new Size(236, 28);
             cboSupplier.TabIndex = 1;
             cboSupplier.SelectedValueChanged += cboSupplier_SelectedValueChanged;
             // 
@@ -71,7 +71,7 @@
             cboPkg.FormattingEnabled = true;
             cboPkg.Location = new Point(154, 281);
             cboPkg.Name = "cboPkg";
-            cboPkg.Size = new Size(121, 28);
+            cboPkg.Size = new Size(236, 28);
             cboPkg.TabIndex = 5;
             cboPkg.SelectedValueChanged += cboPkg_SelectedValueChanged;
             // 
