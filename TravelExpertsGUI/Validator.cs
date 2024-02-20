@@ -125,11 +125,11 @@ namespace TravelExpertsGUI
             string msg = "";
             if (dateTimePicker.Value > dateTimerPicker2.Value ) // start date before end date
             {
-                msg = "Start date can't be before end date";
+                msg = $"Start date can't be before end date{LineEnd}";
             }
             else if (dateTimePicker.Value == dateTimerPicker2.Value) // start date the same as end date
             {
-                msg = "Start date can't be the same as end date";
+                msg = $"Start date can't be the same as end date{LineEnd}";
             }
             return msg;
         }
@@ -141,7 +141,7 @@ namespace TravelExpertsGUI
             {
                 if (value1 < value2)
                 {
-                    msg = "Agent Commission can't be over package price";
+                    msg = $"Agent Commission can't be over package price{LineEnd}";
                 }
             }
             return msg;
