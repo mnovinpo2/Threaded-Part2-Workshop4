@@ -227,54 +227,58 @@ namespace TravelExpertsGUI
         private void btnModify_Click(object sender, EventArgs e) //Opens a new form(frmAddModProductSupplier) for modifying an existing product supplier.
                                                                  //Checks for existing product suppliers and updates the modified product supplier in the database.
         {
+            frmAddModProductSupplier secondForm = new();
+            secondForm.isAdd = false;
+            secondForm.productsSupplier = selectedSupplier;
+
+            DialogResult result = secondForm.ShowDialog();
+
+            if (result == DialogResult.OK)
             {
-                frmAddModProductSupplier secondForm = new();
-                secondForm.isAdd = false;
-                secondForm.productsSupplier = selectedSupplier;
-
-
-                DialogResult result = secondForm.ShowDialog();
-
-                if (result == DialogResult.OK)
+                try
                 {
-
-                    try
+                    using (TravelExpertsContext db = new TravelExpertsContext())
                     {
-                        using (TravelExpertsContext db = new TravelExpertsContext())
+                        if (selectedSupplier != null)
                         {
-                            if (selectedSupplier == null)
-                            {
-                                selectedSupplier = secondForm.productsSupplier;
-                                db.ProductsSuppliers.Add(selectedSupplier);
-                                db.SaveChanges();
-                                DisplaySupplier();
-                            }
+                            // Detach the selectedSupplier from the context
+                            db.Entry(selectedSupplier).State = EntityState.Detached;
+
+                            // Update the properties with the modified values
+                            selectedSupplier.ProductId = secondForm.productsSupplier.ProductId;
+                            selectedSupplier.SupplierId = secondForm.productsSupplier.SupplierId;
+
+                            // Attach the modified selectedSupplier to the context
+                            db.ProductsSuppliers.Attach(selectedSupplier);
+
+                            // Mark the entity as modified
+                            db.Entry(selectedSupplier).State = EntityState.Modified;
+
+                            // Save the changes
+                            db.SaveChanges();
+
+                            // Display the updated information
+                            DisplaySupplier();
                         }
-
                     }
-
-                    catch (DbUpdateException ex)
+                }
+                catch (DbUpdateException ex)
+                {
+                    string msg = "";
+                    var sqlException = (SqlException)ex.InnerException!;
+                    foreach (SqlError error in sqlException.Errors)
                     {
-                        string msg = "";
-                        var sqlException =
-                            (SqlException)ex.InnerException!;
-                        foreach (SqlError error in sqlException.Errors)
-                        {
-                            msg += $"ERROR CODE {error.Number}: {error.Message}\n";
-                        }
-                        MessageBox.Show(msg, "Database Error");
+                        msg += $"ERROR CODE {error.Number}: {error.Message}\n";
                     }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("Error while adding product: " + ex.Message,
-                            "Database Error");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Unanticipated error: " + ex.Message,
-                            ex.GetType().ToString());
-                    }
-
+                    MessageBox.Show(msg, "Database Error");
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error while updating product supplier: " + ex.Message, "Database Error");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unanticipated error: " + ex.Message, ex.GetType().ToString());
                 }
             }
         }
